@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{%load crispy_forms_tags %}
+
+{% block body_block %}
+<h1 class="display-3">Update Fixed Asset</h1>
+<br />
+<p class="blockquote-footer">Hello {{user.username}}</p>
+
+<form method="POST" class="post-form">
+    {% csrf_token %}
+    <div class="form-row row">
+        <div class="form-group col-md-4 mb-0 col"> {{ form.part_num|as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.serial_num|as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.departement|as_crispy_field }} </div>
+    </div>
+    <div class="form-row row">
+        <div class="form-group col-md-10 mb-0 col"> {{ form.description|as_crispy_field }} </div>
+    </div>
+    <div class="form-row row">
+        <div class="form-group col-md-4 mb-0 col"> {{ form.asset_life|as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.acquisition_cost|as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.acquisition_date|as_crispy_field }} </div>
+    </div>
+    <div class="form-row row">
+    </div>
+    <!-- <div class="form-row row"> -->
+    <!--     <div class="form-group col-md-4 mb-0 col"> {{ form.file_link|as_crispy_field }} </div> -->
+    <!-- </div> -->
+
+
+    <br />
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-outline-dark " href="{% url 'equipment' %}">Cancel</a>
+
+</form>
+
+{% endblock %}
+
+<!-- old style  -->
+<!-- {#{% csrf_token %}#} -->
+<!-- <table> -->
+<!-- {{form.as_table}} -->
+<!-- </table> -->
+<!-- <button type="submit" class="btn btn-success">Save</button> -->
+<!-- <a class="btn btn-outline-dark" href="{% url 'equipment' %}">Cancel</a> -->

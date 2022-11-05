@@ -1,0 +1,30 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <div class="position-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-muted " aria-current="page" href="{% url 'dashboardQuery' %}">
+          <span data-feather="home"></span>
+          Equipment
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-muted" href="{% url 'dashboardQueryMain' %}">
+          <span data-feather="file"></span>
+          Maintenance
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-muted " href="{% url 'dashboardQueryJobs' %}">
+          <span data-feather="shopping-cart"></span>
+          Jobs
+        </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link text-muted " href="{% url 'dashboardQueryDaily' %}">
+          <span data-feather="shopping-cart"></span>
+          Daily report
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

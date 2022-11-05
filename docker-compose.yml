@@ -2,8 +2,9 @@ version: "3.9"
 services:
   web:
     build: .
+    container_name: web_container_muco
     ports:
-      - "8000:8000"
+      - "9000:8000"
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
@@ -14,12 +15,13 @@ services:
   # Below defind the database config and volumes
   db:
     image: postgres:13
+    container_name: postgres_container_muco
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
     ports:
-      - "5432:5432"
+      - "6432:5432"
     # networks:
     #   app_net:
     #     ipv4_address: 192.168.0.2
@@ -28,12 +30,12 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     restart: always
-    container_name: pgadmin4_container
+    container_name: pgadmin4_container_muco
     environment:
       - PGADMIN_DEFAULT_EMAIL=moh@hotmail.com
       - PGADMIN_DEFAULT_PASSWORD=1234
     ports:
-      - "5050:80"
+      - "6050:80"
     volumes:
      - pgadmin-data:/var/lib/pgadmin
     # networks:
