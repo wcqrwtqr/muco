@@ -3,7 +3,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>Equipment Site</title>
+		<title>Operation Site</title>
 		<link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
 		<!-- Bootstrap links-->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -47,7 +47,7 @@
 			<div class="container">
 				<p>Please login or ask the admin to create an account for you</p>
 			</div>
-			<a href="{#%url 'login'%#}"class="btn btn-outline-dark">LOGIN</a>
+			<a href="{%url 'login'%}"class="btn btn-outline-dark">LOGIN</a>
 			{% endif %}
 
 			{% block body_block_login %}

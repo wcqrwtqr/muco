@@ -27,7 +27,7 @@
 				</table>
 				<button type="submit" class="btn btn-primary">Search</button>
 				{% if user.is_superuser %}
-				<a class="btn btn-outline-dark" href="{#% url 'equipment_new' %#}">Add New Asset</a>
+				<a class="btn btn-outline-dark" href="{% url 'equipment_new' %}">Add New Asset</a>
 				{% endif %}
 			</form>
 		</div>
@@ -80,7 +80,7 @@
 			<td><a href="{%url 'equipment_update' pk=equip.pk%}" class="btn btn-outline-dark"> <span
 						class="fa fa-clone"></a></td>
 			{% if user.is_superuser %}
-			<td><a href="{#%url 'equipment_delete' pk=equip.pk %#}" class="btn btn-outline-dark"><span
+			<td><a href="{%url 'equipment_delete' pk=equip.pk %}" class="btn btn-outline-dark"><span
 						class="fa fa-eraser"></a></td>
 			{% endif %}
 		</tr>

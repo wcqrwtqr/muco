@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "crispy_forms",
+    'crispy_bootstrap5',
     'equipmentList',
+    'personnel',
+    'equipmenMaintenance',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +135,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+#
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 STATIC_URL = 'static/'
 
@@ -140,7 +147,7 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 LOGIN_REDIRECT_URL='home'
 LOGOUT_REDIRECT_URL='home'
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

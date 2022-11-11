@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+<!-- #% load bootstrap  %} -->
+{% load static %}
+
+{% block body_block %}
+
+<h1 class="display-5">Personnel Page<span class="material-icons">precision_manufacturing </span> </h1>
+<br />
+<p class="blockquote-footer" align="left">Hello {{user.username}}</p>
+
+{% for message in messages %}
+{% if message %}
+<div class="alert alert-{{message.tags}}" id="message-card" >
+	{{message}}
+</div>
+{% endif %}
+{% endfor %}
+
+<button class="btn btn-outline-secondary mb-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMe"
+	aria-expanded="false" aria-controls="collapseExample" id="filterbutton">Show/Hide form</button>
+<div class="row collapse" id="collapseMe">
+	<div class="col">
+		<div class="card card-body">
+			<form method="GET">
+				<table>
+					{{ filter.form.as_table}}
+				</table>
+				<button type="submit" class="btn btn-primary">Search</button>
+				{% if user.is_superuser %}
+				<a class="btn btn-outline-dark" href="{% url 'personnel_new' %}">Add New Person</a>
+				{% endif %}
+			</form>
+		</div>
+	</div>
+</div>
+
+<div>
+	<!-- <p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p> -->
+	<p class="fw-lighter" style="float:right"> Total records... {{object_list.count}}</p>
+	<!-- <p class="fw-lighter" style="float:left"> No of searched items... {{page_obj.object_list.count}}</p> -->
+</div>
+<br>
+<table class="table table-striped">
+	<thead>
+		<!-- This style makes the top header sticking to the top of the page as a sticky table header  -->
+		<tr class="table-dark" style=" position: sticky; top: 0;">
+			<th scope="col">#</th>
+			<th scope="col">First Name</th>
+			<th scope="col">Last Name</th>
+			<th scope="col">Seniorty</th>
+			<th scope="col">Department</th>
+			<th scope="col">Grade</th>
+			<th scope="col">Position</th>
+			<th scope="col">Brith</th>
+			<th scope="col" style='width:50px'>Update</th>
+			{% if user.is_superuser %}
+			<th scope="col" style='width:50px'>Delete</th>
+			{% endif %}
+		</tr>
+	</thead>
+	<tbody>
+
+		<!-- This page_obj.object_list will get us the pagination and filter working togather -->
+		<!-- {#% for equip in page_obj.object_list %#} -->
+		{% for person in object_list %}
+
+		<tr>
+			<th scope="row" >{{forloop.counter}}</th>
+			<th scope="row"> <a href="{% url 'personnel_detail' pk=person.pk %}">{{ person.first_name }}</a></th>
+			<td >{{ person.last_name }}</td>
+			<td >{{ person.senionrty_date}}</td>
+			<td style='width:80px'>{{ person.department }}</td>
+			<td>{{ person.grade }}</td>
+			<td>{{ person.position }}</td>
+			<td style='width:120px'>{{ person.birth_date }}</td>
+			<!-- {%if person.file_link != null%} -->
+			<!-- <td style='word-break:break-word; width:80px'><a href="{{ person.file_link}}" target="_blank">Link</a></td> -->
+			<!-- {%else%} -->
+			<!-- <td style='word-break:break-word; width:50px'> - </td> -->
+			<!-- {% endif %} -->
+			<td><a href="{%url 'personnel_update' pk=person.pk%}" class="btn btn-outline-dark"> <span
+						class="fa fa-clone"></a></td>
+			{% if user.is_superuser %}
+			<td><a href="{%url 'personnel_delete' pk=person.pk %}" class="btn btn-outline-dark"><span
+						class="fa fa-eraser"></a></td>
+			{% endif %}
+		</tr>
+
+		{% endfor %}
+
+		<!-- Pagination pages toggle -->
+
+		<br />
+		<!-- <nav aria-label="Page navigation example"> -->
+		<!-- 	<ul class="pagination"> -->
+		<!-- 		{% if page_obj.has_previous %} -->
+		<!-- 		<li class="page-item"><a class="page-link" href="?page=1">First</a></li> -->
+		<!-- 		<li class="page-item"><a class="page-link" -->
+		<!-- 				href="?page={{ page_obj.previous_page_number }} ">previous</a></li> -->
+		<!-- 		{% endif %} -->
+		<!-- 		<li class="page-item"><a class="text-rest text-muted page-link" href="#"> -->
+		<!-- 				Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. -->
+		<!-- 			</a></li> -->
+		<!-- 		{% if page_obj.has_next %} -->
+		<!-- 		<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }} ">next</a></li> -->
+		<!-- 		<li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }} ">last</a> -->
+		<!-- 		</li> -->
+		<!-- 		{% endif %} -->
+		<!-- 	</ul> -->
+		<!-- </nav> -->
+
+	</tbody>
+</table>
+
+<br>
+{% endblock %}
+
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript" src="{#% static 'js/personmentScript.js'  %#}"></script>
+<script src="{% static 'js/messageScript.js' %}"></script>
+
+<!-- Select2 script for searching dropdown list -->
+<script>
+$(document).ready(function() {
+    $('.js-select2-basic').select2();
+});
+</script>
+
+{% endblock %}

@@ -2,27 +2,30 @@
 {%load crispy_forms_tags %}
 
 {% block body_block %}
-<h1 class="display-3">New Fixed Asset</h1>
+<h1 class="display-3">New Person</h1>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 
 <form method="POST" class="post-form">
     {% csrf_token %}
     <div class="form-row row">
-        <div class="form-group col-md-4 mb-0 col"> {{ form.part_num|as_crispy_field }} </div>
-        <div class="form-group col-md-4 mb-0 col"> {{ form.serial_num|as_crispy_field }} </div>
-        <div class="form-group col-md-4 mb-0 col"> {{ form.asset_life|as_crispy_field }} </div>
+        <div class="form-group col-md-6 mb-0 col"> {{ form.first_name|as_crispy_field }} </div>
+        <div class="form-group col-md-6 mb-0 col"> {{ form.last_name|as_crispy_field }} </div>
     </div>
     <div class="form-row row">
-        <div class="form-group col-md-10 mb-0 col"> {{ form.description|as_crispy_field}} </div>
+
+        <div class="form-group col-md-6 mb-0 col"> {{ form.senionrty_date|as_crispy_field }} </div>
+
+        <div class="form-group col-md-6 mb-0 col"> {{ form.birth_date|as_crispy_field}} </div>
     </div>
     <div class="form-row row">
-        <div class="form-group col-md-4 mb-0 col"> {{ form.file_link|as_crispy_field }} </div>
-        <div class="form-group col-md-4 mb-0 col"> {{ form.acquisition_date|as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.department|as_crispy_field}} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.position|as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.grade|as_crispy_field }} </div>
     </div>
     <br />
     <button type="submit" class="btn btn-primary">Save</button>
-    <a class="btn btn-outline-dark " href="{% url 'equipment' %}">Cancel</a>
+    <a class="btn btn-outline-dark " href="{% url 'personnel' %}">Cancel</a>
 </form>
 
 {% endblock %}
@@ -46,3 +49,12 @@
 <!--     <\!-- {#{% endfor %}#} -\-> -->
 <!--     <\!-- {#{% csrf_token %}#} -\-> -->
 <!-- </div> -->
+
+
+<script>
+  $(function () {
+    $("#datetimepicker1").datetimepicker({
+      format: 'DD/MM/YYYY HH:mm',
+    });
+  });
+</script>
