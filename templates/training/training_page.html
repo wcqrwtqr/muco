@@ -4,7 +4,7 @@
 
 {% block body_block %}
 
-<h1 class="display-5">Personnel Page<span class="material-icons">person </span> </h1>
+<h1 class="display-5">Training Page<span class="material-icons">book</span> </h1>
 <br />
 <p class="blockquote-footer" align="left">Hello {{user.username}} from {{user.groups.all.0.name}}</p>
 
@@ -27,7 +27,7 @@
 				</table>
 				<button type="submit" class="btn btn-primary">Search</button>
 				{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
-				<a class="btn btn-outline-dark" href="{% url 'personnel_new' %}">Add New Person</a>
+				<a class="btn btn-outline-dark" href="{% url 'training_new' %}">Add New Training</a>
 				{% endif %}
 			</form>
 		</div>
@@ -36,8 +36,6 @@
 
 <div>
 	<!-- <p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p> -->
-	<p class="fw-lighter" style="float:right"> Total records... {{object_list.count}}</p>
-	<!-- <p class="fw-lighter" style="float:left"> No of searched items... {{page_obj.object_list.count}}</p> -->
 </div>
 <br>
 
@@ -46,13 +44,13 @@
 		<!-- This style makes the top header sticking to the top of the page as a sticky table header  -->
 		<tr class="table-dark" style=" position: sticky; top: 0;">
 			<th scope="col">#</th>
-			<th scope="col">First Name</th>
-			<th scope="col">Last Name</th>
-			<th scope="col">Seniorty</th>
-			<th scope="col">Department</th>
-			<th scope="col">Grade</th>
-			<th scope="col">Position</th>
-			<th scope="col">Brith</th>
+			<th scope="col">Training Date</th>
+			<th scope="col">Training Type</th>
+			<th scope="col">Training Name</th>
+			<th scope="col">Expiry</th>
+			<th scope="col">Training Cost</th>
+			<!-- <th scope="col">Person</th> -->
+			<th scope="col">Description</th>
 			{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
 			<th scope="col" style='width:50px'>Update</th>
 			{% endif %}
@@ -64,26 +62,26 @@
 	<tbody>
 		<!-- This page_obj.object_list will get us the pagination and filter working togather -->
 		<!-- {#% for equip in page_obj.object_list %#} -->
-		{% for person in object_list %}
+		{% for training in object_list %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
-			<th scope="row"> <a href="{% url 'personnel_detail' pk=person.pk %}">{{ person.first_name }}</a></th>
-			<td >{{ person.last_name }}</td>
-			<td >{{ person.senionrty_date}}</td>
-			<td style='width:80px'>{{ person.department }}</td>
-			<td>{{ person.grade }}</td>
-			<td>{{ person.position }}</td>
-			<td style='width:120px'>{{ person.birth_date }}</td>
-			<!-- {%if person.file_link != null%} -->
+			<th scope="row"> <a href="{% url 'training_detail' pk=training.pk %}">{{ training.training_date_start}}</a></th>
+			<td >{{ training.training_type }}</td>
+			<td >{{ training.training_name}}</td>
+			<td style='width:100px'>{{ training.training_date_expire }}</td>
+			<td>{{ training.training_cost }}</td>
+			<!-- <td>{{ training.attendees }}</td> -->
+			<td style='width:220px'>{{ training.description }}</td>
+			<!-- {%if training.file_link != null%} -->
 			<!-- <td style='word-break:break-word; width:80px'><a href="{{ person.file_link}}" target="_blank">Link</a></td> -->
 			<!-- {%else%} -->
 			<!-- <td style='word-break:break-word; width:50px'> - </td> -->
 			<!-- {% endif %} -->
 			{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
-			<td><a href="{%url 'personnel_update' pk=person.pk%}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a></td>
+			<td><a href="{%url 'training_update' pk=training.pk%}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a></td>
 			{% endif %}
 			{% if user.is_superuser %}
-			<td><a href="{%url 'personnel_delete' pk=person.pk %}" class="btn btn-outline-dark"><span
+			<td><a href="{%url 'training_delete' pk=training.pk %}" class="btn btn-outline-dark"><span
 						class="fa fa-eraser"></a></td>
 			{% endif %}
 		</tr>

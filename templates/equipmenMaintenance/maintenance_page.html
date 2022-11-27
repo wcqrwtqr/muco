@@ -32,7 +32,7 @@
 	</div>
 </div>
 <div>
-	<p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p>
+	<!-- <p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p> -->
 	<p class="fw-lighter" style="float:left"> No of searched items... {{page_obj.object_list.count}}</p>
 </div>
 
@@ -50,7 +50,9 @@
 			<th scope="col">Description</th>
 			<th scope="col">Main Cost</th>
 			<th scope="col">Link</th>
+			{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
 			<th scope="col">Update</th>
+			{% endif %}
 			{% if user.is_superuser %}
 			<th scope="col">Delete</th>
 			{% endif %}
@@ -58,10 +60,11 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for fa in page_obj.object_list %}
+		<!-- {#% for fa in page_obj.object_list #%} -->
+		{% for fa in object_list %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
-			<th scope="row"> <a href="{% url 'maintenance_detail' pk=fa.pk  %}">{{ fa.asset.asset_num }}</a></th>
+			<th scope="row"> <a href="{% url 'maintenance_detail' pk=fa.pk  %}"> {{ fa.asset.part_num }}</a></th>
 			<td>{{ fa.asset.serial_num }}</td>
 			<td>{{ fa.ms_type }}</td>
 			<td>{{ fa.main_date_start }}</td>
@@ -71,12 +74,14 @@
 			{%if fa.file_link != null%}
 			<td><a href="{{ fa.file_link}}" target="_blank">Link</a></td>
 			{%else%}
-			<td></td>
+			<td>-</td>
 			{% endif %}
-			<td><a href="{#% url 'maintenance_update' pk=fa.pk  %#}" class="btn btn-outline-dark"><span
+			{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
+			<td><a href="{% url 'maintenance_update' pk=fa.pk  %}" class="btn btn-outline-dark"><span
 						class="fa fa-clone"></a></td>
+			{% endif %}
 			{% if user.is_superuser %}
-			<td><a href="{#% url 'maintenance_delete' pk=fa.pk  %#}" class="btn btn-outline-dark"><span
+			<td><a href="{% url 'maintenance_delete' pk=fa.pk  %}" class="btn btn-outline-dark"><span
 						class="fa fa-eraser"></a></td>
 			{% endif %}
 			<!-- <td><a href="{#% url 'pdf_maintenance_view' pk=fa.pk  %}"class="btn btn-outline-dark"><span class="fa fa-pencil"></a></td> -->

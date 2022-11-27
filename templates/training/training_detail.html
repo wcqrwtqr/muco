@@ -6,25 +6,33 @@
   <div class="col">
     <div class="card card-body">
       <div class="row">
-        <h3 class="display-5">Personnel Details</h3>
+        <h3 class="display-5">Training Details</h3>
         <hr />
         <div class="col">
-          <p class='card-text'>First Name : {{ personnel_detail.first_name}}</p>
-          <p class='card-text'>Last Name : {{ personnel_detail.last_name}}</p>
+          <p class='card-text'>Training Type : {{ training_detail.training_type }}</p>
+          <p class='card-text'>Training Name : {{ training_detail.training_name }}</p>
+          <p class='card-text'>Description : {{ training_detail.description}}</p>
         </div>
         <div class="col">
-          <p class='card-text'>Start Date : {{ personnel_detail.senionrty_date}}</p>
-          <p class='card-text'>Birth Date : {{ personnel_detail.birth_date}}</p>
+          <p class='card-text'>Training Date : {{ training_detail.training_date_start }}</p>
+          <p class='card-text'>Expiry Date : {{ training_detail.training_date_expire }}</p>
+          <p class='card-text'>Cost : {{ training_detail.training_cost }}</p>
         </div>
         <div class="col">
-          <p class='card-text'>Grade : {{ personnel_detail.grade }}</p>
-          <p class='card-text'>Position : {{ personnel_detail.position}}</p>
-          <p class='card-text'>Department : {{ personnel_detail.department}}</p>
+          <p class='card-text'>First Name : {{ training_detail.person.first_name}}</p>
+          <p class='card-text'>Person Name : {{ training_detail.person.last_name}}</p>
+          <p class='card-text'>Person Name : {{ training_detail.person.department}}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+{% for foo  in trainvsperson %}
+{{foo.training_name}},
+{{foo.attendees}},
+{{foo.training_type}}
+{% endfor %}
 
 <!-- <table class="table table-striped"> -->
 <!--   <thead> -->

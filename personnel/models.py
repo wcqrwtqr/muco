@@ -11,6 +11,7 @@ class personneldb(models.Model):
     grade = models.CharField(max_length=255,blank=False)
     position = models.CharField(max_length=255,blank=False)
     department = models.CharField(max_length=255,blank=False)
+    pdf_file = models.FileField(upload_to='pdfs/', null=True)
     # field = models.CharField(max_length=255,blank=True, null=True)
     # well = models.CharField(max_length=255,blank=False, null=True)
     # country = models.CharField(max_length=255,blank=False,default='Iraq')

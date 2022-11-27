@@ -8,7 +8,6 @@ from .forms import personnelForm
 from . import models
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-# from equipmentMaintenance.models import MaintenanceDB
 from personnel.models import personneldb
 # from .filters import EquipmentFilter, EquipmentMaintenanceFilter
 # from .filters import EquipmentFilter
@@ -17,12 +16,12 @@ from personnel.models import personneldb
 # from xhtml2pdf import pisa
 
 
-class personnelListView(ListView):
+class personnelListView(ListView, PermissionRequiredMixin):
 
     template_name = 'personnel/personnel_page.html'
-    # queryset = models.EQUIPMENT_DB.objects.all()
     model = personneldb
     queryset = personneldb.objects.all()
+    permission_required = 'personnel.view_personneldb'
     # paginate_by = 50
 
     # def get_context_data(self, **kwargs):
@@ -38,11 +37,13 @@ class personnelListView(ListView):
     #     return filter_equipment.qs
 
 
-class personnelDetailView(DetailView):
+class personnelDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'personnel/personnel_detail.html'
-    queryset = models.personneldb.objects.all()
+    permission_required = 'personnel.view_personneldb'
+    queryset = personneldb.objects.all()
     context_object_name = 'personnel_detail'
 
+    # TODO for getting traning for the crew in the details page
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
     #     mypk = self.kwargs['pk'] # this will get the pk for the asset
@@ -51,10 +52,10 @@ class personnelDetailView(DetailView):
 
 
 class personnelCreateView(PermissionRequiredMixin,SuccessMessageMixin, CreateView):
-    permission_required = ("is_superuser")
     template_name = 'personnel/personnel_new.html'
     form_class = personnelForm
     model = personneldb
+    permission_required = 'personnel.add_personneldb'
     success_message = "New Personel was created successfully"
     success_url = reverse_lazy('personnel')
 
@@ -75,8 +76,9 @@ class personnelDeleteView(PermissionRequiredMixin,SuccessMessageMixin, DeleteVie
     template_name = 'personnel/personnel_confirm_delete.html'
 
 
-class personnelUpdateView(SuccessMessageMixin,UpdateView):
+class personnelUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = personneldb
+    permission_required = 'personnel.add_personneldb'
     fields = '__all__'
     template_name = 'personnel/personnel_update.html'
     success_message = "%(first_name)s Asset was deleted successfully"
