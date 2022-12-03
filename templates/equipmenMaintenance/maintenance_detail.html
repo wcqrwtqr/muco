@@ -37,29 +37,27 @@
 <table class="table table-striped">
   <thead>
     <tr class="table-dark" style="position: sticky ; top: 0;">
-      <th scope="col">Asset No</th>
+      <th scope="col">Part No</th>
       <th scope="col">Serial No</th>
-      <th scope="col">BU</th>
-      <th scope="col">BL</th>
-      <th scope="col">Asset Life</th>
-      <th scope="col">Acquisition Cost</th>
-      <th scope="col">NBV</th>
-      <th scope="col">Total Dep</th>
-      <th scope="col">Location</th>
+      <th scope="col">Maintenance Type</th>
+      <th scope="col">Maintenance Date</th>
+      <th scope="col">Maintenance End</th>
+      <th scope="col">Maintenance Cost</th>
+      <th scope="col">Expiry Date </th>
+      <th scope="col">Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><a href="{% url 'equipment_detail' pk=maintenance_detail.asset.pk %}">
-          {{ maintenance_detail.asset.asset_num}}</a></td>
+          {{ maintenance_detail.asset.part_num}}</a></td>
       <td>{{ maintenance_detail.asset.serial_num }}</td>
-      <td>{{ maintenance_detail.asset.BU }}</td>
-      <td>{{ maintenance_detail.asset.BL }}</td>
-      <td>{{ maintenance_detail.asset.asset_life }}</td>
-      <td>{{ maintenance_detail.asset.acquisition_cost }}</td>
-      <td>{{ maintenance_detail.asset.nbv }}</td>
-      <td>{{ maintenance_detail.asset.tot_dep_value }}</td>
-      <td>{{ maintenance_detail.asset.temp_location }}</td>
+      <td>{{ maintenance_detail.ms_type }}</td>
+      <td>{{ maintenance_detail.main_date_start }}</td>
+      <td>{{ maintenance_detail.main_date_end }}</td>
+      <td>{{ maintenance_detail.main_cost }}</td>
+      <td>{{ maintenance_detail.expiry_date }}</td>
+      <td>{{ maintenance_detail.description }}</td>
     </tr>
   </tbody>
 </table>

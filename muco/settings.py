@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'equipmenMaintenance',
     'jobs',
     'dailyreport',
+    'batteryList',
 ]
 
 MIDDLEWARE = [

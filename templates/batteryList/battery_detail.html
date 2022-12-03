@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block body_block %}
+
+<div class="row " >
+  <div class="col">
+    <div class="card card-body">
+      <div class="row">
+        <h3 class="display-5">Battery Full details</h3>
+        <hr />
+        <div class="col">
+          <p class='card-text'>Part No : {{ battery_detail.part_num}}</p>
+          <p class='card-text'>Serial No : {{ battery_detail.serial_num}}</p>
+          <p class='card-text'>Description : {{ battery_detail.description}}</p>
+        </div>
+        <div class="col">
+          <p class='card-text'>Acquistion cost : {{ battery_detail.purchase_date}}</p>
+          <p class='card-text'>Date : {{ battery_detail.in_service_date}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr class="table-dark" style="position: sticky ; top: 0;">
+      <th scope="col">Part No</th>
+      <th scope="col">Serial No</th>
+      <th scope="col">Purcahsed</th>
+      <th scope="col">In Service</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ battery_detail.part_num }}</td>
+      <td>{{ battery_detail.serial_num }}</td>
+      <td>{{ battery_detail.purchase_date }}</td>
+      <td>{{ battery_detail.in_service_date }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card ">
+  <div class="card-header">
+    <h3 class="display-5">Battery Maintenacne Related</h3>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr class="table-dark" style="position: sticky ; top: 0;">
+      <th scope="col">Check Type</th>
+      <th scope="col">Check Date</th>
+      <th scope="col">Voltage Value</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- TODO make the equipment vs maintenance active  -->
+    {% for fa in batteryMain %}
+    <tr>
+      <td><a href="{% url 'battery_maintenance_detail' pk=fa.pk %}">{{ fa.ms_type }}</a></td>
+      <td>{{ fa.check_date }}</td>
+      <td>{{ fa.voltage_value}}</td>
+      <td style='word-break:break-word; width:300px'>{{ fa.description }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a class="btn btn-primary " href="{% url 'battery' %}">Back to battery</a>
+<a class="btn btn-secondary " href="{% url 'battery_update' pk=battery_detail.pk %}" target="_blank">Update battery</a>
+<!-- TODO make a button to take the user to a new maintenance record for this equipment based on the pk number -->
+{% endblock %}

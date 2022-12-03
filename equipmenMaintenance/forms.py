@@ -1,11 +1,9 @@
 from django import forms
-from .models import Maintenancedb
+from .models import Maintenancedb, Batterymaintenancedb
 # from templates.widgets import FengyuanChenDatePickerInput
 from django.forms import  DateInput
 
 class MaintenanceForm (forms.ModelForm):
-   # main_date_start = forms.DateField(label="Start Date", input_formats=['%d-%m-%Y'], widget=FengyuanChenDatePickerInput())
-   # main_date_end = forms.DateField(label="End Date",  input_formats=['%d-%m-%Y'], widget=FengyuanChenDatePickerInput())
    # expiry_date = forms.DateField(label="Expiry Date",  input_formats=['%d-%m-%Y'], widget=FengyuanChenDatePickerInput())
    main_date_start = forms.DateField(label="Start Date", input_formats=['%d-%m-%Y'], )
    main_date_end = forms.DateField(label="End Date",  input_formats=['%d-%m-%Y'], )
@@ -30,33 +28,24 @@ class MaintenanceForm (forms.ModelForm):
       #    'file_link':'Link',
       # }
       widgets  = {
-         'main_date_start' : forms.SelectDateWidget(years=[x for x in range(2018,2025)]),
+         'main_date_start' : forms.SelectDateWidget(years=[x for x in range(2020,2025)]),
          'ms_type' : forms.Select(choices=ms),
-         'main_date_end' : forms.SelectDateWidget(years=[x for x in range(2018,2025)]),
-         'expiry_date' : forms.SelectDateWidget(years=[x for x in range(2018,2025)]),
+         'main_date_end' : forms.SelectDateWidget(years=[x for x in range(2020,2025)]),
+         'expiry_date' : forms.SelectDateWidget(years=[x for x in range(2020,2025)]),
          'description' : forms.Textarea(attrs={'rows':3 }),
 
       }
 
-# # class DateForm(forms.Form):
-# #    main_date_start = forms.DateField(
-# #       input_formats=['%d-%m-%Y'],
-# #       widget=forms.DateInput(attrs={
-# #          'class': 'form-control datetimepicker-input',
-# #          'data-target': '#datetimepicker1'
-# #       })
-# #    )
-# #    main_date_end = forms.DateField(
-# #       input_formats=['%d-%m-%Y'],
-# #       widget=forms.DateInput(attrs={
-# #          'class': 'form-control datetimepicker-input',
-# #          'data-target': '#datetimepicker1'
-# #       })
-# #    )
-# #    expiry_date = forms.DateField(
-# #       input_formats=['%d-%m-%Y'],
-# #       widget=forms.DateInput(attrs={
-# #          'class': 'form-control datetimepicker-input',
-# #          'data-target': '#datetimepicker1'
-# #       })
-# #    )
+
+class BatteryMaintenanceForm (forms.ModelForm):
+   check_date = forms.DateField(label="Check Date", input_formats=['%d-%m-%Y'], )
+
+   class Meta:
+      model = Batterymaintenancedb
+      fields = '__all__'
+
+      ms = [('Voltage','Voltage'),('Visutal Check','Visutal Check'), ('Junked','Junked'),]
+
+      widgets  = {
+         'ms_type' : forms.Select(choices=ms),
+      }

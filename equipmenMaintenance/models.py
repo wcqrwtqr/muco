@@ -1,5 +1,6 @@
 from django.db import models
 from equipmentList.models import equipmentdb
+from batteryList.models import batterydb
 from django.urls import reverse
 
 # Create your models here.
@@ -26,3 +27,24 @@ class Maintenancedb(models.Model):
         return '%s %s %s' % (self.ms_type,self.main_date_start,self.asset)
     class Meta:
         ordering = ['asset']
+
+
+class Batterymaintenancedb(models.Model):
+    battery = models.ForeignKey(batterydb,on_delete=models.CASCADE)
+    check_date= models.DateField( null=False)
+    description = models.CharField(max_length=500, null=True,blank=True)
+    ms_type= models.CharField(max_length=20, null=True)
+    voltage_value = models.DecimalField(max_digits=4, null=True, decimal_places=2, blank=True)
+
+    def get_absolute_url(self):
+        """Get the url of the path
+        Get the url of the path when the user click on the url
+        Returns:
+            url with id number
+        """
+        return reverse ('battery_maintenance_detail',kwargs={'pk':self.pk})
+
+    def __str__(self):
+        return '%s %s %s' % (self.ms_type,self.check_date, self.battery)
+    class Meta:
+        ordering = ['check_date']

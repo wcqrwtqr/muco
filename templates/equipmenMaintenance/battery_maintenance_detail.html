@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+<!-- {#% load humanize %} -->
+{% block body_block %}
+
+<div class="card ">
+  <div class="card-header">
+    <h3 class="display-5">Battery Information Details</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="card card-body">
+      <div class="row">
+        <div class="col">
+          <p class='card-text'>Maintenance Type : {{ battery_maintenance_detail.ms_type }}</p>
+          <p class='card-text'>Test Date : {{ battery_maintenance_detail.check_date}}</p>
+          <p class='card-text'>Battery SN : {{ battery_maintenance_detail.battery.serial_num}}</p>
+        </div>
+        <div class="col">
+          <p class='card-text'>Voltage Val  :{{ battery_maintenance_detail.voltage_value}}</p>
+          <p class='card-text'>Description : {{ battery_maintenance_detail.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="card ">
+  <div class="card-header">
+    <h3 class="display-5">Battery Maintenance Table</h3>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr class="table-dark" style="position: sticky ; top: 0;">
+      <th scope="col">Part No</th>
+      <th scope="col">Serial No</th>
+      <th scope="col">Check Type</th>
+      <th scope="col">Check Date</th>
+      <th scope="col">Voltage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="{% url 'battery_detail' pk=battery_maintenance_detail.battery.pk %}">
+          {{ battery_maintenance_detail.battery.part_num}}</a></td>
+      <td>{{ battery_maintenance_detail.battery.serial_num }}</td>
+      <td>{{ battery_maintenance_detail.ms_type }}</td>
+      <td>{{ battery_maintenance_detail.check_date }}</td>
+      <td>{{ battery_maintenance_detail.voltage_value}}</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<a class="btn btn-primary" href="{% url 'battery_maintenance' %}">Back Battery Maintenance</a>
+<div class="card-footer text-muted">
+  Maintenance is Important
+</div>
+
+{% endblock %}
