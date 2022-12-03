@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView,ListView,DetailView, View, CreateView, DeleteView, UpdateView
 from .models import jobsdb
-# from dailyreport.models import DailyreportDB
+from dailyreport.models import dailyreportdb
 # from django.contrib.auth.decorators import login_required
 from django.urls import  reverse_lazy
 from .forms import *
@@ -52,11 +52,11 @@ class JobsDetailView(DetailView):
     context_object_name = 'jobs_detail'
     template_name = 'jobs/jobs_detail.html'
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         mypk = self.kwargs['pk'] # this will get the pk for the asset
-#         context['jobDaily'] = DailyreportDB.objects.filter(jobid=mypk)
-#         return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        mypk = self.kwargs['pk'] # this will get the pk for the asset
+        context['jobDaily'] = dailyreportdb.objects.filter(jobid=mypk)
+        return context
 
 class JobsUpdateView( SuccessMessageMixin, UpdateView):
     template_name = 'jobs/jobs_update.html'

@@ -4,7 +4,6 @@ from django import forms
 from django.forms import  DateInput
 
 class EquipmentForm(forms.ModelForm):
-    # acquisition_date = forms.DateField(input_formats=['%d-%m-%Y'], widget=FengyuanChenDatePickerInput())
     acquisition_date = forms.DateField(input_formats=['%d-%m-%Y'] )
     class Meta:
         model = equipmentdb

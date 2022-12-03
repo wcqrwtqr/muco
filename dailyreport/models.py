@@ -33,10 +33,10 @@ class dailyreportdb(models.Model):
     # isCleanup = models.BooleanField(default=True, null=True, blank=True)
     # isProduction = models.BooleanField(default=True, null=True, blank=True)
 
-    # @property
-    # def calc_gor(self):
-    #     x = int(self.gasrate / self.oilrate * 1000000)
-    #     return x
+    @property
+    def calc_gor(self):
+        x = int(self.gasrate / self.oilrate * 1000000)
+        return x
 
     # def get_absolute_url(self):
     #     return reverse('dailyreport_detail', kwargs={'pk': self.pk})

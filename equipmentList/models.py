@@ -11,9 +11,6 @@ class equipmentdb(models.Model):
     acquisition_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     acquisition_date  = models.DateField(null=True, blank=True)
     file_link = models.URLField(max_length=200, null=True, blank=True)
-    # BU = models.CharField(max_length=4, null=True, blank=True)
-    # tot_dep_value = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    # nbv  = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('equipment_detail', kwargs={'pk': self.pk})
