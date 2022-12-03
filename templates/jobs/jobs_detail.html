@@ -1,0 +1,317 @@
+{% extends 'base.html' %}
+{% block body_block %}
+
+<div class="row ">
+  <div class="col">
+    <div class="card card-body">
+      <div class="row">
+        <h3 class="display-5">Jobs Full details</h3>
+        <hr />
+        <div class="col">
+          <p class='card-text'>Client : {{ jobs_detail.client}}</p>
+          <p class='card-text'>Field : {{ jobs_detail.field}}</p>
+          <p class='card-text'>Well : {{ jobs_detail.well}}</p>
+        </div>
+        <div class="col">
+          <p class='card-text'>Department : {{ jobs_detail.departmenet}}</p>
+          <p class='card-text'>Service : {{ jobs_detail.service}}</p>
+          <p class='card-text'>Description : {{ jobs_detail.description}}</p>
+        </div>
+        <div class="col">
+          <p class='card-text'>Start Date : {{ jobs_detail.startDate }}</p>
+          <p class='card-text'>End Date : {{ jobs_detail.endDate }}</p>
+          <p class='card-text'>Contract : {{ jobs_detail.isContract}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
+
+<!-- TODO  -->
+
+<!-- <div class="accordion" id="accordionExample"> -->
+<!--   <div class="accordion-item"> -->
+<!--     <h2 class="accordion-header" id="headingOne"> -->
+<!--       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> -->
+<!--         Daily Report Details -->
+<!--       </button> -->
+<!--     </h2> -->
+<!--     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample"> -->
+<!--       <div class="accordion-body"> -->
+<!--         <p class="fw-lighter">No of records.. {{jobDaily.count}}</p> -->
+<!--         <table class="table table-striped"> -->
+<!--           <thead> -->
+<!--             <tr class="table-dark" style="position: sticky ; top: 0;"> -->
+<!--               <th scope="col" style='width:200px'>Date</th> -->
+<!--               <th scope="col" style='word-break:break-word; width:450'>Last 24hr Ops</th> -->
+<!--               <th scope="col" style='word-break:break-word; width:450'>Next 24hr Ops</th> -->
+<!--               <th scope="col" style='width:200px'>Oil rate</th> -->
+<!--               <th scope="col" style='width:100'>Choke Size</th> -->
+<!--               <th scope="col" style='width:150'>WHP</th> -->
+<!--             </tr> -->
+<!--           </thead> -->
+<!--           <tbody> -->
+<!--             {% for fa in jobDaily %} -->
+<!--             <tr> -->
+<!--               <td><a href="{#% url 'dailyreport_detail' pk=fa.pk %#}">{{ fa.operationdate }}</a></td> -->
+<!--               <td style='width:400px' align="justify">{{ fa.lastdayops }}</td> -->
+<!--               <td style='width:400px' align="justify" >{{ fa.nextdayops }}</td> -->
+<!--               <td>{{ fa.oilrate}} BPD</td> -->
+<!--               <td>{{ fa.chokesize }}/64"</td> -->
+<!--               <td >{{ fa.whp }} psi</td> -->
+<!--             </tr> -->
+<!--             {% endfor %} -->
+<!--           </tbody> -->
+<!--         </table> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!--   <\!-- Creating the accordion which will hold the data and graphs -\-> -->
+<!--   <div class="accordion-item"> -->
+<!--     <h2 class="accordion-header" id="headingTwo"> -->
+<!--       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> -->
+<!--         Upstream Parameters -->
+<!--       </button> -->
+<!--     </h2> -->
+
+<!--     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample"> -->
+<!--       <div class="accordion-body"> -->
+<!--         <button type="button" class="btn btn-outline-dark mb-2" id='bar'>Bar</button> -->
+<!--         <button type="button" class="btn btn-outline-dark mb-2" id='line'>Line</button> -->
+<!--         <div class="row"> -->
+<!--           <h3>Upstream parameters</h3> -->
+<!--           <canvas id="myChart" width="300" height="150"></canvas> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+
+<!--     <div class="accordion-item"> -->
+<!--       <h2 class="accordion-header" id="headingThree"> -->
+<!--         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> -->
+<!--           Flow Rates -->
+<!--         </button> -->
+<!--       </h2> -->
+<!--       <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample"> -->
+<!--         <div class="accordion-body"> -->
+<!--           <h3>Flow rates</h3> -->
+<!--           <canvas id="myChart2" width="300" height="150"></canvas> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+
+<!--     <div class="accordion-item"> -->
+<!--       <h2 class="accordion-header" id="headingFour"> -->
+<!--         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"> -->
+<!--           Other Paramters -->
+<!--         </button> -->
+<!--       </h2> -->
+<!--       <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample"> -->
+<!--         <div class="accordion-body"> -->
+<!--           <h3>Other parameters</h3> -->
+<!--           <canvas id="myChart3" width="300" height="150"></canvas> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div> -->
+
+<br/>
+<!-- Making the button for going back -->
+<a class="btn btn-primary" href="{% url 'jobs' %}">Back to Jobs</a>
+<div class="card-footer text-muted">
+  {% if jobs_detail.endDate is null %}
+  <p class='card-text' style="color: green;">Job is running </p>
+  {% else %}
+  <p class='card-text' style="color: red;">Job ended</p>
+  {% endif %}
+</div>
+
+<!-- TODO add new functionality to the daily report -->
+
+<!-- Scirpting for the chart js  -->
+<!-- <script> -->
+<!--   const line = document.getElementById('line') -->
+<!--   const bar = document.getElementById('bar') -->
+<!--   line.addEventListener('click', changeline) -->
+<!--   bar.addEventListener('click', changebar) -->
+
+<!--   const ctx = document.getElementById('myChart').getContext('2d'); -->
+<!--   const ctx2 = document.getElementById('myChart2').getContext('2d'); -->
+<!--   const ctx3 = document.getElementById('myChart3').getContext('2d'); -->
+<!--   // First chart with Upstream parameters -->
+<!--   const myChart = new Chart(ctx, { -->
+<!--       type: 'line', -->
+<!--       data: { -->
+<!--           labels: [{% for foo in jobDaily  %} '{{foo.operationdate }}', {% endfor %}], -->
+<!--           datasets: [ -->
+<!--               // Oil rate -->
+<!--               { -->
+<!--                   label: 'WHT', -->
+<!--                   yAxisID: 'A', -->
+<!--                   data: [{% for foo in jobDaily  %} {{foo.wht}}, {% endfor %}], -->
+<!--                   backgroundColor: ['rgba(255, 99, 132, 0.2)',], -->
+<!--                   borderColor: ['rgba(255, 99, 132, 1)',], -->
+<!--                   borderWidth: 1 -->
+<!--                 }, -->
+<!--               // WHP -->
+<!--               { -->
+<!--                   label: 'WHP pressure', -->
+<!--                   yAxisID: 'A', -->
+<!--                   data: [{% for foo in jobDaily  %} {{foo.whp}}, {% endfor %}], -->
+<!--                   backgroundColor: ['rgba(54, 162, 235, 0.2)',], -->
+<!--                   borderColor: ['rgba(54, 162, 235, 1)',], -->
+<!--                   borderWidth: 1 -->
+<!--               }, -->
+<!--               // dp -->
+<!--               { -->
+<!--                   label: 'dp', -->
+<!--                   yAxisID: 'A', -->
+<!--                   data: [{% for foo in jobDaily  %} {{foo.dp}}, {% endfor %}], -->
+<!--                   backgroundColor: ['rgba(255, 206, 86, 0.2)',], -->
+<!--                   borderColor: ['rgba(255, 206, 86, 1)',], -->
+<!--                   borderWidth: 1 -->
+<!--               }, -->
+<!--               { -->
+<!--                   label: 'Choke size', -->
+<!--                   yAxisID: 'B', -->
+<!--                   data: [{% for foo in jobDaily  %} {{foo.chokesize}}, {% endfor %}], -->
+<!--                   backgroundColor: ['rgba(120, 73, 75, 0.2)',], -->
+<!--                   borderColor: ['rgba(120, 73, 75, 0.2)',], -->
+<!--                   borderWidth: 1 -->
+<!--               } -->
+<!--           ] -->
+<!--       }, -->
+<!--       options: { -->
+<!--           scales: { -->
+<!--               yAxes:[{ -->
+<!--                   id: 'B', -->
+<!--                   position: 'right' -->
+<!--               },{ -->
+<!--                   id: 'A', -->
+<!--                   position: 'left' -->
+<!--               }] -->
+<!--           } -->
+<!--       } -->
+<!--   }); -->
+<!--   // Second chart with flow rates parameters -->
+<!--   const myChart2 = new Chart(ctx2, { -->
+<!--       type: 'line', -->
+<!--       data: { -->
+<!--           labels: [ -->
+<!--               {% for foo in jobDaily  %} '{{foo.operationdate }}', {% endfor %}], -->
+<!--           datasets: [ -->
+<!--               // Oil rate -->
+<!--               { -->
+<!--                   label: 'Oil Rate', -->
+<!--                   yAxisID: 'A', -->
+<!--                   data: [{% for foo in jobDaily  %} {{foo.oilrate}}, {% endfor %}], -->
+<!--                   backgroundColor: ['rgba(255, 99, 132, 0.2)',], -->
+<!--                   borderColor: ['rgba(255, 99, 132, 1)',], -->
+<!--                   borderWidth: 1 -->
+<!--               }, -->
+<!--               // Water rate -->
+<!--               { -->
+<!--                   label: 'Water rate', -->
+<!--                   yAxisID: 'A', -->
+<!--                   data: [{% for foo in jobDaily  %} {{foo.waterrate}}, {% endfor %}], -->
+<!--                   backgroundColor: ['rgba(54, 162, 235, 0.2)',], -->
+<!--                   borderColor: ['rgba(54, 162, 235, 1)',], -->
+<!--                   borderWidth: 1 -->
+<!--               }, -->
+<!--               { -->
+<!--                   label: 'Orifice', -->
+<!--                   yAxisID: 'B', -->
+<!--                   data: [{% for foo in jobDaily  %} {{foo.orifice}}, {% endfor %}], -->
+<!--                   backgroundColor: ['rgba(255, 206, 86, 0.2)',], -->
+<!--                   borderColor: ['rgba(255, 206, 86, 1)',], -->
+<!--                   borderWidth: 1 -->
+<!--               }, -->
+<!--               { -->
+<!--                   label: 'Gas Rate', -->
+<!--                   yAxisID: 'B', -->
+<!--                   data: [{% for foo in jobDaily  %} {{foo.gasrate}}, {% endfor %}], -->
+<!--                   backgroundColor: ['rgba(120, 73, 75, 0.2)',], -->
+<!--                   borderColor: ['rgba(120, 73, 75, 0.2)',], -->
+<!--                   borderWidth: 1 -->
+<!--               } -->
+<!--           ] -->
+<!--       }, -->
+<!--       options: { -->
+<!--           scales: { -->
+<!--               yAxes:[{ -->
+<!--                   id: 'B', -->
+<!--                   position: 'right' -->
+<!--               },{ -->
+<!--                   id: 'A', -->
+<!--                   position: 'left' -->
+<!--               }] -->
+<!--           } -->
+<!--       } -->
+<!--   }); -->
+<!--   // third chart with other parameters -->
+<!--   const myChart3 = new Chart(ctx3, { -->
+<!--       type: 'line', -->
+<!--       data: { -->
+<!--           labels: [{% for foo in jobDaily  %} '{{foo.operationdate }}', {% endfor %}], -->
+<!--           datasets: [ -->
+<!--               // Oil rate -->
+<!--               { -->
+<!--                   label: 'BSW', -->
+<!--                   yAxisID: 'B', -->
+<!--                   data: [{% for foo in jobDaily  %} {{foo.bsw}}, {% endfor %}], -->
+<!--                   backgroundColor: ['rgba(255, 99, 132, 0.2)',], -->
+<!--                   borderColor: ['rgba(255, 99, 132, 1)',], -->
+<!--                   borderWidth: 1 -->
+<!--               }, -->
+<!--               // Water rate -->
+<!--               { -->
+<!--                   label: 'CO2', -->
+<!--                   yAxisID: 'A', -->
+<!--                   data: [{% for foo in jobDaily  %} {{foo.co2}}, {% endfor %}], -->
+<!--                   backgroundColor: ['rgba(54, 162, 235, 0.2)',], -->
+<!--                   borderColor: ['rgba(54, 162, 235, 1)',], -->
+<!--                   borderWidth: 1 -->
+<!--               }, -->
+<!--               { -->
+<!--                   label: 'H2S', -->
+<!--                   yAxisID: 'A', -->
+<!--                   data: [{% for foo in jobDaily  %} {{foo.h2s}}, {% endfor %}], -->
+<!--                   backgroundColor: ['rgba(255, 206, 86, 0.2)',], -->
+<!--                   borderColor: ['rgba(255, 206, 86, 1)',], -->
+<!--                   borderWidth: 1 -->
+<!--               }, -->
+<!--               { -->
+<!--                   label: 'Choke size', -->
+<!--                   yAxisID: 'B', -->
+<!--                   data: [{% for foo in jobDaily  %} {{foo.chokesize}}, {% endfor %}], -->
+<!--                   backgroundColor: ['rgba(120, 73, 75, 0.2)',], -->
+<!--                   borderColor: ['rgba(120, 73, 75, 0.2)',], -->
+<!--                   borderWidth: 1 -->
+<!--               } -->
+<!--           ] -->
+<!--       }, -->
+<!--       options: { -->
+<!--           scales: { -->
+<!--               yAxes:[{ -->
+<!--                   id: 'B', -->
+<!--                   position: 'right' -->
+<!--               },{ -->
+<!--                   id: 'A', -->
+<!--                   position: 'left' -->
+<!--               }] -->
+<!--           } -->
+<!--       } -->
+<!--   }); -->
+
+<!--   function changeline() { -->
+<!--       myChart.config.type = 'line' -->
+<!--       myChart.update() -->
+<!--   } -->
+<!--   function changebar() { -->
+<!--       myChart.config.type = 'bar' -->
+<!--       myChart.update() -->
+<!--   } -->
+<!-- </script> -->
+
+{% endblock %}
