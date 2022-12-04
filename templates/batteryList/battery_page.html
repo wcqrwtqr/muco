@@ -58,18 +58,16 @@
 		</tr>
 	</thead>
 	<tbody>
-
-		<!-- This page_obj.object_list will get us the pagination and filter working togather -->
 		<!-- {#% for battery in page_obj.object_list %#} -->
 		{% for battery in object_list %}
 
 		<tr>
 			<th scope="row" style='width:50px'>{{forloop.counter}}</th>
-			<th scope="row" style='word-break:break-word; width:200px'> <a href="{% url 'battery_detail' pk=battery.pk %}">{{ battery.part_num }}</a></th>
-			<td style='word-break:break-word; width:200px'>{{ battery.serial_num }}</td>
-			<td style='word-break:break-word; width:300px'>{{ battery.description }}</td>
-			<td style='width:100px'>{{ battery.purchase_date }}</td>
-			<td style='width:100px'>{{ battery.in_service_date }}</td>
+			<th scope="row" style='word-break:break-word; width:150px'> <a href="{% url 'battery_detail' pk=battery.pk %}">{{ battery.part_num }}</a></th>
+			<td style='width:200px'>{{ battery.serial_num }}</td>
+			<td style='width:200px'>{{ battery.description }}</td>
+			<td style='width:150px'>{{ battery.purchase_date }}</td>
+			<td style='width:150px'>{{ battery.in_service_date }}</td>
 			{%if battery.in_service_date == null%}
 			<td style='word-break:break-word; width:80px'>New</td>
 			{%else%}

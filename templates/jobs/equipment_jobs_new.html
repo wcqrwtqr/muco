@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{%load crispy_forms_tags %}
+
+{% block body_block %}
+<h3 class="display-5">Create new Job</h3>
+
+<br />
+<p class="blockquote-footer">Hello {{user.username}}</p>
+
+<form method="POST" class="post-form">
+    {% csrf_token %}
+
+    <div class="form-row row">
+        <div class="form-group col-md-3 mb-0 col"> {{ form.jobid | as_crispy_field }} </div>
+        <div class="form-group col-md-3 mb-0 col"> {{ form.client| as_crispy_field }} </div>
+        <div class="form-group col-md-3 mb-0 col"> {{ form.field| as_crispy_field }} </div>
+        <div class="form-group col-md-3 mb-0 col"> {{ form.well| as_crispy_field }} </div>
+    </div>
+
+    <div class="form-row row">
+        <div class="form-group col-md-4 mb-0 col"> {{ form.country | as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.departmenet| as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.service | as_crispy_field }} </div>
+    </div>
+    {{ form.description | as_crispy_field }}
+    <div class="form-row row">
+        <div class="form-group col-md-4 mb-0 col"> {{ form.startDate | as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.endDate | as_crispy_field }} </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-outline-dark" href="{% url 'jobs' %}">Cancel</a>
+</form>
+
+{% endblock %}

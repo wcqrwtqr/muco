@@ -65,18 +65,14 @@
 
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
-			<th scope="row" style='word-break:break-word; width:200px'> <a href="{% url 'equipment_detail' pk=equip.pk %}">{{ equip.part_num }}</a></th>
-			<!-- <th scope="row" style='word-break:break-word; width:200px'> <a href="#">{{ equip.asset_num }}</a></th> -->
-			<td style='word-break:break-word; width:200px'>{{ equip.serial_num }}</td>
-			<!-- Special style for the description as it might contain som long test -->
-			<td style='word-break:break-word; width:450px'>{{ equip.description }}</td>
-			<td style='width:80px'>{{ equip.departement }}</td>
+			<th scope="row" style='word-break:break-word'> <a href="{% url 'equipment_detail' pk=equip.pk %}">{{ equip.part_num }}</a></th>
+			<td>{{ equip.serial_num }}</td>
+			<td>{{ equip.description }}</td>
+			<td>{{ equip.departement }}</td>
 			<td>{{ equip.acquisition_cost }}</td>
-			<td><a href="{%url 'equipment_update' pk=equip.pk%}" class="btn btn-outline-dark"> <span
-						class="fa fa-clone"></a></td>
+			<td><a href="{%url 'equipment_update' pk=equip.pk%}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a></td>
 			{% if user.is_superuser %}
-			<td><a href="{%url 'equipment_delete' pk=equip.pk %}" class="btn btn-outline-dark"><span
-						class="fa fa-eraser"></a></td>
+			<td><a href="{%url 'equipment_delete' pk=equip.pk %}" class="btn btn-outline-dark"><span class="fa fa-eraser"></a></td>
 			{% endif %}
 		</tr>
 

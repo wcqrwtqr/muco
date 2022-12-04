@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView,ListView,DetailView, View, CreateView, DeleteView, UpdateView
-from .models import jobsdb
+from .models import jobsdb , equipment_job_activitiesdb
 from dailyreport.models import dailyreportdb
 # from django.contrib.auth.decorators import login_required
 from django.urls import  reverse_lazy
@@ -34,6 +34,12 @@ class JobsHomePage(ListView):
     #     filter_jobs = Jobsfilter(self.request.GET, queryset=qs)
     #     return filter_jobs.qs
 
+class EquipmentJobsHomePage(ListView):
+    template_name = 'jobs/equipment_jobs_page.html'
+    model = equipment_job_activitiesdb
+    queryset = equipment_job_activitiesdb.objects.all()
+    # paginate_by = 50
+
 class JobsCreate(PermissionRequiredMixin, SuccessMessageMixin,CreateView ):
     permission_required = ("is_superuser")
     template_name = 'jobs/jobs_new.html'
@@ -57,6 +63,17 @@ class JobsDetailView(DetailView):
         mypk = self.kwargs['pk'] # this will get the pk for the asset
         context['jobDaily'] = dailyreportdb.objects.filter(jobid=mypk)
         return context
+
+class EquipmentJobsDetailView(DetailView):
+    queryset = equipment_job_activitiesdb.objects.all()
+    context_object_name = 'equipment_jobs_detail'
+    template_name = 'jobs/equipment_jobs_detail.html'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     mypk = self.kwargs['pk'] # this will get the pk for the asset
+    #     context['jobDaily'] = dailyreportdb.objects.filter(jobid=mypk)
+    #     return context
 
 class JobsUpdateView( SuccessMessageMixin, UpdateView):
     template_name = 'jobs/jobs_update.html'

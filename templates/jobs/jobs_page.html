@@ -51,8 +51,10 @@
 			<th scope="col">Description</th>
 			<th scope="col">Start Date</th>
 			<th scope="col">End Date</th>
-			{% if user.is_superuser %}
+			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 			<th scope="col">Update</th>
+			{% endif %}
+			{% if user.is_superuser %}
 			<th scope="col">Delete</th>
 			{% endif %}
 			<!-- <th scope="col">PDF</th> -->
@@ -72,11 +74,11 @@
 			<td>{{ fa.description }}</td>
 			<td>{{ fa.startDate}}</td>
 			<td>{{ fa.endDate}}</td>
+			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
+			<td><a href="{% url 'jobs_update' pk=fa.pk  %}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a></td>
+			{% endif %}
 			{% if user.is_superuser %}
-			<td><a href="{% url 'jobs_update' pk=fa.pk  %}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a>
-			</td>
-			<td><a href="{% url 'jobs_delete' pk=fa.pk  %}" class="btn btn-outline-dark"><span class="fa fa-eraser">
-				</a></td>
+			<td><a href="{% url 'jobs_delete' pk=fa.pk  %}" class="btn btn-outline-dark"><span class="fa fa-eraser"> </a></td>
 			{% endif %}
 			<!-- <td><a href="{#% url 'pdf_job_view' pk=fa.pk  %}"class="btn btn-outline-dark"><span class="fa fa-pencil"></a></td> -->
 		</tr>

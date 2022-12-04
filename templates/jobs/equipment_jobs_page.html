@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block body_block %}
 
-<h1 class="display-5">Battery Maintenance Page <span class="material-icons">battery_3_bar</span></h1>
+
+<h1 class="display-5">Jobs vs Equipment<span class="material-icons">oil_barrel</span> </h1>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
-<!-- messages flash  -->
 {% for message in messages %}
 {% if message %}
-<div class="alert alert-{{message.tags}}" id="message-card">
+<div class="alert alert-{{message.tags}}" id="message-card" >
 	{{message}}
 </div>
 {% endif %}
@@ -20,74 +19,65 @@
 <div class="row collapse" id="collapseMe">
 	<div class="col">
 		<div class="card card-body">
-			<!-- I liked this method below as it shows the table in a better way -->
 			<form method="GET">
 				<table>
 					{{ filter.form.as_table}}
 				</table>
 				<button type="submit" class="btn btn-primary">Search</button>
-				<a class="btn btn-outline-dark" href="{% url 'battery_maintenance_new' %}">New Battery Maintenance</a>
+				{% if user.is_superuser %}
+				<a class="btn btn-outline-dark" href="{#% url 'jobs_new' %#}">New XXX</a>
+				{% endif %}
+
 			</form>
 		</div>
 	</div>
 </div>
 <div>
-	<!-- <p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p> -->
+	<p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p>
 	<p class="fw-lighter" style="float:left"> No of searched items... {{object_list.count}}</p>
 </div>
-
 <br>
 <table class="table table-striped">
 	<thead>
-		<!-- This style makes the top header sticking to the top of the page as a sticky table header  -->
 		<tr class="table-dark" style=" position: sticky; top: 0;">
 			<th scope="col">#</th>
-			<th scope="col">Battery SN</th>
-			<th scope="col">Battery PN</th>
-			<th scope="col">Maintenance Type</th>
+			<th scope="col">JobID</th>
+			<th scope="col">Client</th>
+			<th scope="col">Well</th>
+			<th scope="col">Service</th>
+			<th scope="col">Asset PN</th>
+			<th scope="col">Asset SN</th>
 			<th scope="col">Description</th>
-			<th scope="col" style="width:150px">Check Date</th>
-			<th scope="col">Voltage</th>
-			<th scope="col">Status</th>
-			<!-- TODO -- check this part below, Done I checked it -->
-			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
-			<th scope="col">Update</th>
-			{% endif %}
+			<th scope="col">Battery</th>
 			{% if user.is_superuser %}
+			<th scope="col">Update</th>
 			<th scope="col">Delete</th>
 			{% endif %}
 			<!-- <th scope="col">PDF</th> -->
 		</tr>
 	</thead>
 	<tbody>
-		<!-- {#% for fa in page_obj.object_list #%} -->
 		{% for fa in object_list %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
-			<th scope="row"> <a href="{% url 'battery_maintenance_detail' pk=fa.pk  %}"> {{ fa.battery.serial_num }}</a></th>
-			<td>{{ fa.battery.part_num }}</td>
-			<td>{{ fa.ms_type }}</td>
-			<td>{{ fa.description }}</td>
-			<td>{{ fa.check_date }}</td>
-			<td>{{ fa.voltage_value }}</td>
-			{% if fa.ops_status == "Good" %}
-			<td style="color:green">{{ fa.ops_status }}</td>
-			{% else %}
-			<td style="color:red">{{ fa.ops_status }}</td>
-			{% endif %}
-			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
-			<td><a href="{% url 'battery_maintenance_update' pk=fa.pk  %}" class="btn btn-outline-dark"><span
-						class="fa fa-clone"></a></td>
-			{% endif %}
+			<th scope="row"> <a href="{% url 'equipment_jobs_detail' pk=fa.pk %}">{{ fa.jobidnew.jobid }}</a></th>
+			<td>{{ fa.jobidnew.client }}</td>
+			<td>{{ fa.jobidnew.well }}</td>
+			<td>{{ fa.jobidnew.service }}</td>
+			<td>{{ fa.assetnew.part_num }}</td>
+			<td>{{ fa.assetnew.serial_num }}</td>
+			<td>{{ fa.assetnew.description }}</td>
+			<td> {% for fo in fa.battery.all %} {{forloop.counter}}){{fo.serial_num}}, {% endfor %}</td>
 			{% if user.is_superuser %}
-			<td><a href="{% url 'battery_maintenance_delete' pk=fa.pk  %}" class="btn btn-outline-dark"><span
-						class="fa fa-eraser"></a></td>
+			<td><a href="{#% url 'jobs_update' pk=fa.pk  %#}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a>
+			</td>
+			<td><a href="{#% url 'jobs_delete' pk=fa.pk  %#}" class="btn btn-outline-dark"><span class="fa fa-eraser">
+				</a></td>
 			{% endif %}
 		</tr>
 		{% endfor %}
-
-
 		<!-- Pagination pages toggle -->
+
 		<br />
 		<nav aria-label="Page navigation example">
 			<ul class="pagination">
@@ -96,7 +86,7 @@
 				<li class="page-item"><a class="page-link"
 						href="?page={{ page_obj.previous_page_number }} ">previous</a></li>
 				{% endif %}
-				<li class="page-item"><a class=" text-rest text-muted page-link" href="#">
+				<li class="page-item"><a class="text-rest text-muted page-link" href="#">
 						Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
 					</a></li>
 				{% if page_obj.has_next %}
@@ -108,12 +98,13 @@
 		</nav>
 	</tbody>
 </table>
-{% endblock %}
 
+
+{% endblock %}
 
 {% block scripts %}
 {{block.super}}
-<script src="{% static 'js/mainScript.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jobScript.js' %}"></script>
 <script src="{% static 'js/messageScript.js' %}"></script>
 
 {% endblock %}
