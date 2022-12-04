@@ -42,12 +42,13 @@
 		<!-- This style makes the top header sticking to the top of the page as a sticky table header  -->
 		<tr class="table-dark" style=" position: sticky; top: 0;">
 			<th scope="col">#</th>
-			<th scope="col" style='word-break:break-word; width:200px'>Battery SN</th>
+			<th scope="col" style='word-break:break-word; width:100px'>Battery SN</th>
 			<th scope="col">Battery PN</th>
 			<th scope="col">Maintenance Type</th>
 			<th scope="col">Description</th>
-			<th scope="col">Check Date</th>
+			<th scope="col" style="width:150px">Check Date</th>
 			<th scope="col">Voltage</th>
+			<th scope="col">Status</th>
 			<!-- TODO -- check this part below -->
 			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 			<th scope="col">Update</th>
@@ -69,6 +70,11 @@
 			<td>{{ fa.description }}</td>
 			<td>{{ fa.check_date }}</td>
 			<td>{{ fa.voltage_value }}</td>
+			{% if fa.ops_status == "Good" %}
+			<td style="color:green">{{ fa.ops_status }}</td>
+			{% else %}
+			<td style="color:red">{{ fa.ops_status }}</td>
+			{% endif %}
 			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 			<td><a href="{% url 'battery_maintenance_update' pk=fa.pk  %}" class="btn btn-outline-dark"><span
 						class="fa fa-clone"></a></td>

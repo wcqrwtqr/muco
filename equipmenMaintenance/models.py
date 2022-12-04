@@ -44,6 +44,12 @@ class Batterymaintenancedb(models.Model):
         """
         return reverse ('battery_maintenance_detail',kwargs={'pk':self.pk})
 
+    @property
+    def ops_status(self):
+        if self.voltage_value > 3.1:
+            return "Good"
+        return "Not Good"
+
     def __str__(self):
         return '%s %s %s' % (self.ms_type,self.check_date, self.battery)
     class Meta:

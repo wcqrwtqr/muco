@@ -50,7 +50,7 @@
 			<th scope="col">Description</th>
 			<th scope="col">Department</th>
 			<th scope="col">cost</th>
-			<th scope="col">link</th>
+			<!-- <th scope="col">link</th> -->
 			<th scope="col" style='width:50px'>Update</th>
 			{% if user.is_superuser %}
 			<th scope="col" style='width:50px'>Delete</th>
@@ -72,11 +72,6 @@
 			<td style='word-break:break-word; width:450px'>{{ equip.description }}</td>
 			<td style='width:80px'>{{ equip.departement }}</td>
 			<td>{{ equip.acquisition_cost }}</td>
-			{%if equip.file_link != null%}
-			<td style='word-break:break-word; width:80px'><a href="{{ equip.file_link}}" target="_blank">Link</a></td>
-			{%else%}
-			<td style='word-break:break-word; width:50px'> - </td>
-			{% endif %}
 			<td><a href="{%url 'equipment_update' pk=equip.pk%}" class="btn btn-outline-dark"> <span
 						class="fa fa-clone"></a></td>
 			{% if user.is_superuser %}

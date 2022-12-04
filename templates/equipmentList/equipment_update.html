@@ -3,7 +3,7 @@
 {%load crispy_forms_tags %}
 
 {% block body_block %}
-<h1 class="display-3">Update Fixed Asset</h1>
+<h1 class="display-5">Update Fixed Asset</h1>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 
@@ -15,7 +15,7 @@
         <div class="form-group col-md-4 mb-0 col"> {{ form.departement|as_crispy_field }} </div>
     </div>
     <div class="form-row row">
-        <div class="form-group col-md-10 mb-0 col"> {{ form.description|as_crispy_field }} </div>
+        <div class="form-group col-md-12 mb-0 col"> {{ form.description|as_crispy_field }} </div>
     </div>
     <div class="form-row row">
         <div class="form-group col-md-4 mb-0 col"> {{ form.asset_life|as_crispy_field }} </div>

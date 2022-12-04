@@ -43,7 +43,7 @@
 
 <div class="card ">
   <div class="card-header">
-    <h3 class="display-5">Battery Maintenacne Related</h3>
+    <h3 class="display-6">Maintenacne Check</h3>
   </div>
 </div>
 <table class="table table-striped">
@@ -56,7 +56,6 @@
     </tr>
   </thead>
   <tbody>
-    <!-- TODO make the equipment vs maintenance active  -->
     {% for fa in batteryMain %}
     <tr>
       <td><a href="{% url 'battery_maintenance_detail' pk=fa.pk %}">{{ fa.ms_type }}</a></td>
@@ -70,5 +69,7 @@
 
 <a class="btn btn-primary " href="{% url 'battery' %}">Back to battery</a>
 <a class="btn btn-secondary " href="{% url 'battery_update' pk=battery_detail.pk %}" target="_blank">Update battery</a>
-<!-- TODO make a button to take the user to a new maintenance record for this equipment based on the pk number -->
+<!-- TODO add the graph of the battery voltage drop vs date here -->
+<!-- FIXME  -->
+
 {% endblock %}
