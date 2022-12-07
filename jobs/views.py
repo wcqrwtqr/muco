@@ -18,10 +18,16 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 
-class JobsHomePage(ListView):
+class JobsHomePage(PermissionRequiredMixin,ListView):
     template_name = 'jobs/jobs_page.html'
     model = jobsdb
+    permission_required = ('jobs.view_jobsdb')
     queryset = jobsdb.objects.all()
+    ordering = ['startDate']
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering','-startDate')
+        return ordering
+
     # paginate_by = 50
 
     # def get_context_data(self, **kwargs):
@@ -34,14 +40,15 @@ class JobsHomePage(ListView):
     #     filter_jobs = Jobsfilter(self.request.GET, queryset=qs)
     #     return filter_jobs.qs
 
-class EquipmentJobsHomePage(ListView):
+class EquipmentJobsHomePage(PermissionRequiredMixin, ListView):
     template_name = 'jobs/equipment_jobs_page.html'
+    permission_required = ('jobs.view_jobsdb')
     model = equipment_job_activitiesdb
     queryset = equipment_job_activitiesdb.objects.all()
     # paginate_by = 50
 
 class JobsCreate(PermissionRequiredMixin, SuccessMessageMixin,CreateView ):
-    permission_required = ("is_superuser")
+    permission_required = ("is_superuser", "jobs.add_jobsdb")
     template_name = 'jobs/jobs_new.html'
     form_class = JobsForm
     model = models.jobsdb
@@ -53,8 +60,23 @@ class JobsCreate(PermissionRequiredMixin, SuccessMessageMixin,CreateView ):
         self.object = save()
         return super().form_valid(form)
 
-class JobsDetailView(DetailView):
+class EquipmentJobsCreate(PermissionRequiredMixin, SuccessMessageMixin,CreateView ):
+    permission_required = ("is_superuser")
+    template_name = 'jobs/equipment_jobs_new.html'
+    form_class = EquipmentJobsForm
+    model = models.equipment_job_activitiesdb
+    success_message = "%(jobidnew)s was created successfully"
+    success_url = reverse_lazy('equipment_jobs')
+
+    def from_valid(self, form):
+        self.object = form.save(commit = True)
+        self.object = save()
+        return super().form_valid(form)
+
+
+class JobsDetailView(PermissionRequiredMixin, DetailView):
     queryset = jobsdb.objects.all()
+    permission_required = ('jobs.view_jobsdb')
     context_object_name = 'jobs_detail'
     template_name = 'jobs/jobs_detail.html'
 
@@ -64,9 +86,10 @@ class JobsDetailView(DetailView):
         context['jobDaily'] = dailyreportdb.objects.filter(jobid=mypk)
         return context
 
-class EquipmentJobsDetailView(DetailView):
+class EquipmentJobsDetailView(PermissionRequiredMixin, DetailView):
     queryset = equipment_job_activitiesdb.objects.all()
     context_object_name = 'equipment_jobs_detail'
+    permission_required = "jobs.view_equipment_job_activitiesdb"
     template_name = 'jobs/equipment_jobs_detail.html'
 
     # def get_context_data(self, **kwargs):
@@ -75,11 +98,20 @@ class EquipmentJobsDetailView(DetailView):
     #     context['jobDaily'] = dailyreportdb.objects.filter(jobid=mypk)
     #     return context
 
-class JobsUpdateView( SuccessMessageMixin, UpdateView):
+class JobsUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'jobs/jobs_update.html'
+    permission_required = ('jobs.view_jobsdb')
     model = models.jobsdb
     success_url = reverse_lazy('jobs')
     success_message = "%(jobid)s was updated successfully"
+    fields = "__all__"
+
+class EquipmentJobsUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
+    template_name = 'jobs/equipment_jobs_update.html'
+    permission_required = "jobs.view_equipment_job_activitiesdb"
+    model = models.equipment_job_activitiesdb
+    success_url = reverse_lazy('equipment_jobs')
+    success_message = "%(jobidnew)s was updated successfully"
     fields = "__all__"
 
 class JobsDeleteView(PermissionRequiredMixin,SuccessMessageMixin, DeleteView):

@@ -14,7 +14,9 @@
           <p class='card-text'>Description : {{ equipment_detail.description}}</p>
         </div>
         <div class="col">
+          {% if user.is_superuser %}
           <p class='card-text'>Acquistion cost : {{ equipment_detail.acquisition_cost}}</p>
+          {% endif %}
           <p class='card-text'>Date : {{ equipment_detail.acquisition_date}}</p>
         </div>
         <div class="col">
@@ -34,7 +36,9 @@
       <th scope="col">Department</th>
       <th scope="col">Date</th>
       <th scope="col">Asset Life</th>
+      {% if user.is_superuser %}
       <th scope="col">Acquisition Cost</th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -44,7 +48,10 @@
       <td>{{ equipment_detail.departement }}</td>
       <td>{{ equipment_detail.acquisition_date }}</td>
       <td>{{ equipment_detail.asset_life }}</td>
+      {% if user.is_superuser %}
       <td>{{ equipment_detail.acquisition_cost }}</td>
+      {% endif %}
+
     </tr>
   </tbody>
 </table>
@@ -66,7 +73,6 @@
     </tr>
   </thead>
   <tbody>
-    <!-- TODO make the equipment vs maintenance active  -->
     {% for fa in equipMain %}
     <tr>
       <td><a href="{% url 'maintenance_detail' pk=fa.pk %}">{{ fa.ms_type }}</a></td>

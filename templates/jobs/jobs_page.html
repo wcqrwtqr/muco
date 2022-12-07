@@ -3,9 +3,9 @@
 {% block body_block %}
 
 
-<h1 class="display-5">Jobs Main Page <span class="material-icons">oil_barrel</span> </h1>
+<h1 class="display-5">Jobs Page <span class="material-icons">oil_barrel</span> </h1>
 <br />
-<p class="blockquote-footer">Hello {{user.username}}</p>
+<p class="blockquote-footer">Hello {{user.username}} {{user.groups.all.0}}</p>
 {% for message in messages %}
 {% if message %}
 <div class="alert alert-{{message.tags}}" id="message-card" >
@@ -26,7 +26,7 @@
 					{{ filter.form.as_table}}
 				</table>
 				<button type="submit" class="btn btn-primary">Search</button>
-				{% if user.is_superuser %}
+				{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 				<a class="btn btn-outline-dark" href="{% url 'jobs_new' %}">Add new Job</a>
 				{% endif %}
 

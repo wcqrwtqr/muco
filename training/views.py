@@ -17,7 +17,7 @@ from personnel.models import personneldb
 # from xhtml2pdf import pisa
 
 
-class trainingListView(ListView, PermissionRequiredMixin):
+class trainingListView(PermissionRequiredMixin, ListView):
     template_name = 'training/training_page.html'
     model = trainingdb
     queryset = trainingdb.objects.all()
@@ -26,11 +26,11 @@ class trainingListView(ListView, PermissionRequiredMixin):
 
 
 
-class trainingDetailView(DetailView):
+class trainingDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'training/training_detail.html'
     queryset = trainingdb.objects.all()
     context_object_name = 'training_detail'
-    # print(queryset)
+    permission_required = 'training.view_trainingdb'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -60,12 +60,12 @@ class trainingUpdateView(PermissionRequiredMixin ,SuccessMessageMixin,UpdateView
     model = trainingdb
     fields = "__all__"
     success_url = reverse_lazy('training')
-    permission_required = ("is_superuser", 'training.change_trainingdb')
+    permission_required = ('training.view_trainingdb')
     template_name = 'training/training_update.html'
     success_message = "%(training_type)s was updated successfully"
 
 class trainingDeleteView(SuccessMessageMixin,PermissionRequiredMixin,DeleteView):
-    permission_required = ("is_superuser", )
+    permission_required = ("is_superuser")
     template_name = 'training/training_confirm_delete.html'
     model = trainingdb
     success_url = reverse_lazy('training')

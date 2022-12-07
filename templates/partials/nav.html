@@ -16,7 +16,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'jobs' %}">Jobs</a></li>
             <li><a class="dropdown-item" href="{% url 'dailyreport' %}">Daily Reports</a></li>
-            <li><a class="dropdown-item" href="{% url 'equipment_jobs' %}">Equ-Job-Battery</a></li>
+            <li><a class="dropdown-item" href="{% url 'equipment_jobs' %}">Tracker</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -41,6 +41,20 @@
         </li>
         {% endif %}
 
+
+        {% if user.is_superuser or user.groups.all.0.name == 'Marketing'  %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Marketing
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{#%url 'personnel' %#}">Visit</a></li>
+            <li><a class="dropdown-item" href="{#% url 'training' %#}">Client</a></li>
+          </ul>
+        </li>
+        {% endif %}
+
+
         {% if user.is_superuser or user.groups.all.0.name == 'HR'  %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,8 +70,6 @@
           </ul>
         </li>
         {% endif %}
-
-
         {% if user.is_superuser %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'admin:index'  %}">Admin</a>

@@ -3,7 +3,7 @@
 {% block body_block %}
 
 
-<h1 class="display-5">Jobs vs Equipment<span class="material-icons">oil_barrel</span> </h1>
+<h1 class="display-5">Jobs Equipment Traker<span class="material-icons">assessment</span> </h1>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 {% for message in messages %}
@@ -25,7 +25,7 @@
 				</table>
 				<button type="submit" class="btn btn-primary">Search</button>
 				{% if user.is_superuser %}
-				<a class="btn btn-outline-dark" href="{#% url 'jobs_new' %#}">New XXX</a>
+				<a class="btn btn-outline-dark" href="{% url 'equipment_jobs_new' %}">New Track</a>
 				{% endif %}
 
 			</form>
@@ -69,7 +69,7 @@
 			<td>{{ fa.assetnew.description }}</td>
 			<td> {% for fo in fa.battery.all %} {{forloop.counter}}){{fo.serial_num}}, {% endfor %}</td>
 			{% if user.is_superuser %}
-			<td><a href="{#% url 'jobs_update' pk=fa.pk  %#}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a>
+			<td><a href="{% url 'equipment_jobs_update' pk=fa.pk  %}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a>
 			</td>
 			<td><a href="{#% url 'jobs_delete' pk=fa.pk  %#}" class="btn btn-outline-dark"><span class="fa fa-eraser">
 				</a></td>

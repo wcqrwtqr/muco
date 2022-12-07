@@ -6,14 +6,21 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 
-class BatteryListView(ListView):
+class BatteryListView(PermissionRequiredMixin, ListView):
     template_name = 'batteryList/battery_page.html'
+    permission_required = ('batteryList.view_batterydb')
     model = batterydb # new
     queryset = batterydb.objects.all()
+    ordering = ['serial_num']
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering','serial_num') #Order live feed events according to closest start date events at the top
+        return ordering
 
-class BatteryDetailView(DetailView):
+
+class BatteryDetailView(PermissionRequiredMixin,DetailView):
     template_name = 'batteryList/battery_detail.html'
     queryset = batterydb.objects.all()
+    permission_required = ('batteryList.view_batterydb')
     context_object_name = 'battery_detail'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -21,8 +28,9 @@ class BatteryDetailView(DetailView):
         context['batteryMain'] = Batterymaintenancedb.objects.filter(battery=mypk)
         return context
 
-class BatteryUpdateView(SuccessMessageMixin,UpdateView):
+class BatteryUpdateView(PermissionRequiredMixin,SuccessMessageMixin,UpdateView):
     model = batterydb
+    permission_required = ('batteryList.view_batterydb')
     fields = '__all__'
     template_name = 'batteryList/battery_update.html'
     success_message = "%(serial_num)s Asset was deleted successfully"

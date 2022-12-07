@@ -11,7 +11,7 @@ urlpatterns = [
 
     path('equipment_jobs/', views.EquipmentJobsHomePage.as_view(), name='equipment_jobs'),
     path('equipment_jobs/<int:pk>', views.EquipmentJobsDetailView.as_view(), name='equipment_jobs_detail'),
-    # path('equipment_jobs/<int:pk>/update/', views.EquipmentJobsUpdateView.as_view(), name='equipment_jobs_update'),
-    # path('equipment_jobs/new/', views.EquipmentJobsCreate.as_view(), name='equipment_jobs_new'),
+    path('equipment_jobs/<int:pk>/update/', views.EquipmentJobsUpdateView.as_view(), name='equipment_jobs_update'),
+    path('equipment_jobs/new/', views.EquipmentJobsCreate.as_view(), name='equipment_jobs_new'),
     # path('equipment_jobs/<int:pk>/delete/', views.EquipmentJobsDeleteView.as_view(), name='equipment_jobs_delete'),
 ]

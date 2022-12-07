@@ -33,7 +33,7 @@ class jobsdb(models.Model):
 class equipment_job_activitiesdb(models.Model):
     jobidnew  = models.ForeignKey(jobsdb,on_delete=models.CASCADE)
     assetnew  = models.ForeignKey(equipmentdb, on_delete=models.CASCADE, null=False)
-    battery  = models.ManyToManyField(batterydb)
+    battery  = models.ManyToManyField(batterydb, blank=True)
 
     def get_absolute_url(self):
         return reverse('equipment_jobs_detail',kwargs={'pk':self.pk})

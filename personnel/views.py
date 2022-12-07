@@ -16,7 +16,7 @@ from personnel.models import personneldb
 # from xhtml2pdf import pisa
 
 
-class personnelListView(ListView, PermissionRequiredMixin):
+class personnelListView(PermissionRequiredMixin, ListView):
 
     template_name = 'personnel/personnel_page.html'
     model = personneldb
@@ -43,14 +43,6 @@ class personnelDetailView(PermissionRequiredMixin, DetailView):
     queryset = personneldb.objects.all()
     context_object_name = 'personnel_detail'
 
-    # TODO for getting traning for the crew in the details page
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     mypk = self.kwargs['pk'] # this will get the pk for the asset
-    #     context['personnelMain'] = MaintenanceDB.objects.filter(asset=mypk)
-    #     return context
-
-
 class personnelCreateView(PermissionRequiredMixin,SuccessMessageMixin, CreateView):
     template_name = 'personnel/personnel_new.html'
     form_class = personnelForm
@@ -67,6 +59,14 @@ class personnelCreateView(PermissionRequiredMixin,SuccessMessageMixin, CreateVie
         self.object = save()
         return super().form_valid(form)
 
+class personnelUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = personneldb
+    fields = '__all__'
+    success_url = reverse_lazy('personnel')
+    template_name = 'personnel/personnel_update.html'
+    success_message = "Record was updated successfully"
+    permission_required = ('personnel.view_personneldb') # BUG  there is an issue here need to fix it as I can not
+    # update the record from both users , HR and superuser
 
 class personnelDeleteView(PermissionRequiredMixin,SuccessMessageMixin, DeleteView):
     permission_required = ("is_superuser", )
@@ -74,12 +74,3 @@ class personnelDeleteView(PermissionRequiredMixin,SuccessMessageMixin, DeleteVie
     success_url = reverse_lazy('personnel')
     success_message = "Personel was deleted successfully"
     template_name = 'personnel/personnel_confirm_delete.html'
-
-
-class personnelUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = personneldb
-    permission_required = 'personnel.add_personneldb'
-    fields = '__all__'
-    template_name = 'personnel/personnel_update.html'
-    success_message = "%(first_name)s Asset was deleted successfully"
-    success_url = reverse_lazy('personnel')

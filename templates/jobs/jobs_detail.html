@@ -28,8 +28,6 @@
 </div>
 <br/>
 
-<!-- TODO  -->
-
 <div class="accordion" id="accordionExample">
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingOne">
@@ -117,17 +115,7 @@
 </div>
 
 <br/>
-<!-- Making the button for going back -->
 <a class="btn btn-primary" href="{% url 'jobs' %}">Back to Jobs</a>
-<div class="card-footer text-muted">
-  {% if jobs_detail.endDate is null %}
-  <p class='card-text' style="color: green;">Job is running </p>
-  {% else %}
-  <p class='card-text' style="color: red;">Job ended</p>
-  {% endif %}
-</div>
-
-<!-- TODO add new functionality to the daily report -->
 
 <!-- Scirpting for the chart js -->
 <script>

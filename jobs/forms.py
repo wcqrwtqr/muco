@@ -1,6 +1,6 @@
 # from django.contrib.admin.options import widges
 from django.utils.autoreload import start_django
-from .models import jobsdb
+from .models import equipment_job_activitiesdb, jobsdb
 from django import forms
 
 # from .widgets import FengyuanChenDatePickerInput
@@ -35,3 +35,22 @@ class JobsForm(forms.ModelForm):
             'service' : forms.Select(choices=service),
         }
 
+
+class EquipmentJobsForm(forms.ModelForm):
+    # startDate = forms.DateField(label="Start Date", input_formats=['%d-%m-%Y'])
+    # endDate = forms.DateField(label="End Date",input_formats=['%d-%m-%Y'])
+    class Meta:
+        model = equipment_job_activitiesdb
+        fields = '__all__'
+        # exclude = ['get_id','gen_JOBID']
+        labels = {
+            'jobidnew' :'Job ID',
+            'assetnew' :'Asset',
+            'battery'  :'Battery',
+        }
+        # CHECK if all ok
+        widgets  = {
+            # 'description' : forms.Textarea(attrs={'rows':3 }),
+            # 'departmenet' : forms.Select(choices=departmenet),
+            'battery' : forms.CheckboxSelectMultiple
+        }

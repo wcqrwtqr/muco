@@ -49,7 +49,9 @@
 			<th scope="col">Serial No</th>
 			<th scope="col">Description</th>
 			<th scope="col">Department</th>
+			{% if user.is_superuser %}
 			<th scope="col">cost</th>
+			{% endif %}
 			<!-- <th scope="col">link</th> -->
 			<th scope="col" style='width:50px'>Update</th>
 			{% if user.is_superuser %}
@@ -69,7 +71,9 @@
 			<td>{{ equip.serial_num }}</td>
 			<td>{{ equip.description }}</td>
 			<td>{{ equip.departement }}</td>
+			{% if user.is_superuser %}
 			<td>{{ equip.acquisition_cost }}</td>
+			{% endif %}
 			<td><a href="{%url 'equipment_update' pk=equip.pk%}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a></td>
 			{% if user.is_superuser %}
 			<td><a href="{%url 'equipment_delete' pk=equip.pk %}" class="btn btn-outline-dark"><span class="fa fa-eraser"></a></td>

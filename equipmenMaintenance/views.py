@@ -11,14 +11,15 @@ class MaintenanceHomePage(PermissionRequiredMixin,ListView):
     queryset = Maintenancedb.objects.all()
     model = Maintenancedb
     permission_required = 'equipmenMaintenance.view_maintenancedb'
-
+    ordering = ['main_date_start']
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering','-main_date_start')
+        return ordering
     # paginate_by = 50
-
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
     #     context['filter'] = Maintenancefilter(self.request.GET, queryset=self.queryset)
     #     return context
-
     # def get_queryset(self):
     #     qs = super().get_queryset()
     #     filter_maintenance = Maintenancefilter(self.request.GET, queryset=qs)
@@ -29,14 +30,20 @@ class BatteryMaintenanceHomePage(PermissionRequiredMixin,ListView):
     model = Batterymaintenancedb
     queryset = Batterymaintenancedb.objects.all()
     permission_required = 'equipmenMaintenance.view_maintenancedb'
+    ordering = ['check_date']
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering','-check_date')
+        return ordering
 
-class MaintenanceDetailView(DetailView):
+class MaintenanceDetailView(PermissionRequiredMixin, DetailView):
     queryset = Maintenancedb.objects.all()
+    permission_required = 'equipmenMaintenance.view_maintenancedb'
     template_name = 'equipmenMaintenance/maintenance_detail.html'
     context_object_name = 'maintenance_detail'
 
-class BatteryMaintenanceDetailView(DetailView):
+class BatteryMaintenanceDetailView(PermissionRequiredMixin,DetailView):
     queryset = Batterymaintenancedb.objects.all()
+    permission_required = 'equipmenMaintenance.view_batterymaintenancedb'
     template_name = 'equipmenMaintenance/battery_maintenance_detail.html'
     context_object_name = 'battery_maintenance_detail'
 
@@ -51,10 +58,7 @@ class MaintenanceCreate(PermissionRequiredMixin, SuccessMessageMixin,CreateView 
     def from_valid(self, form):
         self.object = form.save(commit = True)
         self.object = save()
-        # success_message = "Maintenance created"
         return super().form_valid(form)
-
-
 
 class BatteryMaintenanceCreate(PermissionRequiredMixin, SuccessMessageMixin,CreateView ):
     template_name = 'equipmenMaintenance/battery_maintenance_new.html'
@@ -83,7 +87,6 @@ class BatteryMaintenanceUpdateView(PermissionRequiredMixin, SuccessMessageMixin,
     fields = "__all__"
     success_url = reverse_lazy('battery_maintenance')
     template_name = 'equipmenMaintenance/battery_maintenance_update.html'
-    # TODO - check this part of persmission required FIXME
     permission_required = 'equipmenMaintenance.change_maintenancedb'
     success_message = "%(battery)s was updated successfully"
 

@@ -26,71 +26,7 @@
   </div>
 </div>
 
-<!-- <table class="table table-striped"> -->
-<!--   <thead> -->
-<!--     <tr class="table-dark" style="position: sticky ; top: 0;"> -->
-<!--       <th scope="col">Part No</th> -->
-<!--       <th scope="col">Serial No</th> -->
-<!--       <th scope="col">Department</th> -->
-<!--       <th scope="col">Date</th> -->
-<!--       <th scope="col">Asset Life</th> -->
-<!--       <th scope="col">Acquisition Cost</th> -->
-<!--       <\!-- <th scope="col">NBV</th> -\-> -->
-<!--       <\!-- <th scope="col">Total Dep</th> -\-> -->
-<!--       <\!-- <th scope="col">Location</th> -\-> -->
-<!--     </tr> -->
-<!--   </thead> -->
-<!--   <tbody> -->
-<!--     <tr> -->
-<!--       <\!-- <td>{{ equipment_detail.part_num }}</td> -\-> -->
-<!--       <\!-- <td>{{ equipment_detail.serial_num }}</td> -\-> -->
-<!--       <\!-- <td>{{ equipment_detail.departement }}</td> -\-> -->
-<!--       <\!-- <td>{{ equipment_detail.acquisition_cost }}</td> -\-> -->
-<!--       <\!-- <td>{{ equipment_detail.asset_life }}</td> -\-> -->
-<!--       <\!-- <td>{{ equipment_detail.acquisition_date }}</td> -\-> -->
-<!--       <\!-- <td>{{ equipment_detail.nbv }}</td> -\-> -->
-<!--       <\!-- <td>{{ equipment_detail.tot_dep_value }}</td> -\-> -->
-<!--       <\!-- <td>{{ equipment_detail.temp_location }}</td> -\-> -->
-<!--     </tr> -->
-<!--   </tbody> -->
-<!-- </table> -->
-
-<!-- <hr /> -->
-
-<!-- TODO add functiondality to the below  -->
-
-<!-- <div class="card "> -->
-<!--   <div class="card-header"> -->
-<!--     <h3 class="display-5">Maintenance</h3> -->
-<!--   </div> -->
-<!-- </div> -->
-<!-- <table class="table table-striped"> -->
-<!--   <thead> -->
-<!--     <tr class="table-dark" style="position: sticky ; top: 0;"> -->
-<!--       <th scope="col">Maintenacne Type</th> -->
-<!--       <th scope="col">Start Date</th> -->
-<!--       <th scope="col">End Date</th> -->
-<!--       <th scope="col">Expiry Date</th> -->
-<!--       <th scope="col">Cost</th> -->
-<!--       <th scope="col">Description</th> -->
-<!--     </tr> -->
-<!--   </thead> -->
-<!--   <tbody> -->
-<!--     <\!-- TODO make the equipment vs maintenance active  -\-> -->
-<!--     {% for fa in equipMain %} -->
-<!--     <tr> -->
-<!--       <td><a href="{#% url 'maintenance_detail' pk=fa.pk %#}">{{ fa.ms_type }}</a></td> -->
-<!--       <td>{{ fa.main_date_start }}</td> -->
-<!--       <td>{{ fa.main_date_end }}</td> -->
-<!--       <td>{{ fa.expiry_date}}</td> -->
-<!--       <td>{{ fa.main_cost }}</td> -->
-<!--       <td style='word-break:break-word; width:300px'>{{ fa.description }}</td> -->
-<!--     </tr> -->
-<!--     {% endfor %} -->
-<!--   </tbody> -->
-<!-- </table> -->
 <br />
 <a class="btn btn-primary " href="{% url 'personnel' %}">Personnel</a>
-<!-- <a class="btn btn-secondary " href="{#% url 'equipment_update' pk=equipment_detail.pk %#}">Update Asset</a> -->
-<!-- <\!-- TODO make a button to take the user to a new maintenance record for this equipment based on the pk number -\-> -->
-<!-- {% endblock %} -->
+
+{% endblock %}

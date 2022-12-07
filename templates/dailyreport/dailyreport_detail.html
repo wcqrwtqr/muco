@@ -19,7 +19,6 @@
       <div class="col">
         <p class='card-text'>Well : {{ dailyreport_detail.jobid.well }}</p>
         <p class='card-text'>Field : {{ dailyreport_detail.jobid.field }}</p>
-        <!-- TODO  add the link for the jobs to daily report to the job id-->
         <p class='card-text'> <a href="{% url 'jobs_detail' pk=dailyreport_detail.jobid.pk %}" target="_blank"> Job ID : {{ dailyreport_detail.jobid.jobid}}</a> </p>
       </div>
       <div class="col">

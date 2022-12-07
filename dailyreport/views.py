@@ -9,10 +9,16 @@ from . import models
 from django.contrib.auth.mixins import PermissionRequiredMixin
 # Create your views here.
 
-class DailyReportListView(ListView):
+class DailyReportListView(PermissionRequiredMixin, ListView):
     template_name = 'dailyreport/dailyreport_page.html'
+    permission_required  = "dailyreport.view_dailyreportdb"
     queryset = models.dailyreportdb.objects.all()
     model = models.dailyreportdb # new
+    ordering = ['operationdate']
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering','-operationdate')
+        return ordering
+
     # form_class = DailyForm
     # paginate_by = 20
 
@@ -26,9 +32,10 @@ class DailyReportListView(ListView):
     #     filter_dailyreport = DailyreportFilter(self.request.GET, queryset=qs)
     #     return filter_dailyreport.qs
 
-class DailyreportCreate(SuccessMessageMixin, CreateView ):
+class DailyreportCreate(PermissionRequiredMixin, SuccessMessageMixin, CreateView ):
     template_name = 'dailyreport/dailyreport_new.html'
     form_class = DailyForm
+    permission_required  = "dailyreport.view_dailyreportdb"
     model = models.dailyreportdb
     success_message = "%(jobid)s was crated successfully"
     success_url = reverse_lazy('dailyreport')
@@ -38,8 +45,9 @@ class DailyreportCreate(SuccessMessageMixin, CreateView ):
         self.object = save()
         return super().form_valid(form)
 
-class DailyreportDetailView(DetailView):
+class DailyreportDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'dailyreport/dailyreport_detail.html'
+    permission_required  = "dailyreport.view_dailyreportdb"
     queryset = models.dailyreportdb.objects.all()
     context_object_name = 'dailyreport_detail'
 
@@ -47,8 +55,9 @@ class DailyreportDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         return context
 
-class DailyreportUpdateView(SuccessMessageMixin, UpdateView):
+class DailyreportUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'dailyreport/dailyreport_update.html'
+    permission_required  = "dailyreport.view_dailyreportdb"
     model = models.dailyreportdb
     success_url = reverse_lazy('dailyreport')
     success_message = "%(jobid)s was updated successfully"

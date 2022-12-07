@@ -49,7 +49,6 @@
 			<th scope="col" style="width:150px">Check Date</th>
 			<th scope="col">Voltage</th>
 			<th scope="col">Status</th>
-			<!-- TODO -- check this part below, Done I checked it -->
 			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 			<th scope="col">Update</th>
 			{% endif %}
