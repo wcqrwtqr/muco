@@ -51,6 +51,7 @@
 			<th scope="col">Training Cost</th>
 			<!-- <th scope="col">Person</th> -->
 			<th scope="col">Description</th>
+			<th scope="col">Attendees</th>
 			{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
 			<th scope="col" style='width:50px'>Update</th>
 			{% endif %}
@@ -68,15 +69,14 @@
 			<th scope="row"> <a href="{% url 'training_detail' pk=training.pk %}">{{ training.training_date_start}}</a></th>
 			<td >{{ training.training_type }}</td>
 			<td >{{ training.training_name}}</td>
-			<td style='width:100px'>{{ training.training_date_expire }}</td>
+			<td >{{ training.training_date_expire }}</td>
 			<td>{{ training.training_cost }}</td>
-			<!-- <td>{{ training.attendees }}</td> -->
-			<td style='width:220px'>{{ training.description }}</td>
-			<!-- {%if training.file_link != null%} -->
-			<!-- <td style='word-break:break-word; width:80px'><a href="{{ person.file_link}}" target="_blank">Link</a></td> -->
-			<!-- {%else%} -->
-			<!-- <td style='word-break:break-word; width:50px'> - </td> -->
-			<!-- {% endif %} -->
+			<td >{{ training.description }}</td>
+			<td>
+			{% for fo in training.attendees.all %}
+			{{forloop.counter}}){{fo.first_name}},
+			{% endfor %}
+			</td>
 			{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
 			<td><a href="{%url 'training_update' pk=training.pk%}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a></td>
 			{% endif %}

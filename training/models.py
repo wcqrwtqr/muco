@@ -23,6 +23,21 @@ class trainingdb(models.Model):
         """
         return reverse ('training_detail',kwargs={'pk':self.pk})
 
+    def get_next(self):
+        next = trainingdb.objects.filter(pk__gt=self.pk).order_by('pk').first()
+        if next:
+            return next
+        else:
+            return trainingdb.objects.all().order_by('pk').first()
+
+    def get_prev(self):
+        next = trainingdb.objects.filter(pk__lt=self.pk).order_by('pk').last()
+        if next:
+            return next
+        else:
+            return trainingdb.objects.all().order_by('pk').last()
+
+
     def __str__(self):
         return '%s %s' % (self.training_name,self.training_date_start)
     class Meta:

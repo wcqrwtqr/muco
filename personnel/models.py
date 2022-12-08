@@ -20,5 +20,21 @@ class personneldb(models.Model):
     def __str__(self):
         return '%s %s %s'% (self.first_name, self.last_name, self.department)
 
+    def get_next(self):
+        next = personneldb.objects.filter(pk__gt=self.pk).order_by('pk').first()
+        if next:
+            return next
+        else:
+            return personneldb.objects.all().order_by('pk').first()
+
+    def get_prev(self):
+        next = personneldb.objects.filter(pk__lt=self.pk).order_by('pk').last()
+        if next:
+            return next
+        else:
+            return personneldb.objects.all().order_by('pk').last()
+
+
+
     class Meta:
         ordering = ['first_name']

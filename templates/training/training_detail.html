@@ -7,6 +7,11 @@
     <div class="card card-body">
       <div class="row">
         <h3 class="display-5">Training Details</h3>
+        <div class="cal">
+          <a class="btn btn-primary" href="{% url 'training_detail' pk=training_detail.get_prev.pk  %}"><< Prev Record </a> 
+          <a class="btn btn-primary" href="{% url 'training_detail' pk=training_detail.get_next.pk  %}">Next Record >></a> 
+        </div>
+
         <hr />
         <div class="col">
           <p class='card-text'>Training Type : {{ training_detail.training_type }}</p>
@@ -28,4 +33,6 @@
   </div>
 </div>
 <br />
-<a class="btn btn-primary " href="{% url 'training' %}">Training</a>
+<a class="btn btn-primary " href="{% url 'training' %}">Back to Training</a>
+
+{% endblock %}
