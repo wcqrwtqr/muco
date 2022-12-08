@@ -8,7 +8,7 @@
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 
-<form method="POST" class="post-form">
+<form method="POST" class="post-form"  enctype ="multipart/form-data">
     {% csrf_token %}
     <div class="form-row row">
         <div class="form-group col-md-4 mb-0 col"> {{ form.part_num|as_crispy_field }} </div>
@@ -19,11 +19,10 @@
         <div class="form-group col-md-12 mb-0 col"> {{ form.description|as_crispy_field }} </div>
     </div>
     <div class="form-row row">
-        <div class="form-group col-md-4 mb-0 col"> {{ form.asset_life|as_crispy_field }} </div>
-        <div class="form-group col-md-4 mb-0 col"> {{ form.acquisition_cost|as_crispy_field }} </div>
-        <div class="form-group col-md-4 mb-0 col"> {{ form.acquisition_date|as_crispy_field }} </div>
-    </div>
-    <div class="form-row row">
+        <div class="form-group col-md-3 mb-0 col"> {{ form.asset_life|as_crispy_field }} </div>
+        <div class="form-group col-md-3 mb-0 col"> {{ form.acquisition_cost|as_crispy_field }} </div>
+        <div class="form-group col-md-3 mb-0 col"> {{ form.acquisition_date|as_crispy_field }} </div>
+        <div class="form-group col-md-3 mb-0 col"> {{ form.pdf_file|as_crispy_field }} </div>
     </div>
     <br />
     <button type="submit" class="btn btn-primary">Save</button>

@@ -1,6 +1,7 @@
 from .models import personneldb
 from django import forms
 from django.forms import  DateInput
+from django.forms import ClearableFileInput
 
 class personnelForm(forms.ModelForm):
     # senionrty_date = forms.DateField(input_formats=['%d-%m-%Y'] )
@@ -21,12 +22,11 @@ class personnelForm(forms.ModelForm):
             'birth_date': 'Birth Date',
             'first_name': 'First Name',
             'last_name': 'Last Name',
-            # 'acquisition_cost': 'Purchase Cost',
+            'pdf_file': 'upload file',
             # 'acquisition_date ': 'Purchase Date',
             # 'file_link': 'Link',
         }
-        # widgets = {
-        #     'description': forms.Textarea(attrs={'rows': 3}),
-        #     # 'BU': forms.Select(choices=bu),
-        #     # 'BL': forms.Select(choices=bl),
-        # }
+        widgets = {
+            # 'description': forms.Textarea(attrs={'rows': 3}),
+            'pdf_file': ClearableFileInput(attrs={'multiple': True}),
+        }

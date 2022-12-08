@@ -6,7 +6,7 @@
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 
-<form method="POST" class="job-form">
+<form method="POST" class="job-form" enctype ="multipart/form-data">
     <hr />
     {% csrf_token %}
 
@@ -17,8 +17,9 @@
     </div>
 
     <div class="form-row row">
-        <div class="form-group col-md-6 mb-0 col"> {{ form.description|as_crispy_field }} </div>
-        <div class="form-group col-md-6 mb-0 col"> {{ form.battery |as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.description|as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.battery |as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.pdf_file |as_crispy_field }} </div>
     </div>
     <br />
     <button type="submit" class="btn btn-primary">Save</button>

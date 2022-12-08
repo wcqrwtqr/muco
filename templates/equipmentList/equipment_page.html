@@ -51,6 +51,7 @@
 			{% if user.is_superuser %}
 			<th scope="col">cost</th>
 			{% endif %}
+			<th scope="col">File</th>
 			<!-- <th scope="col">link</th> -->
 			<th scope="col" style='width:50px'>Update</th>
 			{% if user.is_superuser %}
@@ -72,7 +73,15 @@
 			<td>{{ equip.departement }}</td>
 			{% if user.is_superuser %}
 			<td>{{ equip.acquisition_cost }}</td>
+			<td>
+				{% if equip.pdf_file != None %}
+				<a href="/media/{{equip.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
+				{% else %}
+				No files
+				{% endif %}
+			</td>
 			{% endif %}
+
 			<td><a href="{%url 'equipment_update' pk=equip.pk%}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a></td>
 			{% if user.is_superuser %}
 			<td><a href="{%url 'equipment_delete' pk=equip.pk %}" class="btn btn-outline-dark"><span class="fa fa-eraser"></a></td>
@@ -110,7 +119,7 @@
 
 {% block scripts %}
 {{block.super}}
-<script type="text/javascript" src="{% static 'js/equipmentScript.js'  %}"></script>
+<!-- <script type="text/javascript" src="{#% static 'js/equipmentScript.js'  %#}"></script> -->
 <script src="{% static 'js/messageScript.js' %}"></script>
 
 <!-- Select2 script for searching dropdown list -->

@@ -24,19 +24,6 @@ class personnelListView(PermissionRequiredMixin, ListView):
     permission_required = 'personnel.view_personneldb'
     # paginate_by = 50
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['filter'] = EquipmentFilter(self.request.GET, queryset=self.queryset)
-    #     # Below context is for select2 dropdown list searchablity
-    #     # context['full_list'] = models.EQUIPMENT_DB.objects.all()
-    #     return context
-
-    # def get_queryset(self):
-    #     qs = super().get_queryset()
-    #     # filter_equipment = EquipmentFilter(self.request.GET, queryset=qs)
-    #     return filter_equipment.qs
-
-
 class personnelDetailView(PermissionRequiredMixin, DetailView):
     template_name = 'personnel/personnel_detail.html'
     permission_required = 'personnel.view_personneldb'
@@ -59,14 +46,14 @@ class personnelCreateView(PermissionRequiredMixin,SuccessMessageMixin, CreateVie
         self.object = save()
         return super().form_valid(form)
 
+
 class personnelUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = personneldb
     fields = '__all__'
-    success_url = reverse_lazy('personnel')
+    permission_required = 'personnel.view_personneldb' # BUG  there is an issue here need to fix it as I can not
     template_name = 'personnel/personnel_update.html'
     success_message = "Record was updated successfully"
-    permission_required = ('personnel.view_personneldb') # BUG  there is an issue here need to fix it as I can not
-    # update the record from both users , HR and superuser
+    success_url = reverse_lazy('personnel')
 
 class personnelDeleteView(PermissionRequiredMixin,SuccessMessageMixin, DeleteView):
     permission_required = ("is_superuser", )

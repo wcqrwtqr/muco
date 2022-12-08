@@ -7,6 +7,10 @@
     <div class="card card-body">
       <div class="row">
         <h3 class="display-5">Battery Full details</h3>
+        <div class="col">
+          <a class="btn btn-primary" href="{% url 'battery_detail' pk=battery_detail.get_prev.pk  %}"><< Prev Record </a> 
+          <a class="btn btn-primary" href="{% url 'battery_detail' pk=battery_detail.get_next.pk  %}">Next Record >></a> 
+        </div>
         <hr />
         <div class="col">
           <p class='card-text'>Part No : {{ battery_detail.part_num}}</p>
@@ -16,35 +20,24 @@
         <div class="col">
           <p class='card-text'>Acquistion cost : {{ battery_detail.purchase_date}}</p>
           <p class='card-text'>Date : {{ battery_detail.in_service_date}}</p>
+          <p class='card-text' >Pdf file :
+            {% if battery_detail.pdf_file != None %}
+            <a href="/media/{{ battery_detail.pdf_file}}"
+               type="application/pdf" target="_blank"> Link </a>
+            {% else %}
+              No files
+            {% endif %}
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr class="table-dark" style="position: sticky ; top: 0;">
-      <th scope="col">Part No</th>
-      <th scope="col">Serial No</th>
-      <th scope="col">Purcahsed</th>
-      <th scope="col">In Service</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{ battery_detail.part_num }}</td>
-      <td>{{ battery_detail.serial_num }}</td>
-      <td>{{ battery_detail.purchase_date }}</td>
-      <td>{{ battery_detail.in_service_date }}</td>
-    </tr>
-  </tbody>
-</table>
-
 <!-- ==================================================================== -->
 <!-- ===========Makeing the data in accordion============================ -->
 <!-- ==================================================================== -->
-
+<br />
 
 <div class="accordion" id="accordionExample">
   <div class="accordion-item">
@@ -78,11 +71,11 @@
             {% endfor %}
           </tbody>
         </table>
-
       </div>
     </div>
   </div>
   <!-- Creating the accordion which will hold the data and graphs -->
+
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"

@@ -4,7 +4,7 @@ from .models import Maintenancedb, Batterymaintenancedb
 class MaintenanceForm (forms.ModelForm):
    main_date_start = forms.DateField(input_formats=['%d-%m-%Y'])
    main_date_end = forms.DateField(input_formats=['%d-%m-%Y'] )
-   expiry_date = forms.DateField(input_formats=['%d-%m-%Y'])
+   expiry_date = forms.DateField(label="Expiry Date", input_formats=['%d-%m-%Y'], )
 
    class Meta:
       model = Maintenancedb

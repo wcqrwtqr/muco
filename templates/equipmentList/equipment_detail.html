@@ -7,6 +7,11 @@
     <div class="card card-body">
       <div class="row">
         <h3 class="display-5">Equipment Full details</h3>
+        <div class="col">
+          <a class="btn btn-primary" href="{% url 'equipment_detail' pk=equipment_detail.get_prev.pk  %}"><< Prev Record </a> 
+          <a class="btn btn-primary" href="{% url 'equipment_detail' pk=equipment_detail.get_next.pk  %}">Next Record >></a> 
+          <br />
+        </div>
         <hr />
         <div class="col">
           <p class='card-text'>Part No : {{ equipment_detail.part_num}}</p>
@@ -22,39 +27,20 @@
         <div class="col">
           <p class='card-text'>Department : {{ equipment_detail.departement }}</p>
           <p class='card-text'>Asset life : {{ equipment_detail.asset_life}}</p>
+          <p class='card-text' >Pdf file :
+            {% if equipment_detail.pdf_file != None %}
+            <a href="/media/{{ equipment_detail.pdf_file}}"
+               type="application/pdf" target="_blank"> Link </a>
+            {% else %}
+            No files
+            {% endif %}
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<table class="table table-striped">
-  <thead>
-    <tr class="table-dark" style="position: sticky ; top: 0;">
-      <th scope="col">Part No</th>
-      <th scope="col">Serial No</th>
-      <th scope="col">Department</th>
-      <th scope="col">Date</th>
-      <th scope="col">Asset Life</th>
-      {% if user.is_superuser %}
-      <th scope="col">Acquisition Cost</th>
-      {% endif %}
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{ equipment_detail.part_num }}</td>
-      <td>{{ equipment_detail.serial_num }}</td>
-      <td>{{ equipment_detail.departement }}</td>
-      <td>{{ equipment_detail.acquisition_date }}</td>
-      <td>{{ equipment_detail.asset_life }}</td>
-      {% if user.is_superuser %}
-      <td>{{ equipment_detail.acquisition_cost }}</td>
-      {% endif %}
-
-    </tr>
-  </tbody>
-</table>
+<br />
 
 <div class="card ">
   <div class="card-header">

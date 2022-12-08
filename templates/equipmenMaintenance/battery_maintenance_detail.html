@@ -5,9 +5,10 @@
 <div class="card ">
   <div class="card-header">
     <h3 class="display-5">Battery Information Details</h3>
+    <a class="btn btn-primary" href="{% url 'battery_maintenance_detail' pk=battery_maintenance_detail.get_prev.pk  %}"><< Prev Record </a> 
+    <a class="btn btn-primary" href="{% url 'battery_maintenance_detail' pk=battery_maintenance_detail.get_next.pk  %}">Next Record >></a> 
   </div>
 </div>
-
 <div class="row">
   <div class="col">
     <div class="card card-body">
@@ -20,12 +21,19 @@
         <div class="col">
           <p class='card-text'>Voltage Val :{{ battery_maintenance_detail.voltage_value}}</p>
           <p class='card-text'>Description : {{ battery_maintenance_detail.description}}</p>
+          <p class='card-text' >Pdf file :
+            {% if battery_maintenance_detail.pdf_file != None %}
+            <a href="/media/{{ battery_maintenance_detail.pdf_file}}"
+               type="application/pdf" target="_blank"> Link </a>
+            {% else %}
+            No files
+            {% endif %}
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
-<br />
 <!-- ==================================================================== -->
 <!-- Page break for showing the list of maintenance done on the batteries -->
 <!-- ==================================================================== -->
@@ -55,7 +63,6 @@
     </tr>
   </tbody>
 </table>
-<br>
 <a class="btn btn-primary" href="{% url 'battery_maintenance' %}">Back Battery Maintenance</a>
 <div class="card-footer text-muted">
   Maintenance is Important

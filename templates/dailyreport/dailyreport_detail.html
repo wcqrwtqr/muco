@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
-<!-- {#% load humanize %} -->
 {% block body_block %}
 
 <div class="card ">
   <div class="card-header">
     <h1 class="display-5">Daily Report Details</h1>
+      <a class="btn btn-primary" href="{% url 'dailyreport_detail' pk=dailyreport_detail.get_prev.pk  %}"><< Prev Record </a> 
+      <a class="btn btn-primary" href="{% url 'dailyreport_detail' pk=dailyreport_detail.get_next.pk  %}">Next Record >></a> 
   </div>
   <div class="card-body">
     <h3 class="card-title"> Report Date : {{ dailyreport_detail.operationdate}} </h3>
+    <br />
     <div class="row">
       <h4> Well info </h4>
       <hr />
@@ -19,7 +21,9 @@
       <div class="col">
         <p class='card-text'>Well : {{ dailyreport_detail.jobid.well }}</p>
         <p class='card-text'>Field : {{ dailyreport_detail.jobid.field }}</p>
-        <p class='card-text'> <a href="{% url 'jobs_detail' pk=dailyreport_detail.jobid.pk %}" target="_blank"> Job ID : {{ dailyreport_detail.jobid.jobid}}</a> </p>
+        <p class='card-text'> Job ID :<a href="{% url 'jobs_detail' pk=dailyreport_detail.jobid.pk %}" target="_blank">
+            {{ dailyreport_detail.jobid.jobid}}</a>
+        </p>
       </div>
       <div class="col">
         <p class='card-text'>Start Date : {{ dailyreport_detail.jobid.startDate}}</p>
@@ -27,53 +31,70 @@
         <p class='card-text'>Country : {{ dailyreport_detail.jobid.country}}</p>
       </div>
     </div>
-    <hr />
+
+
+    <br />
     <div class="row">
       <h4> Well Paramters </h4>
+      <hr />
       <div class="col">
         <p class='card-text'>WHP : {{ dailyreport_detail.whp}} psi</p>
         <p class='card-text'>WHT : {{ dailyreport_detail.wht}} degC</p>
       </div>
       <div class="col">
-        <p class='card-text'>Staric P : {{ dailyreport_detail.staticp}} psi</p>
-        <p class='card-text'>Choke size : {{ dailyreport_detail.chokesize}}/64"</p>
+        <p class='card-text'>H2S : {{ dailyreport_detail.h2s}}%</p>
+        <p class='card-text'>CO2 : {{ dailyreport_detail.co2}}%</p>
       </div>
       <div class="col">
-        <p class='card-text'>Diff P : {{ dailyreport_detail.dp}} inH2O</p>
-        <p class='card-text'>CMF : {{ dailyreport_detail.cmf}}</p>
+        <p class='card-text'>BHP : {{ dailyreport_detail.bhp}} psi</p>
+        <p class='card-text'>BHT : {{ dailyreport_detail.bht}} degC</p>
       </div>
     </div>
 
-    <hr />
+    <br />
     <div class="row">
       <h4> Well Flow Rates </h4>
-
+      <hr />
       <div class="col">
         <p class='card-text'>Oil Rate : {{ dailyreport_detail.oilrate}} BBL/d</p>
         <p class='card-text'>Water Rate : {{ dailyreport_detail.waterrate}} BBL/d</p>
-        <p class='card-text'>Gas Rate : {{ dailyreport_detail.gasrate}} MMSCFD</p>
       </div>
       <div class="col">
         <p class='card-text'>BSW : {{ dailyreport_detail.bsw}} %</p>
         <p class='card-text'>GOR : {{ dailyreport_detail.calc_gor}}</p>
       </div>
       <div class="col">
-        <p class='card-text'>H2S : {{ dailyreport_detail.h2s}}</p>
-        <p class='card-text'>CO2 : {{ dailyreport_detail.co2}}</p>
+        <p class='card-text'>Choke size : {{ dailyreport_detail.chokesize}}/64"</p>
+        <p class='card-text'>Gas Rate : {{ dailyreport_detail.gasrate}} MMSCFD</p>
       </div>
     </div>
-    <hr />
-    <h4>Operation Details</h4>
+
+    <br />
     <div class="row">
+      <h4>Operation Details</h4>
+      <hr />
       <p class='card-text col' align="justify"> <strong>Last 24 hours ops</strong> : <br />
-        {{dailyreport_detail.lastdayops}}</p>
+        {{dailyreport_detail.lastdayops}}
+      </p>
       <p class='card-text col' align="justify"> <strong>Next 24 hours ops</strong> : <br />
-        {{dailyreport_detail.nextdayops}}</p>
+        {{dailyreport_detail.nextdayops}}
+      </p>
+      <p class='card-text col'>Pdf file :
+        {% if dailyreport_detail.pdf_file != None %}
+        <a href="/media/{{ dailyreport_detail.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
+        {% else %}
+        No files
+        {% endif %}
+      </p>
     </div>
 
     <br>
-    <a class="btn btn-primary" href="{% url 'dailyreport' %}">Back to dailyreport</a>
-    <a class="btn btn-secondary" href="{% url 'dailyreport_update' pk=dailyreport_detail.pk %}" target="_blank">Edit Daily report</a>
+    <div class="row">
+      <div class="col">
+        <a class="btn btn-primary" href="{% url 'dailyreport' %}">Back to dailyreport</a>
+        <a class="btn btn-secondary" href="{% url 'dailyreport_update' pk=dailyreport_detail.pk %}" target="_blank">Edit Daily report</a>
+      </div>
+    </div>
   </div>
   <div class="card-footer text-muted">
     dailyreport is Important

@@ -27,6 +27,24 @@ class jobsdb(models.Model):
     def __str__(self):
         return '%s %s %s'% (self.client, self.well, self.startDate)
 
+
+    def get_next(self):
+        next = jobsdb.objects.filter(pk__gt=self.pk).order_by('pk').first()
+        if next:
+            return next
+        else:
+            return jobsdb.objects.all().order_by('pk').first()
+
+    def get_prev(self):
+        next = jobsdb.objects.filter(pk__lt=self.pk).order_by('pk').last()
+        if next:
+            return next
+        else:
+            return jobsdb.objects.all().order_by('pk').last()
+
+    def get_absolute_url(self):
+        return reverse('battery_detail', kwargs={'pk': self.pk})
+
     class Meta:
         ordering = ['client']
 
@@ -40,5 +58,24 @@ class equipment_job_activitiesdb(models.Model):
 
     def __str__(self):
         return '%s %s'% (self.jobidnew, self.assetnew)
+
+    def get_next(self):
+        next = equipment_job_activitiesdb.objects.filter(pk__gt=self.pk).order_by('pk').first()
+        if next:
+            return next
+        else:
+            return equipment_job_activitiesdb.objects.all().order_by('pk').first()
+
+    def get_prev(self):
+        next = equipment_job_activitiesdb.objects.filter(pk__lt=self.pk).order_by('pk').last()
+        if next:
+            return next
+        else:
+            return equipment_job_activitiesdb.objects.all().order_by('pk').last()
+
+    def get_absolute_url(self):
+        return reverse('battery_detail', kwargs={'pk': self.pk})
+
+
     class Meta:
         ordering = ['jobidnew']

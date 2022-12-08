@@ -20,6 +20,14 @@
           <p class='card-text'>Grade : {{ personnel_detail.grade }}</p>
           <p class='card-text'>Position : {{ personnel_detail.position}}</p>
           <p class='card-text'>Department : {{ personnel_detail.department}}</p>
+          <p class='card-text' >Pdf file :
+            {% if personnel_detail.pdf_file != None %}
+            <a href="/media/{{ personnel_detail.pdf_file}}"
+               type="application/pdf" target="_blank"> Link </a>
+            {% else %}
+            No files
+            {% endif %}
+          </p>
         </div>
       </div>
     </div>

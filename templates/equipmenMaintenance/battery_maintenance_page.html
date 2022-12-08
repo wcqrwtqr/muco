@@ -49,6 +49,7 @@
 			<th scope="col" style="width:150px">Check Date</th>
 			<th scope="col">Voltage</th>
 			<th scope="col">Status</th>
+			<th scope="col">File</th>
 			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 			<th scope="col">Update</th>
 			{% endif %}
@@ -74,6 +75,13 @@
 			{% else %}
 			<td style="color:red">{{ fa.ops_status }}</td>
 			{% endif %}
+			<td>
+				{% if fa.pdf_file != None %}
+				<a href="/media/{{fa.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
+				{% else %}
+				No files
+				{% endif %}
+			</td>
 			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 			<td><a href="{% url 'battery_maintenance_update' pk=fa.pk  %}" class="btn btn-outline-dark"><span
 						class="fa fa-clone"></a></td>

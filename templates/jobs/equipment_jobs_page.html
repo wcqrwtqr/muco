@@ -71,7 +71,7 @@
 			{% if user.is_superuser %}
 			<td><a href="{% url 'equipment_jobs_update' pk=fa.pk  %}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a>
 			</td>
-			<td><a href="{#% url 'jobs_delete' pk=fa.pk  %#}" class="btn btn-outline-dark"><span class="fa fa-eraser">
+			<td><a href="{% url 'jobs_delete' pk=fa.pk  %}" class="btn btn-outline-dark"><span class="fa fa-eraser">
 				</a></td>
 			{% endif %}
 		</tr>

@@ -51,6 +51,7 @@
 			<th scope="col">Purchase</th>
 			<th scope="col">In Service</th>
 			<th scope="col">Condition</th>
+			<th scope="col">File</th>
 			<th scope="col" style='width:50px'>Update</th>
 			{% if user.is_superuser %}
 			<th scope="col" style='width:50px'>Delete</th>
@@ -73,6 +74,13 @@
 			{%else%}
 			<td style='word-break:break-word; width:80px'>Used</td>
 			{% endif %}
+			<td>
+				{% if battery.pdf_file != None %}
+				<a href="/media/{{battery.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
+				{% else %}
+				No files
+				{% endif %}
+			</td>
 			<td><a href="{%url 'battery_update' pk=battery.pk%}" class="btn btn-outline-dark"> <span
 						class="fa fa-clone"></a></td>
 			{% if user.is_superuser %}

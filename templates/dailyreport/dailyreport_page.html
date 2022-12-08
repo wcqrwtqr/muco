@@ -48,6 +48,7 @@
 			<th scope="col">Date</th>
 			<th scope="col" style='word-break:break-word'>Last 24 day</th>
 			<th scope="col" style='word-break:break-word'>Next 24 day</th>
+			<th scope="col" style='word-break:break-word'>File</th>
 			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 			<th scope="col">Update</th>
 			{% endif %}
@@ -68,6 +69,13 @@
 			<td>{{ fa.operationdate }}</td>
 			<td align="justify">{{ fa.lastdayops }}</td>
 			<td align="justify">{{ fa.nextdayops }}</td>
+			<td>
+				{% if fa.pdf_file != None %}
+				<a href="/media/{{fa.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
+				{% else %}
+				No files
+				{% endif %}
+			</td>
 			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 			<td><a href="{% url 'dailyreport_update' pk=fa.pk  %}" class="btn btn-outline-dark"><span class="fa fa-clone"></a></td>
 			{% endif %}
