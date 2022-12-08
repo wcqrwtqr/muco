@@ -1,10 +1,10 @@
-from django.contrib.admin.options import widgets
-from django.contrib.admin.utils import label_for_field
-from django.utils.autoreload import start_django
+# from django.contrib.admin.options import widgets
+# from django.contrib.admin.utils import label_for_field
+# from django.utils.autoreload import start_django
 from .models import dailyreportdb
 from django import forms
 # from .widgets import FengyuanChenDatePickerInput
-from django.forms import  DateInput
+# from django.forms import  DateInput
 
 class DailyForm(forms.ModelForm):
     # operationdate = forms.DateField(label="Date",input_formats=['%d-%m-%Y'], widget=FengyuanChenDatePickerInput()) # h2s = forms.DecimalField(label="H2S")

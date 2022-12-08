@@ -30,12 +30,19 @@
 
 </form>
 
+
+<!-- Script for the date picker  -->
+<script>
+    $(function () {
+        $("#id_in_service_date").datepicker({
+            format: 'yyyy-mm-dd',
+        });
+        $("#id_purchase_date").datepicker({
+            format: 'yyyy-mm-dd',
+        });
+    });
+</script>
+
+
 {% endblock %}
 
-<!-- old style  -->
-<!-- {#{% csrf_token %}#} -->
-<!-- <table> -->
-<!-- {{form.as_table}} -->
-<!-- </table> -->
-<!-- <button type="submit" class="btn btn-success">Save</button> -->
-<!-- <a class="btn btn-outline-dark" href="{% url 'equipment' %}">Cancel</a> -->

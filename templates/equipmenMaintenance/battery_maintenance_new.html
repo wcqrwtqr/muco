@@ -27,4 +27,12 @@
 
 {% endblock %}
 {% block scripts %}
+
+<script>
+    $(function () {
+        $("#id_check_date").datepicker({
+            format: 'dd-mm-yyyy',
+        });
+    });
+</script>
 {% endblock %}

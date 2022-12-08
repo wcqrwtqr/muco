@@ -23,6 +23,15 @@
     <a class="btn btn-outline-dark" href="{% url 'battery_maintenance' %}">Cancel</a>
 </form>
 
+<!-- Script for the date picker  -->
+<script>
+    $(function () {
+        $("#id_check_date").datepicker({
+            format: 'yyyy-mm-dd',
+        });
+    });
+</script>
+
 
 {% endblock %}
 

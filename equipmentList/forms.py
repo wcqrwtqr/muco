@@ -1,10 +1,8 @@
 from .models import equipmentdb
 from django import forms
-# from .widgets import FengyuanChenDatePickerInput
-from django.forms import  DateInput
 
 class EquipmentForm(forms.ModelForm):
-    acquisition_date = forms.DateField(input_formats=['%d-%m-%Y'] )
+    acquisition_date = forms.DateField(input_formats=['%d-%m-%Y'])
     class Meta:
         model = equipmentdb
         fields = '__all__'

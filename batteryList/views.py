@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 
+
 class BatteryListView(PermissionRequiredMixin, ListView):
     template_name = 'batteryList/battery_page.html'
     permission_required = ('batteryList.view_batterydb')
@@ -28,6 +29,7 @@ class BatteryDetailView(PermissionRequiredMixin,DetailView):
         context['batteryMain'] = Batterymaintenancedb.objects.filter(battery=mypk)
         return context
 
+
 class BatteryUpdateView(PermissionRequiredMixin,SuccessMessageMixin,UpdateView):
     model = batterydb
     permission_required = ('batteryList.view_batterydb')
@@ -35,6 +37,7 @@ class BatteryUpdateView(PermissionRequiredMixin,SuccessMessageMixin,UpdateView):
     template_name = 'batteryList/battery_update.html'
     success_message = "%(serial_num)s Asset was deleted successfully"
     success_url = reverse_lazy('battery')
+
 
 class BatteryCreateView(PermissionRequiredMixin,SuccessMessageMixin, CreateView):
     permission_required = ("is_superuser")
@@ -51,6 +54,7 @@ class BatteryCreateView(PermissionRequiredMixin,SuccessMessageMixin, CreateView)
         self.object = form.save(commit = True)
         self.object = save()
         return super().form_valid(form)
+
 
 class BatteryDeleteView(PermissionRequiredMixin,SuccessMessageMixin, DeleteView):
     permission_required = ("is_superuser", )

@@ -84,6 +84,7 @@ class JobsDetailView(PermissionRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         mypk = self.kwargs['pk'] # this will get the pk for the asset
         context['jobDaily'] = dailyreportdb.objects.filter(jobid=mypk)
+        context['selectedEquipmentinJob'] = equipment_job_activitiesdb.objects.filter(jobidnew=mypk)
         return context
 
 class EquipmentJobsDetailView(PermissionRequiredMixin, DetailView):

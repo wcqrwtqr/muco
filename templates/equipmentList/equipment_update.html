@@ -3,7 +3,8 @@
 {%load crispy_forms_tags %}
 
 {% block body_block %}
-<h1 class="display-5">Update Fixed Asset</h1>
+
+<h3 class="display-5">Update Fixed Asset</h3>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 
@@ -24,23 +25,19 @@
     </div>
     <div class="form-row row">
     </div>
-    <!-- <div class="form-row row"> -->
-    <!--     <div class="form-group col-md-4 mb-0 col"> {{ form.file_link|as_crispy_field }} </div> -->
-    <!-- </div> -->
-
-
     <br />
     <button type="submit" class="btn btn-primary">Save</button>
     <a class="btn btn-outline-dark " href="{% url 'equipment' %}">Cancel</a>
 
 </form>
 
-{% endblock %}
+<!-- Script for the date picker  -->
+<script>
+    $(function () {
+        $("#id_acquisition_date").datepicker({
+            format: 'yyyy-mm-dd',
+        });
+    });
+</script>
 
-<!-- old style  -->
-<!-- {#{% csrf_token %}#} -->
-<!-- <table> -->
-<!-- {{form.as_table}} -->
-<!-- </table> -->
-<!-- <button type="submit" class="btn btn-success">Save</button> -->
-<!-- <a class="btn btn-outline-dark" href="{% url 'equipment' %}">Cancel</a> -->
+{% endblock %}

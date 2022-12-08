@@ -63,9 +63,15 @@
     <a class="btn btn-outline-dark" href="{% url 'dailyreport' %}">Cancel</a>
 </form>
 
+
+<script>
+    $(function () {
+        $("#id_operationdate").datepicker({
+            format: 'dd-mm-yyyy',
+        });
+    });
+</script>
+
+
 {% endblock %}
 
-<!-- {% csrf_token %} -->
-<!-- <table> -->
-<!-- {{form }} -->
-<!-- </table> -->

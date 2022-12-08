@@ -22,26 +22,27 @@
     <div class="form-row row">
         <div class="form-group col-md-2 mb-0 col"> {{ form.main_cost |as_crispy_field }} </div>
         <div class="form-group col-md-2 mb-0 col"> {{ form.file_link |as_crispy_field }} </div>
-        <!-- <div class="form-group col-md-4 mb-0 col"> -->
-        <!-- Adding the select2 form here -->
-        <!--     <p><b>Asset*: </b> -->
-        <!--         <select name="Asset" class="form-control js-select2-mainteance_add"> -->
-        <!--             {% for result in form.asset %} -->
-        <!--             <option value="{{result }}"></option> -->
-        <!--             {% endfor %} -->
-        <!--         </select> -->
-        <!--     </p> -->
-        <!-- </div> -->
-
         <div class="form-group col-md-8 mb-0 col"> {{ form.asset|as_crispy_field }} </div>
     </div>
-
-    <!-- <input type="button" value="Alert" onclick="demoA()" /> -->
-    <button type="submit" class="btn btn-primary" onclick=demoA()>Update</button>
+    <button type="submit" class="btn btn-primary">Update</button>
     <a class="btn btn-outline-dark" href="{% url 'maintenance' %}">Cancel</a>
 </form>
-
+<!-- Script for the date picker  -->
+<script>
+    $(function () {
+        $("#id_main_date_start").datepicker({
+            format: 'yyyy-mm-dd',
+        });
+    $(function () {
+        $("#id_main_date_end").datepicker({
+            format: 'yyyy-mm-dd',
+        });
+    $(function () {
+        $("#id_expiry_date").datepicker({
+            format: 'yyyy-mm-dd',
+        });
+    });
+</script>
 
 {% endblock %}
-
 
