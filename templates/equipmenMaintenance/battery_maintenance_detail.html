@@ -22,7 +22,7 @@
           <p class='card-text'>Voltage Val :{{ battery_maintenance_detail.voltage_value}}</p>
           <p class='card-text'>Description : {{ battery_maintenance_detail.description}}</p>
           <p class='card-text' >Pdf file :
-            {% if battery_maintenance_detail.pdf_file != None %}
+            {% if battery_maintenance_detail.pdf_file != None and battery_maintenance_detail.pdf_file != ""%}
             <a href="/media/{{ battery_maintenance_detail.pdf_file}}"
                type="application/pdf" target="_blank"> Link </a>
             {% else %}

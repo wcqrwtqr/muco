@@ -10,7 +10,7 @@ class equipmentdb(models.Model):
     asset_life = models.IntegerField(null=True, blank=True)
     acquisition_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     acquisition_date  = models.DateField(null=True, blank=True)
-    pdf_file = models.FileField(upload_to='equipment/', null=True, blank=True)
+    pdf_file = models.FileField(upload_to='equipment/%Y/%m/%d', null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('equipment_detail', kwargs={'pk': self.pk})

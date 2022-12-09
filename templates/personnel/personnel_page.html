@@ -53,6 +53,7 @@
 			<th scope="col">Grade</th>
 			<th scope="col">Position</th>
 			<th scope="col">Brith</th>
+			<th scope="col">File</th>
 			{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
 			<th scope="col" style='width:50px'>Update</th>
 			{% endif %}
@@ -74,11 +75,14 @@
 			<td>{{ person.grade }}</td>
 			<td>{{ person.position }}</td>
 			<td style='width:120px'>{{ person.birth_date }}</td>
-			<!-- {%if person.file_link != null%} -->
-			<!-- <td style='word-break:break-word; width:80px'><a href="{{ person.file_link}}" target="_blank">Link</a></td> -->
-			<!-- {%else%} -->
-			<!-- <td style='word-break:break-word; width:50px'> - </td> -->
-			<!-- {% endif %} -->
+			<td>
+				{% if person.pdf_file != None and person.pdf_file != "" %}
+				<a href="/media/{{person.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
+				{% else %}
+				No files
+				{% endif %}
+			</td>
+
 			{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
 			<td><a href="{%url 'personnel_update' pk=person.pk%}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a></td>
 			{% endif %}

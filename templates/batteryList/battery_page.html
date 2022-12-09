@@ -64,18 +64,18 @@
 
 		<tr>
 			<th scope="row" style='width:50px'>{{forloop.counter}}</th>
-			<th scope="row" style='word-break:break-word; width:150px'> <a href="{% url 'battery_detail' pk=battery.pk %}">{{ battery.part_num }}</a></th>
-			<td style='width:200px'>{{ battery.serial_num }}</td>
-			<td style='width:200px'>{{ battery.description }}</td>
-			<td style='width:150px'>{{ battery.purchase_date }}</td>
-			<td style='width:150px'>{{ battery.in_service_date }}</td>
+			<th scope="row"> <a href="{% url 'battery_detail' pk=battery.pk %}">{{ battery.part_num }}</a></th>
+			<td>{{ battery.serial_num }}</td>
+			<td>{{ battery.description }}</td>
+			<td>{{ battery.purchase_date }}</td>
+			<td>{{ battery.in_service_date }}</td>
 			{%if battery.in_service_date == null%}
 			<td style='word-break:break-word; width:80px'>New</td>
 			{%else%}
 			<td style='word-break:break-word; width:80px'>Used</td>
 			{% endif %}
 			<td>
-				{% if battery.pdf_file != None %}
+				{% if battery.pdf_file != None and battery.pdf_file != ""%}
 				<a href="/media/{{battery.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
 				{% else %}
 				No files

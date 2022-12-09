@@ -76,7 +76,7 @@
 			<td style="color:red">{{ fa.ops_status }}</td>
 			{% endif %}
 			<td>
-				{% if fa.pdf_file != None %}
+				{% if fa.pdf_file != None and fa.pdf_file != ""%}
 				<a href="/media/{{fa.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
 				{% else %}
 				No files

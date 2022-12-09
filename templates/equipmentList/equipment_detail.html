@@ -28,7 +28,7 @@
           <p class='card-text'>Department : {{ equipment_detail.departement }}</p>
           <p class='card-text'>Asset life : {{ equipment_detail.asset_life}}</p>
           <p class='card-text' >Pdf file :
-            {% if equipment_detail.pdf_file != None %}
+            {% if equipment_detail.pdf_file != None and eqipmenet_detail.pdf_file != ""%}
             <a href="/media/{{ equipment_detail.pdf_file}}"
                type="application/pdf" target="_blank"> Link </a>
             {% else %}

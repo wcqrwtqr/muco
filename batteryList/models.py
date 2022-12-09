@@ -7,7 +7,7 @@ class batterydb(models.Model):
     description = models.CharField(max_length=400, null=True, blank=True)
     purchase_date  = models.DateField(null=True, blank=True)
     in_service_date  = models.DateField(null=True, blank=True)
-    pdf_file = models.FileField(upload_to='batteries/', null=True, blank=True)
+    pdf_file = models.FileField(upload_to='batteries/%Y/%m/%d', null=True, blank=True)
 
     def get_next(self):
         next = batterydb.objects.filter(pk__gt=self.pk).order_by('pk').first()

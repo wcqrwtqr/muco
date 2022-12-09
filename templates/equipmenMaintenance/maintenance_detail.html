@@ -26,7 +26,7 @@
           <p class='card-text'>Expiry Date: {{ maintenance_detail.expiry_date}}</p>
           <p class='card-text'>Description : {{ maintenance_detail.description}}</p>
           <p class='card-text' >Pdf file :
-            {% if maintenance_detail.pdf_file != None %}
+            {% if maintenance_detail.pdf_file != None and maintenance_detail.pdf_file != ""%}
             <a href="/media/{{ maintenance_detail.pdf_file}}"
                type="application/pdf" target="_blank"> Link </a>
             {% else %}

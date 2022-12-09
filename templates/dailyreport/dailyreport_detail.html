@@ -80,7 +80,7 @@
         {{dailyreport_detail.nextdayops}}
       </p>
       <p class='card-text col'>Pdf file :
-        {% if dailyreport_detail.pdf_file != None %}
+        {% if dailyreport_detail.pdf_file != None and dailyreport_detail.pdf_file != ""%}
         <a href="/media/{{ dailyreport_detail.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
         {% else %}
         No files

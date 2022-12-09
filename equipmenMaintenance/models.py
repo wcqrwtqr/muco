@@ -54,7 +54,7 @@ class Batterymaintenancedb(models.Model):
     description = models.CharField(max_length=500, null=True,blank=True)
     ms_type= models.CharField(max_length=20, null=True)
     voltage_value = models.DecimalField(max_digits=4, null=True, decimal_places=2, blank=True)
-    pdf_file = models.FileField(upload_to='batteryMaintenance/', null=True, blank=True)
+    pdf_file = models.FileField(upload_to='batteryMaintenance/%Y/%m/%d', null=True, blank=True)
 
     def get_absolute_url(self):
         """Get the url of the path

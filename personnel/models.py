@@ -4,7 +4,6 @@ from django.urls import reverse
 # Create your models here.
 
 class personneldb(models.Model):
-    # JOBID = models.CharField(max_length = 20 ,unique=True,blank=False)
     first_name = models.CharField(max_length=255,blank=False)
     last_name = models.CharField(max_length=255,blank=False)
     senionrty_date = models.DateField(null=False, blank=True)
@@ -12,7 +11,7 @@ class personneldb(models.Model):
     grade = models.CharField(max_length=255,blank=False)
     position = models.CharField(max_length=255,blank=False)
     department = models.CharField(max_length=255,blank=False)
-    pdf_file = models.FileField(upload_to='pdfs/', null=True, blank=True)
+    pdf_file = models.FileField(upload_to='pdfs/%Y/%m/%d', null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('personnel_detail',kwargs={'pk':self.pk})

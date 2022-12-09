@@ -21,7 +21,7 @@ class dailyreportdb(models.Model):
     hz = models.IntegerField(blank=True,null=True)
     chokesize = models.IntegerField(blank=True,null=True)
     supervisorname = models.CharField(max_length=200,  blank=False)
-    pdf_file = models.FileField(upload_to='dailyreports/', null=True, blank=True)
+    pdf_file = models.FileField(upload_to='dailyreports/%Y/%m/%d', null=True, blank=True)
 
     @property
     def calc_gor(self):

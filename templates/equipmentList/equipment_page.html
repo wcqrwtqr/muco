@@ -74,7 +74,7 @@
 			{% if user.is_superuser %}
 			<td>{{ equip.acquisition_cost }}</td>
 			<td>
-				{% if equip.pdf_file != None %}
+				{% if equip.pdf_file != None  and equip.pdf_file != ""%}
 				<a href="/media/{{equip.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
 				{% else %}
 				No files

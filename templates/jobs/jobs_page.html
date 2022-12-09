@@ -51,6 +51,7 @@
 			<th scope="col">Description</th>
 			<th scope="col">Start Date</th>
 			<th scope="col">End Date</th>
+			<th scope="col">File</th>
 			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 			<th scope="col">Update</th>
 			{% endif %}
@@ -74,6 +75,13 @@
 			<td>{{ fa.description }}</td>
 			<td>{{ fa.startDate}}</td>
 			<td>{{ fa.endDate}}</td>
+			<td>
+				{% if fa.pdf_file != None and fa.pdf_file != ""%}
+				<a href="/media/{{fa.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
+				{% else %}
+				No files
+				{% endif %}
+			</td>
 			{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 			<td><a href="{% url 'jobs_update' pk=fa.pk  %}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a></td>
 			{% endif %}

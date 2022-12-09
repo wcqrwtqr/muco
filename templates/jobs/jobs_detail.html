@@ -24,7 +24,13 @@
         <div class="col">
           <p class='card-text'>Start Date : {{ jobs_detail.startDate }}</p>
           <p class='card-text'>End Date : {{ jobs_detail.endDate }}</p>
-          <p class='card-text'>Contract : {{ jobs_detail.isContract}}</p>
+        <p class='card-text col'>Pdf file :
+          {% if jobs_detail.pdf_file != None and jobs_detail.pdf_file != ""%}
+          <a href="/media/{{ jobs_detail.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
+          {% else %}
+          No files
+          {% endif %}
+        </p>
         </div>
       </div>
     </div>

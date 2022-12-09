@@ -21,12 +21,18 @@
         <div class="col">
           <p class='card-text'>Training Date : {{ training_detail.training_date_start }}</p>
           <p class='card-text'>Expiry Date : {{ training_detail.training_date_expire }}</p>
-          <p class='card-text'>Cost : {{ training_detail.training_cost }}</p>
         </div>
         <div class="col">
-          <p class='card-text'>First Name : {{ training_detail.person.first_name}}</p>
-          <p class='card-text'>Person Name : {{ training_detail.person.last_name}}</p>
-          <p class='card-text'>Person Name : {{ training_detail.person.department}}</p>
+          <p class='card-text' >Pdf file :
+            {% if training_detail.pdf_file != None and battery_detail.pdf_file != ""%}
+            <a href="/media/{{ battery_detail.pdf_file}}"
+               type="application/pdf" target="_blank"> Link </a>
+            {% else %}
+              No files
+            {% endif %}
+          </p>
+          <p class='card-text'>Cost : {{ training_detail.training_cost }}</p>
+
         </div>
       </div>
     </div>

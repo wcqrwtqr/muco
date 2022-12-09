@@ -18,8 +18,7 @@ class jobsdb(models.Model):
     description = models.CharField(max_length= 800, blank=True, null=True)
     startDate = models.DateField(null=True, blank=True)
     endDate = models.DateField(blank=True,null=True)
-    # isContract = models.BooleanField(default=True, null=True, blank=True)
-    # BL = models.CharField(max_length= 3, default='SWT', null=True, blank=True)
+    pdf_file = models.FileField(upload_to='jobs/%Y/%m/%d', null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('jobs_detail',kwargs={'pk':self.pk})
@@ -41,9 +40,6 @@ class jobsdb(models.Model):
             return next
         else:
             return jobsdb.objects.all().order_by('pk').last()
-
-    def get_absolute_url(self):
-        return reverse('battery_detail', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['client']

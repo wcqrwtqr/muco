@@ -21,7 +21,7 @@
           <p class='card-text'>Acquistion cost : {{ battery_detail.purchase_date}}</p>
           <p class='card-text'>Date : {{ battery_detail.in_service_date}}</p>
           <p class='card-text' >Pdf file :
-            {% if battery_detail.pdf_file != None %}
+            {% if battery_detail.pdf_file != None and battery_detail.pdf_file != ""%}
             <a href="/media/{{ battery_detail.pdf_file}}"
                type="application/pdf" target="_blank"> Link </a>
             {% else %}
