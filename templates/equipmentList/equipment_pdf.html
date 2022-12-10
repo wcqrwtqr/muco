@@ -1,27 +1,57 @@
-<!DOCTYPE html>
-{% load humanize %}
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Test file</title>
-    </head>
-    <body>
+{% extends 'base_pdf.html' %}
 
-        <div class=conainer align='middle'>
-
-            <h2>Asset No : {{ far.asset_num	}}</h2>
-            <h2>Serial No :  {{ far.serial_num	}}</h2>
-            <h3>Description :{{ far.description	}}</h3>
-            <h3>BU  : {{ far.BU	}}</h3>
-            <h3>BL  :  {{ far.BL	}}</h3>
-            <h3>Temp Location  : {{ far.temp_location }}</h3>
-            <h3>Asset Life  : {{ far.asset_life	}}</h3>
-            <h3>Acquisition Date  : {{ far.acquisition_date	}}</h3>
-            <h3>Acquisition Cost  :   {{ far.acquisition_cost|intcomma}}</h3>
-            <h3>Total Depreciation  :   {{ far.tot_dep_value|intcomma}}</h3>
-            <h3>NBV  :   {{ far.nbv|intcomma}}</h3>
-
+{% block pdf %}
+<div class="col">
+    <div class="card card-body">
+        <div class="row">
+            <h3>Equipment Full details</h3>
+            <div class="col">
+                <p class='card-text'>Part No : {{ equipment.part_num}}</p>
+                <p class='card-text'>Serial No : {{ equipment.serial_num}}</p>
+                <p class='card-text'>Description : {{ equipment.description}}</p>
+            </div>
+            <div class="col">
+                <p class='card-text'>Acquistion cost : {{ equipment.acquisition_cost}}</p>
+                <p class='card-text'>Date : {{ equipment.acquisition_date}}</p>
+            </div>
+            <div class="col">
+                <p class='card-text'>Department : {{ equipment.departement }}</p>
+                <p class='card-text'>Asset life : {{ equipment.asset_life}}</p>
+            </div>
         </div>
+    </div>
+</div>
+<hr />
+<div class="card ">
+    <div class="card-header">
+        <h3>Maintenance</h3>
+    </div>
+</div>
 
-    </body>
-</html>
+{% if equipMain != none %}
+<table class="table table-striped">
+    <thead>
+        <tr class="table-dark" style="position: sticky ; top: 0;">
+            <th scope="col">Maintenacne Type</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Expiry Date</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fa in equipMain %}
+        <tr>
+            <td>{{ fa.ms_type }}</td>
+            <td>{{ fa.main_date_start }}</td>
+            <td>{{ fa.main_date_end }}</td>
+            <td>{{ fa.expiry_date}}</td>
+            <td>{{ fa.main_cost }}</td>
+            <td>{{ fa.description }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

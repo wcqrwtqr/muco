@@ -20,7 +20,6 @@
 <div class="row collapse" id="collapseMe">
 	<div class="col">
 		<div class="card card-body">
-			<!-- I liked this method below as it shows the table in a better way -->
 			<form method="GET">
 				<table>
 					{{ filter.form.as_table}}
@@ -32,7 +31,7 @@
 	</div>
 </div>
 <div>
-	<!-- <p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p> -->
+	<p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p>
 	<p class="fw-lighter" style="float:left"> No of searched items... {{page_obj.object_list.count}}</p>
 </div>
 
@@ -61,7 +60,8 @@
 	</thead>
 	<tbody>
 		<!-- {#% for fa in page_obj.object_list #%} -->
-		{% for fa in object_list %}
+		<!-- {#% for fa in object_list %#} -->
+		{% for fa in filter.qs %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
 			<th scope="row"> <a href="{% url 'maintenance_detail' pk=fa.pk  %}"> {{ fa.asset.part_num }}</a></th>

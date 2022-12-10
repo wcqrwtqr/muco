@@ -11,7 +11,6 @@
           <a class="btn btn-primary" href="{% url 'training_detail' pk=training_detail.get_prev.pk  %}"><< Prev Record </a> 
           <a class="btn btn-primary" href="{% url 'training_detail' pk=training_detail.get_next.pk  %}">Next Record >></a> 
         </div>
-
         <hr />
         <div class="col">
           <p class='card-text'>Training Type : {{ training_detail.training_type }}</p>

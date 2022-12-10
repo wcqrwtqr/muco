@@ -6,14 +6,12 @@ from dailyreport.models import dailyreportdb
 from django.urls import  reverse_lazy
 from .forms import *
 from .import models
-# from .filters import Jobsfilter
+from .filters import Jobsfilter
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-# Below are the imports for the xhtml2pdf
-# from django.http import HttpResponse
-# from django.template.loader import get_template
-# from xhtml2pdf import pisa
-# from django.contrib.staticfiles import finders
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
 class JobsHomePage(PermissionRequiredMixin,ListView):
     template_name = 'jobs/jobs_page.html'
@@ -21,10 +19,10 @@ class JobsHomePage(PermissionRequiredMixin,ListView):
     permission_required = ('jobs.view_jobsdb')
     queryset = jobsdb.objects.all()
     ordering = ['startDate']
-    def get_ordering(self):
-        ordering = self.request.GET.get('ordering','-startDate')
-        return ordering
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = Jobsfilter(self.request.GET, queryset=self.queryset)
+        return context
 
 class JobsCreate(PermissionRequiredMixin, SuccessMessageMixin,CreateView ):
     permission_required = ("is_superuser", "jobs.add_jobsdb")
@@ -60,13 +58,30 @@ class JobsUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = "%(jobid)s was updated successfully"
     fields = "__all__"
 
-
 class JobsDeleteView(PermissionRequiredMixin,SuccessMessageMixin, DeleteView):
     permission_required = ("is_superuser")
     template_name = 'jobs/jobs_confirm_delete.html'
     model = models.jobsdb
     success_message = "Jobs record was deleted"
     success_url = reverse_lazy('jobs')
+
+def job_render_pdf_view(request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    job = get_object_or_404(jobsdb, pk=pk)
+    jobDaily = dailyreportdb.objects.filter(jobid=pk).order_by('-operationdate')
+    template_path = 'jobs/jobs_pdf.html'
+    context = {'job': job, 'jobDaily':jobDaily}
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    # if error then show some funny view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 # ==========================================
 # Equipment - Jobs section
@@ -77,8 +92,6 @@ class EquipmentJobsHomePage(PermissionRequiredMixin, ListView):
     permission_required = ('jobs.view_jobsdb')
     model = equipment_job_activitiesdb
     queryset = equipment_job_activitiesdb.objects.all()
-    # paginate_by = 50
-
 class EquipmentJobsCreate(PermissionRequiredMixin, SuccessMessageMixin,CreateView ):
     permission_required = ("is_superuser")
     template_name = 'jobs/equipment_jobs_new.html'
@@ -92,18 +105,11 @@ class EquipmentJobsCreate(PermissionRequiredMixin, SuccessMessageMixin,CreateVie
         self.object = save()
         return super().form_valid(form)
 
-
 class EquipmentJobsDetailView(PermissionRequiredMixin, DetailView):
     queryset = equipment_job_activitiesdb.objects.all()
     context_object_name = 'equipment_jobs_detail'
     permission_required = "jobs.view_equipment_job_activitiesdb"
     template_name = 'jobs/equipment_jobs_detail.html'
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     mypk = self.kwargs['pk'] # this will get the pk for the asset
-    #     context['jobDaily'] = dailyreportdb.objects.filter(jobid=mypk)
-    #     return context
 
 class EquipmentJobsUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'jobs/equipment_jobs_update.html'
@@ -112,9 +118,6 @@ class EquipmentJobsUpdateView(PermissionRequiredMixin, SuccessMessageMixin, Upda
     success_url = reverse_lazy('equipment_jobs')
     success_message = "%(jobidnew)s was updated successfully"
     fields = "__all__"
-
-
-
 
 class EquipmentJobsDeleteView(PermissionRequiredMixin,SuccessMessageMixin, DeleteView):
     permission_required = ("is_superuser")

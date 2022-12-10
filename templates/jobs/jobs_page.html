@@ -36,7 +36,7 @@
 </div>
 <div>
 	<p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p>
-	<p class="fw-lighter" style="float:left"> No of searched items... {{page_obj.object_list.count}}</p>
+	<p class="fw-lighter" style="float:left"> No of searched items... {{object_list.count}}</p>
 </div>
 <br>
 <table class="table table-striped">
@@ -58,13 +58,14 @@
 			{% if user.is_superuser %}
 			<th scope="col">Delete</th>
 			{% endif %}
-			<!-- <th scope="col">PDF</th> -->
+			<th scope="col">PDF</th>
 		</tr>
 	</thead>
 	<tbody>
 		<!-- This page_obj.object_list will get us the pagination and filter working togather -->
 		<!-- {#% for fa in page_obj.object_list #%} -->
-		{% for fa in object_list %}
+		<!-- {#% for fa in object_list %#} -->
+		{% for fa in filter.qs %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
 			<th scope="row"> <a href="{% url 'jobs_detail' pk=fa.pk  %}">{{ fa.jobid }}</a></th>
@@ -88,7 +89,7 @@
 			{% if user.is_superuser %}
 			<td><a href="{% url 'jobs_delete' pk=fa.pk  %}" class="btn btn-outline-dark"><span class="fa fa-eraser"> </a></td>
 			{% endif %}
-			<!-- <td><a href="{#% url 'pdf_job_view' pk=fa.pk  %}"class="btn btn-outline-dark"><span class="fa fa-pencil"></a></td> -->
+			<td><a href="{% url 'pdf_job_view' pk=fa.pk  %}" class="btn btn-outline-dark" target="_blank"><span class="fa fa-pencil"></a></td>
 		</tr>
 		{% endfor %}
 		<!-- Pagination pages toggle -->

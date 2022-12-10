@@ -24,6 +24,7 @@
 			<form method="GET">
 				<table>
 					{{ filter.form.as_table}}
+
 				</table>
 				<button type="submit" class="btn btn-primary">Search</button>
 				{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
@@ -35,7 +36,7 @@
 </div>
 
 <div>
-	<!-- <p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p> -->
+	<p class="fw-lighter" style="float:left"> No of searched items... {{filter.qs.count}}</p>
 	<p class="fw-lighter" style="float:right"> Total records... {{object_list.count}}</p>
 	<!-- <p class="fw-lighter" style="float:left"> No of searched items... {{page_obj.object_list.count}}</p> -->
 </div>
@@ -60,12 +61,14 @@
 			{% if user.is_superuser %}
 			<th scope="col" style='width:50px'>Delete</th>
 			{% endif %}
+			<th scope="col">PDF</th>
 		</tr>
 	</thead>
 	<tbody>
 		<!-- This page_obj.object_list will get us the pagination and filter working togather -->
 		<!-- {#% for equip in page_obj.object_list %#} -->
-		{% for person in object_list %}
+		<!-- {#% for person in object_list %#} -->
+		{% for person in filter.qs %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
 			<th scope="row"> <a href="{% url 'personnel_detail' pk=person.pk %}">{{ person.first_name }}</a></th>
@@ -90,12 +93,12 @@
 			<td><a href="{%url 'personnel_delete' pk=person.pk %}" class="btn btn-outline-dark"><span
 						class="fa fa-eraser"></a></td>
 			{% endif %}
+			<td><a href="{% url 'personnel_pdf' pk=person.pk  %}" class="btn btn-outline-dark" target="_blank"><span class="fa fa-pencil"></a></td>
 		</tr>
 
 		{% endfor %}
 
 		<!-- Pagination pages toggle -->
-
 		<br />
 		<!-- <nav aria-label="Page navigation example"> -->
 		<!-- 	<ul class="pagination"> -->

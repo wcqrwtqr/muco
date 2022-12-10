@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Pdf generated</title>
+		<link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
+
+    <style type="text/css">
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+        th {
+            text-align: left;
+        }
+        th, td {
+            padding: 2px;
+        }
+    </style>
+
+	</head>
+
+	<body >
+
+		{% block pdf  %}
+		{% endblock  %}
+	</body>
+</html>

@@ -1,7 +1,7 @@
-from .models import dailyreportdb
 import django_filters
+from .models import batterydb
 
-class DailyreportFilter(django_filters.FilterSet):
+class batteryfilter(django_filters.FilterSet):
     CHOICES = [
         ('ascending','Ascending'),
         ('descending','Descending'),
@@ -9,14 +9,11 @@ class DailyreportFilter(django_filters.FilterSet):
     ordering  = django_filters.ChoiceFilter(label='Ordering', choices= CHOICES , method='filter_by_order')
 
     class Meta:
-        model  = dailyreportdb
-        # labels= {
-        #     'lastdayops':'Last 24hr ops',
-        # }
+        model  = batterydb
         fields = {
-            'lastdayops' : ['icontains'],
+            'serial_num' : ['icontains'],
         }
 
     def filter_by_order(self,queryset, _, value):
-        expression  = 'operationdate' if value == 'ascending' else  '-operationdate'
+        expression  = 'serial_num' if value == 'ascending' else  '-serial_num'
         return queryset.order_by(expression)

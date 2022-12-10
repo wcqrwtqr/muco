@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from personnel.models import personneldb
 # from .filters import EquipmentFilter, EquipmentMaintenanceFilter
-# from .filters import EquipmentFilter
+from .filters import trainingFilter
 # from django.http import HttpResponse
 # from django.template.loader import get_template
 # from xhtml2pdf import pisa
@@ -22,7 +22,10 @@ class trainingListView(PermissionRequiredMixin, ListView):
     model = trainingdb
     queryset = trainingdb.objects.all()
     permission_required = 'training.view_trainingdb'
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = trainingFilter(self.request.GET, queryset=self.queryset)
+        return context
 
 
 

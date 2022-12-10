@@ -2,7 +2,7 @@ from django.views.generic import TemplateView,ListView,DetailView,UpdateView,Del
 from .models import Maintenancedb, Batterymaintenancedb
 from django.urls import  reverse_lazy
 from .forms import MaintenanceForm, BatteryMaintenanceForm
-# from .filters import Maintenancefilter
+from .filters import BatteryMaintenancefilter, Maintenancefilter
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 
@@ -14,9 +14,10 @@ class MaintenanceHomePage(PermissionRequiredMixin,ListView):
     model = Maintenancedb
     permission_required = 'equipmenMaintenance.view_maintenancedb'
     ordering = ['main_date_start']
-    def get_ordering(self):
-        ordering = self.request.GET.get('ordering','-main_date_start')
-        return ordering
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = Maintenancefilter(self.request.GET, queryset=self.queryset)
+        return context
 
 class MaintenanceDetailView(PermissionRequiredMixin, DetailView):
     queryset = Maintenancedb.objects.all()
@@ -62,9 +63,10 @@ class BatteryMaintenanceHomePage(PermissionRequiredMixin,ListView):
     queryset = Batterymaintenancedb.objects.all()
     permission_required = 'equipmenMaintenance.view_maintenancedb'
     ordering = ['check_date']
-    def get_ordering(self):
-        ordering = self.request.GET.get('ordering','-check_date')
-        return ordering
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = BatteryMaintenancefilter(self.request.GET, queryset=self.queryset)
+        return context
 
 class BatteryMaintenanceDetailView(PermissionRequiredMixin,DetailView):
     queryset = Batterymaintenancedb.objects.all()

@@ -15,7 +15,8 @@ class dailyreportdb(models.Model):
     gasrate = models.DecimalField(max_digits=10,decimal_places=4,blank=True,null=True)
     whp = models.IntegerField(blank=True,null=True)
     wht = models.DecimalField(max_digits=5,decimal_places=2,blank=True,null=True)
-    bhp = models.DecimalField(max_digits=5,decimal_places=2,blank=True,null=True)
+    # bhp = models.DecimalField(max_digits=5,decimal_places=2,blank=True,null=True)
+    bhp = models.IntegerField(blank=True,null=True)
     bht = models.DecimalField(max_digits=5,decimal_places=2,blank=True,null=True)
     bsw = models.DecimalField(max_digits=5,decimal_places=2,blank=True,null=True)
     hz = models.IntegerField(blank=True,null=True)
@@ -43,7 +44,6 @@ class dailyreportdb(models.Model):
         # If the current card is the last one, return the first card in the deck
         else:
             return dailyreportdb.objects.all().order_by('pk').last()
-
 
     def get_absolute_url(self):
         return reverse('dailyreport_detail', kwargs={'pk': self.pk})

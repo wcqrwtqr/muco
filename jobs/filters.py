@@ -1,5 +1,5 @@
 import django_filters
-from .models import JobsDB
+from .models import jobsdb
 
 class Jobsfilter(django_filters.FilterSet):
     CHOICES = [
@@ -8,17 +8,16 @@ class Jobsfilter(django_filters.FilterSet):
     ]
     ordering  = django_filters.ChoiceFilter(label='Ordering', choices= CHOICES , method='filter_by_order')
     class Meta:
-        model  = JobsDB
+        model  = jobsdb
         # fields  ="__all__"
         fields = {
             # 'JOBID' : ['icontains'], removed the unwanted fields for a smaller filter set
             'client' : ['icontains'],
             'well' : ['icontains'],
-            'BU' : ['icontains'],
-            'BL' : ['icontains'],
-            'JOBID' : ['icontains'],
+            'departmenet' : ['icontains'],
+            'service' : ['icontains'],
         }
 
     def filter_by_order(self,queryset,name, value):
-        expression  = 'well' if value == 'ascending' else  '-description'
+        expression  = 'startDate' if value == 'ascending' else  '-startDate'
         return queryset.order_by(expression)

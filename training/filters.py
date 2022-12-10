@@ -1,7 +1,7 @@
-from .models import dailyreportdb
+from .models import trainingdb
 import django_filters
 
-class DailyreportFilter(django_filters.FilterSet):
+class trainingFilter(django_filters.FilterSet):
     CHOICES = [
         ('ascending','Ascending'),
         ('descending','Descending'),
@@ -9,14 +9,16 @@ class DailyreportFilter(django_filters.FilterSet):
     ordering  = django_filters.ChoiceFilter(label='Ordering', choices= CHOICES , method='filter_by_order')
 
     class Meta:
-        model  = dailyreportdb
+        model  = trainingdb
         # labels= {
         #     'lastdayops':'Last 24hr ops',
         # }
         fields = {
-            'lastdayops' : ['icontains'],
+            'training_name' : ['icontains'],
+            'training_type' : ['icontains'],
+            'description' : ['icontains'],
         }
 
     def filter_by_order(self,queryset, _, value):
-        expression  = 'operationdate' if value == 'ascending' else  '-operationdate'
+        expression  = 'training_date_start' if value == 'ascending' else  '-training_date_start'
         return queryset.order_by(expression)

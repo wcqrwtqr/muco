@@ -32,8 +32,8 @@
 	</div>
 </div>
 <div>
-	<!-- <p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p> -->
-	<p class="fw-lighter" style="float:left"> No of searched items... {{object_list.count}}</p>
+	<p class="fw-lighter" style="float:right"> No of searched items... {{filter.qs.count}}</p>
+	<p class="fw-lighter" style="float:left"> Total records... {{object_list.count}}</p>
 </div>
 
 <br>
@@ -61,7 +61,8 @@
 	</thead>
 	<tbody>
 		<!-- {#% for fa in page_obj.object_list #%} -->
-		{% for fa in object_list %}
+		<!-- {#% for fa in object_list %#} -->
+		{% for fa in filter.qs %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
 			<th scope="row"> <a href="{% url 'battery_maintenance_detail' pk=fa.pk  %}"> {{ fa.battery.serial_num }}</a></th>

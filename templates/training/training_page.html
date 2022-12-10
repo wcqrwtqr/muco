@@ -64,7 +64,8 @@
 	<tbody>
 		<!-- This page_obj.object_list will get us the pagination and filter working togather -->
 		<!-- {#% for equip in page_obj.object_list %#} -->
-		{% for training in object_list %}
+		<!-- {#% for training in object_list %#} -->
+		{% for training in filter.qs %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
 			<th scope="row"> <a href="{% url 'training_detail' pk=training.pk %}">{{ training.training_date_start}}</a></th>

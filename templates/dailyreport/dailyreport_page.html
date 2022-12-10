@@ -22,7 +22,7 @@
 		<div class="card card-body">
 			<form method="GET">
 				<table>
-					{{ daily_filter.form.as_table}}
+					{{ filter.form.as_table}}
 				</table>
 				<button type="submit" class="btn btn-primary">Search</button>
 				<a class="btn btn-outline-dark" href="{% url 'dailyreport_new' %}">New Report</a>
@@ -60,7 +60,8 @@
 	</thead>
 	<tbody>
 		<!-- {#% for fa in page_obj.object_list %#} -->
-		{% for fa in object_list %}
+		<!-- {#% for fa in object_list %#} -->
+		{% for fa in filter.qs %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
 			<th scope="row"> <a href="{% url 'dailyreport_detail' pk=fa.pk %}">{{ fa.jobid }}</a></th>

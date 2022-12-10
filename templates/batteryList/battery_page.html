@@ -37,7 +37,7 @@
 <div>
 	<!-- <p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p> -->
 	<p class="fw-lighter" style="float:right"> Total records... {{object_list.count}}</p>
-	<p class="fw-lighter" style="float:left"> No of searched items... {{page_obj.object_list.count}}</p>
+	<p class="fw-lighter" style="float:left"> No of searched items... {{filter.qs.count}}</p>
 </div>
 <br>
 <table class="table table-striped">
@@ -56,11 +56,12 @@
 			{% if user.is_superuser %}
 			<th scope="col" style='width:50px'>Delete</th>
 			{% endif %}
+			<th scope="col">PDF</th>
 		</tr>
 	</thead>
 	<tbody>
-		<!-- {#% for battery in page_obj.object_list %#} -->
-		{% for battery in object_list %}
+		<!-- {#% for battery in page_obj.object_list %#} with pagination -->
+		{% for battery in filter.qs %}
 
 		<tr>
 			<th scope="row" style='width:50px'>{{forloop.counter}}</th>
@@ -87,6 +88,7 @@
 			<td><a href="{%url 'battery_delete' pk=battery.pk %}" class="btn btn-outline-dark"><span
 						class="fa fa-eraser"></a></td>
 			{% endif %}
+			<td><a href="{% url 'battery_pdf' pk=battery.pk  %}" class="btn btn-outline-dark" target="_blank"><span class="fa fa-pencil"></a></td>
 		</tr>
 
 		{% endfor %}

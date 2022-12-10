@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, DeleteView, U
 from django.contrib.auth.decorators import  login_required
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-# from .filters import DailyreportFilter
+from .filters import DailyreportFilter
 from .forms import DailyForm
 from . import models
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -12,25 +12,12 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 class DailyReportListView(PermissionRequiredMixin, ListView):
     template_name = 'dailyreport/dailyreport_page.html'
     permission_required  = "dailyreport.view_dailyreportdb"
-    queryset = models.dailyreportdb.objects.all()
     model = models.dailyreportdb # new
     ordering = ['operationdate']
-    def get_ordering(self):
-        ordering = self.request.GET.get('ordering','-operationdate')
-        return ordering
-
-    # form_class = DailyForm
-    # paginate_by = 20
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['daily_filter'] = DailyreportFilter(self.request.GET, queryset=self.queryset)
-    #     return context
-
-    # def get_queryset(self):
-    #     qs = super().get_queryset()
-    #     filter_dailyreport = DailyreportFilter(self.request.GET, queryset=qs)
-    #     return filter_dailyreport.qs
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = DailyreportFilter(self.request.GET, queryset=self.queryset)
+        return context
 
 class DailyreportCreate(PermissionRequiredMixin, SuccessMessageMixin, CreateView ):
     template_name = 'dailyreport/dailyreport_new.html'

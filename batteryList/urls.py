@@ -7,5 +7,5 @@ urlpatterns = [
     path('battery/<int:pk>/update/', views.BatteryUpdateView.as_view(), name='battery_update'),
     path('battery/new/', views.BatteryCreateView.as_view(), name='battery_new'),
     path('battery/<int:pk>/delete/', views.BatteryDeleteView.as_view(), name='battery_delete'),
-    # path('pdf/<int:pk>', views.equipment_render_pdf_view, name='equipment_pdf'),
+    path('pdf/<int:pk>', views.battery_render_pdf_view, name='battery_pdf'),
 ]

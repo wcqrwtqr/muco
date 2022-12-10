@@ -2,10 +2,15 @@ from django.views.generic import ListView, DetailView, CreateView, DeleteView, U
 from batteryList.models import batterydb
 from equipmenMaintenance.models import Batterymaintenancedb
 from batteryList.forms import BatteryForm
+from batteryList.filters import batteryfilter
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.shortcuts import get_object_or_404, get_list_or_404
 
 class BatteryListView(PermissionRequiredMixin, ListView):
     template_name = 'batteryList/battery_page.html'
@@ -13,10 +18,14 @@ class BatteryListView(PermissionRequiredMixin, ListView):
     model = batterydb # new
     queryset = batterydb.objects.all()
     ordering = ['serial_num']
-    def get_ordering(self):
-        ordering = self.request.GET.get('ordering','serial_num') #Order live feed events according to closest start date events at the top
-        return ordering
-
+    # NOTE I removed this after adding the filter
+    # def get_ordering(self):
+    #     ordering = self.request.GET.get('ordering','serial_num') #Order live feed events according to closest start date events at the top
+    #     return ordering
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = batteryfilter(self.request.GET, queryset=self.queryset)
+        return context
 
 class BatteryDetailView(PermissionRequiredMixin,DetailView):
     template_name = 'batteryList/battery_detail.html'
@@ -29,7 +38,6 @@ class BatteryDetailView(PermissionRequiredMixin,DetailView):
         context['batteryMain'] = Batterymaintenancedb.objects.filter(battery=mypk)
         return context
 
-
 class BatteryUpdateView(PermissionRequiredMixin,SuccessMessageMixin,UpdateView):
     model = batterydb
     permission_required = ('batteryList.view_batterydb')
@@ -37,7 +45,6 @@ class BatteryUpdateView(PermissionRequiredMixin,SuccessMessageMixin,UpdateView):
     template_name = 'batteryList/battery_update.html'
     success_message = "%(serial_num)s Asset was deleted successfully"
     success_url = reverse_lazy('battery')
-
 
 class BatteryCreateView(PermissionRequiredMixin,SuccessMessageMixin, CreateView):
     permission_required = ("is_superuser")
@@ -55,10 +62,27 @@ class BatteryCreateView(PermissionRequiredMixin,SuccessMessageMixin, CreateView)
         self.object = save()
         return super().form_valid(form)
 
-
 class BatteryDeleteView(PermissionRequiredMixin,SuccessMessageMixin, DeleteView):
     permission_required = ("is_superuser", )
     model = batterydb
     success_url = reverse_lazy('battery')
     success_message = "Asset was deleted successfully"
     template_name = 'batteryList/battery_confirm_delete.html'
+
+def battery_render_pdf_view(request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    battery = get_object_or_404(batterydb, pk=pk)
+    batteryMain = Batterymaintenancedb.objects.filter(battery=pk)
+    template_path = 'batteryList/battery_pdf.html'
+    context = {'battery': battery, 'batteryMain':batteryMain}
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    # if error then show some funny view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response

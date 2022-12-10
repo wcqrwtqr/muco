@@ -1,27 +1,40 @@
-<!DOCTYPE html>
-{% load humanize %}
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Test file</title>
-    </head>
-    <body>
+{% extends 'base_pdf.html' %}
+{% block pdf %}
+<h3>Battery Full details</h3>
+<hr />
+<p>Part No : {{ battery.part_num}}</p>
+<p>Serial No : {{ battery.serial_num}}</p>
+<p>Description : {{ battery.description}}</p>
+<p>Acquistion cost : {{ battery.purchase_date}}</p>
+<p>Service Date : {{ battery.in_service_date}}</p>
+<p>Purchase Date : {{ battery.purchase_date}}</p>
 
-        <div class=conainer align='middle'>
-
-            <h2>Asset No : {{ far.asset_num	}}</h2>
-            <h2>Serial No :  {{ far.serial_num	}}</h2>
-            <h3>Description :{{ far.description	}}</h3>
-            <h3>BU  : {{ far.BU	}}</h3>
-            <h3>BL  :  {{ far.BL	}}</h3>
-            <h3>Temp Location  : {{ far.temp_location }}</h3>
-            <h3>Asset Life  : {{ far.asset_life	}}</h3>
-            <h3>Acquisition Date  : {{ far.acquisition_date	}}</h3>
-            <h3>Acquisition Cost  :   {{ far.acquisition_cost|intcomma}}</h3>
-            <h3>Total Depreciation  :   {{ far.tot_dep_value|intcomma}}</h3>
-            <h3>NBV  :   {{ far.nbv|intcomma}}</h3>
-
-        </div>
-
-    </body>
-</html>
+<hr />
+<div class="card ">
+    <div class="card-header">
+        <h3>Maintenance</h3>
+    </div>
+</div>
+{% if batteryMain != none %}
+<table class="table table-striped">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">Check Type</th>
+            <th scope="col">Check Date</th>
+            <th scope="col">Voltage Value</th>
+            <th scope="col">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fa in batteryMain %}
+        <tr>
+            <td>{{ fa.ms_type }}</td>
+            <td>{{ fa.check_date }}</td>
+            <td>{{ fa.voltage_value}}</td>
+            <td>{{ fa.description }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}
