@@ -55,19 +55,10 @@
 			<th scope="col">Position</th>
 			<th scope="col">Brith</th>
 			<th scope="col">File</th>
-			{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
-			<th scope="col" style='width:50px'>Update</th>
-			{% endif %}
-			{% if user.is_superuser %}
-			<th scope="col" style='width:50px'>Delete</th>
-			{% endif %}
-			<th scope="col">PDF</th>
+			<th scope="col">Actions</th>
 		</tr>
 	</thead>
 	<tbody>
-		<!-- This page_obj.object_list will get us the pagination and filter working togather -->
-		<!-- {#% for equip in page_obj.object_list %#} -->
-		<!-- {#% for person in object_list %#} -->
 		{% for person in filter.qs %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
@@ -85,15 +76,25 @@
 				No files
 				{% endif %}
 			</td>
-
-			{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
-			<td><a href="{%url 'personnel_update' pk=person.pk%}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a></td>
-			{% endif %}
-			{% if user.is_superuser %}
-			<td><a href="{%url 'personnel_delete' pk=person.pk %}" class="btn btn-outline-dark"><span
-						class="fa fa-eraser"></a></td>
-			{% endif %}
-			<td><a href="{% url 'personnel_pdf' pk=person.pk  %}" class="btn btn-outline-dark" target="_blank"><span class="fa fa-pencil"></a></td>
+						<td>
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
+						aria-expanded="false">
+						Action
+					</button>
+					<ul class="dropdown-menu">
+						{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
+						<li><a class="dropdown-item" href="{%url 'personnel_update' pk=person.pk%}">Update</a>
+						</li>
+						{% endif %}
+						{% if user.is_superuser %}
+						<li><a class="dropdown-item" href="{%url 'personnel_delete' pk=person.pk %}">Delete</a>
+						</li>
+						{% endif %}
+						<li><a class="dropdown-item" href="{%url 'personnel_pdf' pk=person.pk%}" target="_blank">Pdf</a></li> 
+					</ul>
+				</div>
+			</td>
 		</tr>
 
 		{% endfor %}

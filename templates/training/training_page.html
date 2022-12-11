@@ -53,18 +53,10 @@
 			<th scope="col">Description</th>
 			<th scope="col">Attendees</th>
 			<th scope="col">File</th>
-			{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
-			<th scope="col" style='width:50px'>Update</th>
-			{% endif %}
-			{% if user.is_superuser %}
-			<th scope="col" style='width:50px'>Delete</th>
-			{% endif %}
+			<th scope="col">Actions</th>
 		</tr>
 	</thead>
 	<tbody>
-		<!-- This page_obj.object_list will get us the pagination and filter working togather -->
-		<!-- {#% for equip in page_obj.object_list %#} -->
-		<!-- {#% for training in object_list %#} -->
 		{% for training in filter.qs %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
@@ -86,19 +78,27 @@
 				No files
 				{% endif %}
 			</td>
-			{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
-			<td><a href="{%url 'training_update' pk=training.pk%}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a></td>
-			{% endif %}
-			{% if user.is_superuser %}
-			<td><a href="{%url 'training_delete' pk=training.pk %}" class="btn btn-outline-dark"><span
-						class="fa fa-eraser"></a></td>
-			{% endif %}
+
+			<td>
+			<div class="btn-group" role="group">
+				<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					Action
+				</button>
+				<ul class="dropdown-menu">
+					{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
+					<li><a class="dropdown-item" href="{%url 'training_update' pk=training.pk%}">Update</a></li>
+					{% endif %}
+					{% if user.is_superuser %}
+					<li><a class="dropdown-item" href="{%url 'training_delete' pk=training.pk %}">Delete</a></li>
+					{% endif %}
+				</ul>
+			</div>
+			</td>
 		</tr>
 
 		{% endfor %}
 
 		<!-- Pagination pages toggle -->
-
 		<br />
 		<!-- <nav aria-label="Page navigation example"> -->
 		<!-- 	<ul class="pagination"> -->
@@ -128,12 +128,5 @@
 {{block.super}}
 <!-- <script type="text/javascript" src="{#% static 'js/personmentScript.js'  %#}"></script> -->
 <script src="{% static 'js/messageScript.js' %}"></script>
-
-<!-- Select2 script for searching dropdown list -->
-<!-- <script> -->
-<!-- $(document).ready(function() { -->
-<!--     $('.js-select2-basic').select2(); -->
-<!-- }); -->
-<!-- </script> -->
 
 {% endblock %}

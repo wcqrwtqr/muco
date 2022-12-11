@@ -49,11 +49,7 @@
 			<th scope="col">Asset SN</th>
 			<th scope="col">Description</th>
 			<th scope="col">Battery</th>
-			{% if user.is_superuser %}
-			<th scope="col">Update</th>
-			<th scope="col">Delete</th>
-			{% endif %}
-			<!-- <th scope="col">PDF</th> -->
+			<th scope="col">Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -68,12 +64,27 @@
 			<td>{{ fa.assetnew.serial_num }}</td>
 			<td>{{ fa.assetnew.description }}</td>
 			<td> {% for fo in fa.battery.all %} {{forloop.counter}}){{fo.serial_num}}, {% endfor %}</td>
-			{% if user.is_superuser %}
-			<td><a href="{% url 'equipment_jobs_update' pk=fa.pk  %}" class="btn btn-outline-dark"> <span class="fa fa-clone"></a>
+
+			<td>
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
+						aria-expanded="false">
+						Action
+					</button>
+					<ul class="dropdown-menu">
+						{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
+						<li><a class="dropdown-item" href="{%url 'equipment_jobs_update' pk=fa.pk%}">Update</a>
+						</li>
+						{% endif %}
+						{% if user.is_superuser %}
+						<li><a class="dropdown-item" href="{%url 'equipment_jobs_delete' pk=fa.pk %}">Delete</a>
+						</li>
+						{% endif %}
+						<!-- <li><a class="dropdown-item" href="{#%url 'equipment_pdf' pk=equip.pk%#}" target="_blank">Pdf</a></li> NOTE did not do the pdf yet -->
+					</ul>
+				</div>
 			</td>
-			<td><a href="{% url 'jobs_delete' pk=fa.pk  %}" class="btn btn-outline-dark"><span class="fa fa-eraser">
-				</a></td>
-			{% endif %}
+
 		</tr>
 		{% endfor %}
 		<!-- Pagination pages toggle -->
