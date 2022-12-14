@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<!-- {#% load humanize %#} -->
-<html lang="en">
+{% extends 'base_pdf.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Test file</title>
-</head>
-<body>
+{% block pdf %}
+
+
+
     <div class="row ">
         <div class="col">
             <div class="card card-body">
                 <div class="row">
-                    <h3 class="display-5">Personnel Details</h3>
+                    <h3>Personnel Details</h3>
                     <div class="col">
                     </div>
                     <hr />
@@ -33,6 +30,4 @@
         </div>
     </div>
 
-</body>
-
-</html>
+{% endblock %}

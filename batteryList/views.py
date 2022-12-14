@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from batteryList.models import batterydb
+from jobs.models import equipment_job_activitiesdb # test TODO lets check
 from equipmenMaintenance.models import Batterymaintenancedb
 from batteryList.forms import BatteryForm
 from batteryList.filters import batteryfilter
@@ -18,10 +19,6 @@ class BatteryListView(PermissionRequiredMixin, ListView):
     model = batterydb # new
     queryset = batterydb.objects.all()
     ordering = ['serial_num']
-    # NOTE I removed this after adding the filter
-    # def get_ordering(self):
-    #     ordering = self.request.GET.get('ordering','serial_num') #Order live feed events according to closest start date events at the top
-    #     return ordering
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = batteryfilter(self.request.GET, queryset=self.queryset)
@@ -36,6 +33,7 @@ class BatteryDetailView(PermissionRequiredMixin,DetailView):
         context = super().get_context_data(**kwargs)
         mypk = self.kwargs['pk'] # this will get the pk for the asset
         context['batteryMain'] = Batterymaintenancedb.objects.filter(battery=mypk)
+        context['batteryinjob'] = equipment_job_activitiesdb.objects.filter(battery=mypk)
         return context
 
 class BatteryUpdateView(PermissionRequiredMixin,SuccessMessageMixin,UpdateView):

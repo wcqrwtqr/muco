@@ -76,6 +76,45 @@
   </div>
   <!-- Creating the accordion which will hold the data and graphs -->
 
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+        aria-expanded="false" aria-controls="collapseThree">
+        Used on site
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+      data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+
+        <table class="table table-striped">
+          <thead>
+            <tr class="table-dark">
+              <th>Clinet</th>
+              <th>Well</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for fa in batteryinjob.all %}
+            <tr>
+              <td>{{ fa.jobidnew.client }}</td>
+              <td>{{ fa.jobidnew.well }}</td>
+              <td>{{ fa.jobidnew.startDate }}</td>
+              <td>{{ fa.jobidnew.endDate }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+
+
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"

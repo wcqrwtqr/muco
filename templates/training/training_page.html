@@ -26,7 +26,7 @@
 					{{ filter.form.as_table}}
 				</table>
 				<button type="submit" class="btn btn-primary">Search</button>
-				{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
+				{% if user.is_superuser or user.groups.all.0.name == 'HR' or user.groups.all.0.name == 'HSE'%}
 				<a class="btn btn-outline-dark" href="{% url 'training_new' %}">Add New Training</a>
 				{% endif %}
 			</form>
@@ -85,7 +85,7 @@
 					Action
 				</button>
 				<ul class="dropdown-menu">
-					{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
+					{% if user.is_superuser or user.groups.all.0.name == 'HR' or user.groups.all.0.name == 'HSE' %}
 					<li><a class="dropdown-item" href="{%url 'training_update' pk=training.pk%}">Update</a></li>
 					{% endif %}
 					{% if user.is_superuser %}
@@ -95,29 +95,8 @@
 			</div>
 			</td>
 		</tr>
-
 		{% endfor %}
-
-		<!-- Pagination pages toggle -->
 		<br />
-		<!-- <nav aria-label="Page navigation example"> -->
-		<!-- 	<ul class="pagination"> -->
-		<!-- 		{% if page_obj.has_previous %} -->
-		<!-- 		<li class="page-item"><a class="page-link" href="?page=1">First</a></li> -->
-		<!-- 		<li class="page-item"><a class="page-link" -->
-		<!-- 				href="?page={{ page_obj.previous_page_number }} ">previous</a></li> -->
-		<!-- 		{% endif %} -->
-		<!-- 		<li class="page-item"><a class="text-rest text-muted page-link" href="#"> -->
-		<!-- 				Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. -->
-		<!-- 			</a></li> -->
-		<!-- 		{% if page_obj.has_next %} -->
-		<!-- 		<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }} ">next</a></li> -->
-		<!-- 		<li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }} ">last</a> -->
-		<!-- 		</li> -->
-		<!-- 		{% endif %} -->
-		<!-- 	</ul> -->
-		<!-- </nav> -->
-
 	</tbody>
 </table>
 

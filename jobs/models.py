@@ -3,9 +3,6 @@ from django.db import models
 from equipmentList.models import equipmentdb
 from batteryList.models import batterydb
 from django.urls import reverse
-# from equipmentList.models import EQUIPMENT_DB
-# import datetime
-# Create your models here.
 
 class jobsdb(models.Model):
     jobid = models.CharField(max_length = 20 ,unique=True,blank=True, null=True)

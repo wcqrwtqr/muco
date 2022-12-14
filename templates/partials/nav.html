@@ -47,14 +47,14 @@
             Marketing
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{#%url 'personnel' %#}">Visit</a></li>
-            <li><a class="dropdown-item" href="{#% url 'training' %#}">Client</a></li>
+            <li><a class="dropdown-item" href="{#%url 'Market' %#}">Visit</a></li>
+            <li><a class="dropdown-item" href="{#% url 'Market1' %#}">Client</a></li>
           </ul>
         </li>
         {% endif %}
 
 
-        {% if user.is_superuser or user.groups.all.0.name == 'HR'  %}
+        {% if user.is_superuser or user.groups.all.0.name == 'HR' or user.groups.all.0.name == 'HSE' %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             HR

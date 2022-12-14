@@ -43,7 +43,7 @@ class trainingDetailView(PermissionRequiredMixin, DetailView):
 
 
 class trainingCreateView(PermissionRequiredMixin,SuccessMessageMixin, CreateView):
-    permission_required = ("is_superuser", 'training.add_trainingdb')
+    permission_required = ('training.view_trainingdb', "is_superuser")
     template_name = 'training/training_new.html'
     form_class = trainingForm
     model = trainingdb

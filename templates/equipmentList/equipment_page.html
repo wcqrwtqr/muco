@@ -56,16 +56,16 @@
 		</tr>
 	</thead>
 	<tbody>
-		<!-- {#% for equip in object_list %#} -->
 		{% for equip in filter.qs %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
-			<th scope="row" style='word-break:break-word'> <a href="{% url 'equipment_detail' pk=equip.pk %}">{{ equip.part_num }}</a></th>
+			<th scope="row" > <a href="{% url 'equipment_detail' pk=equip.pk %}">{{ equip.part_num }}</a></th>
 			<td>{{ equip.serial_num }}</td>
 			<td>{{ equip.description }}</td>
 			<td>{{ equip.departement }}</td>
 			{% if user.is_superuser %}
 			<td>{{ equip.acquisition_cost }}</td>
+			{% endif %}
 			<td>
 				{% if equip.pdf_file != None  and equip.pdf_file != ""%}
 				<a href="/media/{{equip.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
@@ -73,8 +73,6 @@
 				No files
 				{% endif %}
 			</td>
-			{% endif %}
-
 			<td>
 			<div class="btn-group" role="group">
 				<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -96,23 +94,23 @@
 
 		<!-- pagination section -->
 		<br />
-		<nav aria-label="Page navigation example">
-			<ul class="pagination">
-				{% if page_obj.has_previous %}
-				<li class="page-item"><a class="page-link" href="?page=1">First</a></li>
-				<li class="page-item"><a class="page-link"
-						href="?page={{ page_obj.previous_page_number }} ">previous</a></li>
-				{% endif %}
-				<li class="page-item"><a class="text-rest text-muted page-link" href="#">
-						Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-					</a></li>
-				{% if page_obj.has_next %}
-				<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }} ">next</a></li>
-				<li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }} ">last</a>
-				</li>
-				{% endif %}
-			</ul>
-		</nav>
+		<!-- <nav aria-label="Page navigation example"> -->
+		<!-- 	<ul class="pagination"> -->
+		<!-- 		{% if page_obj.has_previous %} -->
+		<!-- 		<li class="page-item"><a class="page-link" href="?page=1">First</a></li> -->
+		<!-- 		<li class="page-item"><a class="page-link" -->
+		<!-- 				href="?page={{ page_obj.previous_page_number }} ">previous</a></li> -->
+		<!-- 		{% endif %} -->
+		<!-- 		<li class="page-item"><a class="text-rest text-muted page-link" href="#"> -->
+		<!-- 				Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. -->
+		<!-- 			</a></li> -->
+		<!-- 		{% if page_obj.has_next %} -->
+		<!-- 		<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }} ">next</a></li> -->
+		<!-- 		<li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }} ">last</a> -->
+		<!-- 		</li> -->
+		<!-- 		{% endif %} -->
+		<!-- 	</ul> -->
+		<!-- </nav> -->
 
 	</tbody>
 </table>
