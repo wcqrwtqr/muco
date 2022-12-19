@@ -31,8 +31,8 @@
 	</div>
 </div>
 <div>
-	<p class="fw-lighter" style="float:right"> Total records... {{daily_filter.qs.count}}</p>
-	<p class="fw-lighter" style="float:left"> No of searched items... {{page_obj.object_list.count}}</p>
+	<p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p>
+	<p class="fw-lighter" style="float:left"> No of searched items... {{object_list.count}}</p>
 </div>
 
 <br />
@@ -90,28 +90,8 @@
 					</ul>
 				</div>
 			</td>
-
 		{% endfor %}
-
 		<br />
-		<!-- <nav aria-label="Page navigation example"> -->
-		<!-- 	<ul class="pagination"> -->
-		<!-- 		{% if page_obj.has_previous %} -->
-		<!-- 		<li class="page-item"><a class="page-link" href="?page=1">First</a></li> -->
-		<!-- 		<li class="page-item"><a class="page-link" -->
-		<!-- 				href="?page={{ page_obj.previous_page_number }} ">previous</a></li> -->
-		<!-- 		{% endif %} -->
-		<!-- 		<li class="page-item"><a class="text-rest text-muted page-link" href="#"> -->
-		<!-- 				Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. -->
-		<!-- 			</a></li> -->
-		<!-- 		{% if page_obj.has_next %} -->
-		<!-- 		<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }} ">next</a></li> -->
-		<!-- 		<li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }} ">last</a> -->
-		<!-- 		</li> -->
-		<!-- 		{% endif %} -->
-		<!-- 	</ul> -->
-		<!-- </nav> -->
-
 	</tbody>
 </table>
 {% endblock %}

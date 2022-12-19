@@ -4,8 +4,8 @@
 <div class="card ">
   <div class="card-header">
     <h1 class="display-5">Daily Report Details</h1>
-      <a class="btn btn-primary" href="{% url 'dailyreport_detail' pk=dailyreport_detail.get_prev.pk  %}"><< Prev Record </a> 
-      <a class="btn btn-primary" href="{% url 'dailyreport_detail' pk=dailyreport_detail.get_next.pk  %}">Next Record >></a> 
+      <a class="btn btn-primary" href="{% url 'dailyreport_detail' pk=dailyreport_detail.get_prev.pk  %}"><< Prev </a>
+      <a class="btn btn-primary" href="{% url 'dailyreport_detail' pk=dailyreport_detail.get_next.pk  %}">Next >></a>
   </div>
   <div class="card-body">
     <h3 class="card-title"> Report Date : {{ dailyreport_detail.operationdate}} </h3>

@@ -28,7 +28,7 @@
 				</table>
 				<button type="submit" class="btn btn-primary">Search</button>
 				{% if user.is_superuser or user.groups.all.0.name == 'HR' %}
-				<a class="btn btn-outline-dark" href="{% url 'personnel_new' %}">Add New Person</a>
+				<a class="btn btn-outline-dark" href="{% url 'personnel_new' %}">New Person</a>
 				{% endif %}
 			</form>
 		</div>
