@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'jobs',
     'dailyreport',
     'batteryList',
+    'marketing',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +138,14 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+# My own variables
+# Departement
+BL = [('WSS','WSS'),('H2S','H2S'), ('AQM','AQM'),('Supply','Supply')]
+# Maintenance list
+MS = [('MS-1','MS-1'),('MS-2','MS-2'), ('MS-3','MS-3'), ('O-rings','O-rings'), ('Repair','Repair'),('Down','Down'), ('Waiting on Spares','Waiting on Spares'), ('Junked','Junked'), ('Voltage Check','Voltage Check'),('Visutal Check','Visutal Check'), ('Junked','Junked'),]
+# Services list
+SERVICE = [('DH Camera','DH Camera'),('Eco meter','Eco meter'), ('BossPac','BossPac'), ('xmile','xmile'),('H2S','H2S'),('AQM','AQM'),('Supply','Supply'),]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

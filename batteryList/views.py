@@ -39,7 +39,8 @@ class BatteryDetailView(PermissionRequiredMixin,DetailView):
 class BatteryUpdateView(PermissionRequiredMixin,SuccessMessageMixin,UpdateView):
     model = batterydb
     permission_required = ('batteryList.view_batterydb')
-    fields = '__all__'
+    # fields = '__all__'
+    form_class = BatteryForm
     template_name = 'batteryList/battery_update.html'
     success_message = "%(serial_num)s Asset was deleted successfully"
     success_url = reverse_lazy('battery')

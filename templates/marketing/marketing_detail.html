@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block body_block %}
+
+<div class="row ">
+  <div class="col">
+    <div class="card card-body">
+      <div class="row">
+        <h3 class="display-5">Meeting Full details</h3>
+        <div class="col">
+          <a class="btn btn-primary" href="{% url 'market_detail' pk=marketing_detail.get_prev.pk  %}"><< Prev </a>
+          <a class="btn btn-primary" href="{% url 'market_detail' pk=marketing_detail.get_next.pk  %}">Next >></a>
+        </div>
+        <hr />
+        <div class="col">
+          <p class='card-text'>Part No : {{ marketing_detail.meeting_date}}</p>
+          <p class='card-text'>Serial No : {{ marketing_detail.meeting_type}}</p>
+          <p class='card-text'>Description : {{ marketing_detail.meeting_description}}</p>
+        </div>
+        <div class="col">
+          <p class='card-text'>Acquistion cost : {{ marketing_detail.client}}</p>
+          <p class='card-text'>Date : {{ marketing_detail.attendance}}</p>
+          <!-- <p class='card-text' >Pdf file : -->
+            <!-- {% if marketing_detail.pdf_file != None and marketing_detail.pdf_file != ""%} -->
+            <!-- <a href="/media/{{ market_detail.pdf_file}}" -->
+            <!--    type="application/pdf" target="_blank"> Link </a> -->
+            <!-- {% else %} -->
+            <!--   No files -->
+            <!-- {% endif %} -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================================================================== -->
+<!-- ===========Makeing the data in accordion============================ -->
+<!-- ==================================================================== -->
+<br />
+
+<!-- <div class="accordion" id="accordionExample"> -->
+<!--   <div class="accordion-item"> -->
+<!--     <h2 class="accordion-header" id="headingOne"> -->
+<!--       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" -->
+<!--         aria-expanded="true" aria-controls="collapseOne"> -->
+<!--         Maintenacne Check Table -->
+<!--       </button> -->
+<!--     </h2> -->
+<!--     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" -->
+<!--       data-bs-parent="#accordionExample"> -->
+<!--       <div class="accordion-body"> -->
+<!--         <\!-- <p class="fw-lighter">No of records.. {{batteryMain.count}}</p> -\-> -->
+<!--         <table class="table table-striped"> -->
+<!--           <thead> -->
+<!--             <tr class="table-dark"> -->
+<!--               <th scope="col">Check Type</th> -->
+<!--               <th scope="col">Check Date</th> -->
+<!--               <th scope="col">Voltage Value</th> -->
+<!--               <th scope="col">Description</th> -->
+<!--             </tr> -->
+<!--           </thead> -->
+<!--           <tbody> -->
+<!--             {% for fa in batteryMain %} -->
+<!--             <tr> -->
+<!--               <td><a href="{#% url 'battery_maintenance_detail' pk=fa.pk %#}">{{ fa.ms_type }}</a></td> -->
+<!--               <td>{{ fa.check_date }}</td> -->
+<!--               <td>{{ fa.voltage_value}}</td> -->
+<!--               <td style='word-break:break-word'>{{ fa.description }}</td> -->
+<!--             </tr> -->
+<!--             {% endfor %} -->
+<!--           </tbody> -->
+<!--         </table> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!--   <\!-- Creating the accordion which will hold the data and graphs -\-> -->
+
+
+<!--   <div class="accordion-item"> -->
+<!--     <h2 class="accordion-header" id="headingThree"> -->
+<!--       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" -->
+<!--         aria-expanded="false" aria-controls="collapseThree"> -->
+<!--         Used on site -->
+<!--       </button> -->
+<!--     </h2> -->
+<!--     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" -->
+<!--       data-bs-parent="#accordionExample"> -->
+<!--       <div class="accordion-body"> -->
+
+<!--         <table class="table table-striped"> -->
+<!--           <thead> -->
+<!--             <tr class="table-dark"> -->
+<!--               <th>Clinet</th> -->
+<!--               <th>Well</th> -->
+<!--               <th>Start Date</th> -->
+<!--               <th>End Date</th> -->
+<!--             </tr> -->
+<!--           </thead> -->
+<!--           <tbody> -->
+<!--             {% for fa in batteryinjob.all %} -->
+<!--             <tr> -->
+<!--               <td>{{ fa.jobidnew.client }}</td> -->
+<!--               <td>{{ fa.jobidnew.well }}</td> -->
+<!--               <td>{{ fa.jobidnew.startDate }}</td> -->
+<!--               <td>{{ fa.jobidnew.endDate }}</td> -->
+<!--             </tr> -->
+<!--             {% endfor %} -->
+<!--           </tbody> -->
+<!--         </table> -->
+
+
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+
+
+<!--   <div class="accordion-item"> -->
+<!--     <h2 class="accordion-header" id="headingTwo"> -->
+<!--       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" -->
+<!--         aria-expanded="false" aria-controls="collapseTwo"> -->
+<!--         Voltage chart -->
+<!--       </button> -->
+<!--     </h2> -->
+<!--     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" -->
+<!--       data-bs-parent="#accordionExample"> -->
+<!--       <div class="accordion-body"> -->
+<!--         <button type="button" class="btn btn-outline-dark mb-2" id='bar'>Bar</button> -->
+<!--         <button type="button" class="btn btn-outline-dark mb-2" id='line'>Line</button> -->
+<!--         <div class="row"> -->
+<!--           <canvas id="myChart" width="300" height="150"></canvas> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div> -->
+<br />
+
+<a class="btn btn-primary " href="{% url 'market' %}">Back to list</a>
+{% if user.is_superuser %}
+<a class="btn btn-secondary " href="{% url 'market_update' pk=marketing_detail.pk %}" target="_blank">Update Meeting</a>
+{% endif %}
+
+<!-- <script> -->
+<!--   const line = document.getElementById('line') -->
+<!--   const bar = document.getElementById('bar') -->
+<!--   line.addEventListener('click', changeline) -->
+<!--   bar.addEventListener('click', changebar) -->
+
+<!--   const ctx = document.getElementById('myChart').getContext('2d'); -->
+<!--   const myChart = new Chart(ctx, { -->
+<!--     type: 'line', -->
+<!--     data: { -->
+<!--       labels: [{% for foo in batteryMain %} '{{foo.check_date }}', {% endfor %}], -->
+<!--       datasets: [{ -->
+<!--           label: 'Volt', -->
+<!--           data: [{% for foo in batteryMain %} {{ foo.voltage_value }}, {% endfor %}], -->
+<!--           backgroundColor: ['rgba(255, 99, 132, 0.2)',], -->
+<!--           borderColor: ['rgba(255, 99, 132, 1)',], -->
+<!--           borderWidth: 3}] -->
+<!--     }, -->
+<!--       options: {scales: {y: {beginAtZero: true}}}  -->
+<!--   }); -->
+<!--   function changeline() { -->
+<!--     myChart.config.type = 'line' -->
+<!--     myChart.update() -->
+<!--   } -->
+<!--   function changebar() { -->
+<!--     myChart.config.type = 'bar' -->
+<!--     myChart.update() -->
+<!--   } -->
+<!-- </script> -->
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{%load crispy_forms_tags %}
+
+{% block body_block %}
+<h3 class="display-5">Update Meeting</h3>
+<br />
+<p class="blockquote-footer">Hello {{user.username}}</p>
+
+<form method="POST" class="post-form" enctype ="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row row">
+        <div class="form-group col-md-4 mb-0 col"> {{ form.meeting_date|as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.meeting_type|as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.departement|as_crispy_field }} </div>
+    </div>
+    <div class="form-row row">
+        <div class="form-group col-md-12 mb-0 col"> {{ form.meeting_description|as_crispy_field }} </div>
+    </div>
+    <div class="form-row row">
+        <div class="form-group col-md-8 mb-0 col"> {{ form.attendance|as_crispy_field }} </div>
+        <div class="form-group col-md-4 mb-0 col"> {{ form.client|as_crispy_field }} </div>
+    </div>
+    <div class="form-row row">
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-outline-dark " href="{% url 'market' %}">Cancel</a>
+
+</form>
+
+
+<!-- Script for the date picker  -->
+<script>
+    $(function () {
+        $("#id_meeting_date").datepicker({
+            format: 'yyyy-mm-dd',
+        });
+    });
+</script>
+
+
+{% endblock %}
+

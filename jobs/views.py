@@ -56,7 +56,8 @@ class JobsUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = models.jobsdb
     success_url = reverse_lazy('jobs')
     success_message = "%(jobid)s was updated successfully"
-    fields = "__all__"
+    form_class = JobsForm
+    # fields = "__all__"
 
 class JobsDeleteView(PermissionRequiredMixin,SuccessMessageMixin, DeleteView):
     permission_required = ("is_superuser")

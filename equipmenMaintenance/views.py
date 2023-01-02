@@ -40,8 +40,7 @@ class MaintenanceCreate(PermissionRequiredMixin, SuccessMessageMixin,CreateView 
 
 class MaintenanceUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Maintenancedb
-    fields = "__all__"
-    # form_class = MaintenanceForm
+    form_class = MaintenanceForm
     success_url = reverse_lazy('maintenance')
     template_name = 'equipmenMaintenance/maintenance_update.html'
     permission_required = 'equipmenMaintenance.change_maintenancedb'
@@ -53,7 +52,6 @@ class MaintenanceDeleteView(SuccessMessageMixin,PermissionRequiredMixin,DeleteVi
     model = Maintenancedb
     success_url = reverse_lazy('maintenance')
     success_message = "Main record was deleted"
-
 
 # Battery section
 
@@ -91,7 +89,8 @@ class BatteryMaintenanceCreate(PermissionRequiredMixin, SuccessMessageMixin,Crea
 
 class BatteryMaintenanceUpdateView(PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Batterymaintenancedb
-    fields = "__all__"
+    # fields = "__all__"
+    form_class = BatteryMaintenanceForm
     success_url = reverse_lazy('battery_maintenance')
     template_name = 'equipmenMaintenance/battery_maintenance_update.html'
     permission_required = 'equipmenMaintenance.change_maintenancedb'

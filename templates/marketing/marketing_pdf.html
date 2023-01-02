@@ -1,0 +1,14 @@
+{% extends 'base_pdf.html' %}
+{% block pdf %}
+<h3>Meeting Full details</h3>
+<hr />
+{% for fa in market %}
+<p>Date : {{ fa.meeting_date}}</p>
+<p>Meeting : {{ fa.meeting_type}}</p>
+<p>Description : {{ fa.meeting_description}}</p>
+<p>Departement : {{ fa.departement}}</p>
+<p>Client Date : {{ fa.client}}</p>
+<p>Attendance : {{ fa.attendance}}</p>
+{% endfor %}
+<hr />
+{% endblock %}

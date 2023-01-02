@@ -1,17 +1,15 @@
 from .models import equipment_job_activitiesdb, jobsdb
 from django import forms
+from django.conf import settings
 
 from django.forms import DateTimeInput, DateInput
 
 class JobsForm(forms.ModelForm):
-    startDate = forms.DateField(label="Start Date", input_formats=['%d-%m-%Y'])
-    endDate = forms.DateField(label="End Date",input_formats=['%d-%m-%Y'])
+    startDate = forms.DateField(label="Start Date", input_formats=['%Y-%m-%d'])
+    endDate = forms.DateField(label="End Date",input_formats=['%Y-%m-%d'])
     class Meta:
         model = jobsdb
         fields = '__all__'
-        departmenet = [('WSS','WSS'),('H2S','H2S'), ('Other','Other')]
-        service = [('DH Camera','DH Camera'),('Eco meter','Eco meter'), ('BossPac','BossPac'), ('Xmile','Xmile'),]
-
         labels = {
             'jobid' :'Job ID',
             'client' :'Client',
@@ -23,8 +21,8 @@ class JobsForm(forms.ModelForm):
         }
         widgets  = {
             'description' : forms.Textarea(attrs={'rows':3 }),
-            'departmenet' : forms.Select(choices=departmenet),
-            'service' : forms.Select(choices=service),
+            'departmenet' : forms.Select(choices=settings.BL),
+            'service' : forms.Select(choices=settings.SERVICE),
         }
 
 
