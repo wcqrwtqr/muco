@@ -36,8 +36,8 @@
 
 <div>
 	<!-- <p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p> -->
-	<!-- <p class="fw-lighter" style="float:right"> Total records... {{object_list.count}}</p> -->
-	<!-- <p class="fw-lighter" style="float:left"> No of searched items... {{filter.qs.count}}</p> -->
+	<p class="fw-lighter" style="float:right"> Total records... {{object_list.count}}</p>
+	<p class="fw-lighter" style="float:left"> No of searched items... {{filter.qs.count}}</p>
 </div>
 <br>
 <table class="table table-striped">
@@ -48,10 +48,10 @@
 			<th scope="col">Type</th>
 			<th scope="col">Date</th>
 			<th scope="col">Description</th>
-			<th scope="col">Department</th>
+			<th scope="col">Attendance</th>
 			<th scope="col">Client</th>
 			<!-- <th scope="col">Condition</th> -->
-			<th scope="col">File</th>
+			<!-- <th scope="col">File</th> -->
 			<th scope="col">Actions</th>
 		</tr>
 	</thead>
@@ -61,34 +61,26 @@
 
 		<tr>
 			<th scope="row" style='width:50px'>{{forloop.counter}}</th>
-			<th scope="row"> <a href="{% url 'market_detail' pk=market.pk %}">{{ market.meeting_type }}</a></th>
+			<th scope="row"> <a href="{% url 'market_detail' pk=market.pk %}" target="_blank">{{ market.meeting_type }}</a></th>
 			<td>{{ market.meeting_date }}</td>
-			<td>{{ market.meeting_description }}</td>
-			<td>{{ market.departement }}</td>
+			<td style="text-align: justify;">{{ market.meeting_description }}</td>
+			<td>{{ market.attendance }}</td>
 			<td>{{ market.client }}</td>
 			<td>
-				{% if market.pdf_file != None and market.pdf_file != ""%}
-				<a href="/media/{{market.pdf_file}}" type="application/pdf" target="_blank"> Link </a>
-				{% else %}
-				No files
-				{% endif %}
-			</td>
-
-			<td>
-			<div class="btn-group" role="group">
-				<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-					Action
-				</button>
-				<ul class="dropdown-menu">
-					{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
-					<li><a class="dropdown-item" href="{%url 'market_update' pk=market.pk%}">Update</a></li>
-					{% endif %}
-					{% if user.is_superuser %}
-					<li><a class="dropdown-item" href="{%url 'market_delete' pk=market.pk %}">Delete</a></li>
-					{% endif %}
-					<li><a class="dropdown-item" href="{%url 'pdf_market_view' pk=market.pk%}" target="_blank">Pdf</a></li>
-				</ul>
-			</div>
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						Action
+					</button>
+					<ul class="dropdown-menu">
+						{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
+						<li><a class="dropdown-item" href="{%url 'market_update' pk=market.pk%}">Update</a></li>
+						{% endif %}
+						{% if user.is_superuser %}
+						<li><a class="dropdown-item" href="{%url 'market_delete' pk=market.pk %}">Delete</a></li>
+						{% endif %}
+						<li><a class="dropdown-item" href="{%url 'pdf_market_view' pk=market.pk%}" target="_blank">Pdf</a></li>
+					</ul>
+				</div>
 			</td>
 		</tr>
 

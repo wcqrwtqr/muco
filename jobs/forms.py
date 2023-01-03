@@ -4,6 +4,11 @@ from django.conf import settings
 
 from django.forms import DateTimeInput, DateInput
 
+# sorted_clients = sorted(settings.CLINET, key=lambda x : x[0])
+# sorted_type = sorted(settings.TYPE, key=lambda x : x[0])
+sorted_bl = sorted(settings.BL, key=lambda x : x[0])
+sorted_services = sorted(settings.SERVICE, key=lambda x : x[0])
+
 class JobsForm(forms.ModelForm):
     startDate = forms.DateField(label="Start Date", input_formats=['%Y-%m-%d'])
     endDate = forms.DateField(label="End Date",input_formats=['%Y-%m-%d'])
@@ -21,8 +26,10 @@ class JobsForm(forms.ModelForm):
         }
         widgets  = {
             'description' : forms.Textarea(attrs={'rows':3 }),
-            'departmenet' : forms.Select(choices=settings.BL),
-            'service' : forms.Select(choices=settings.SERVICE),
+            # 'departmenet' : forms.Select(choices=settings.BL),
+            # 'service' : forms.Select(choices=settings.SERVICE),
+            'departmenet' : forms.Select(choices=sorted_bl),
+            'service' : forms.Select(choices=sorted_services),
         }
 
 

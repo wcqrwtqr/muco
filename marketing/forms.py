@@ -4,14 +4,17 @@ from django.conf import settings
 
 from django.forms import DateTimeInput, DateInput
 
+sorted_clients = sorted(settings.CLINET, key=lambda x : x[0])
+sorted_type = sorted(settings.TYPE, key=lambda x : x[0])
+sorted_bl = sorted(settings.BL, key=lambda x : x[0])
+
+
 class marketingForm(forms.ModelForm):
     # meeting_date = forms.DateField(label="Meeting Date", input_formats=['%d-%m-%Y'])
     meeting_date = forms.DateField(label="Meeting Date", input_formats=['%Y-%m-%d'])
     class Meta:
         model = marketingdb
         fields = '__all__'
-        # departmenet = [('WSS','WSS'),('H2S','H2S'), ('else','else')]
-        type = [('Visit','Visit'),('Call','Call'), ('Confernce Call','Confernce Call')]
 
         labels = {
             'meeting_type':'Meeting',
@@ -22,7 +25,7 @@ class marketingForm(forms.ModelForm):
         }
         widgets  = {
             'description' : forms.Textarea(attrs={'rows':3 }),
-            # 'departement' : forms.Select(choices=departmenet),
-            'departement' : forms.Select(choices=settings.BL),
-            'meeting_type': forms.Select(choices=type),
+            'departement' : forms.Select(choices=sorted_bl),
+            'meeting_type': forms.Select(choices=sorted_type),
+            'client': forms.Select(choices=sorted_clients),
         }

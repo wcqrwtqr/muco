@@ -1,89 +1,93 @@
 <!--NavBar start-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'home' %} ">MUCO</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-      <ul class="navbar-nav">
-        {% if user.is_authenticated %}
-        {% if user.is_superuser or user.groups.all.0.name == 'Operation'  %}
-        <!-- separator -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Operation </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'jobs' %}">Jobs</a></li>
-            <li><a class="dropdown-item" href="{% url 'dailyreport' %}">Daily Reports</a></li>
-            <li><a class="dropdown-item" href="{% url 'equipment_jobs' %}">Tracker</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Dashboard**</a></li>
-          </ul>
-        </li>
-        <!-- separator -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Assets</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{%url 'equipment' %}">Equipment List</a></li>
-            <li><a class="dropdown-item" href="{%url 'battery' %}">Battery List</a></li>
-          </ul>
-        </li>
-        <!-- separator -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Maintenance</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'maintenance' %}">Equipmenet </a></li>
-            <li><a class="dropdown-item" href="{% url 'battery_maintenance' %}">Battery </a></li>
-          </ul>
-        </li>
-        {% endif %}
+  <div class=" container-fluid">
+  <a class="navbar-brand" href="{% url 'home' %} ">MUCO</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+    <ul class="navbar-nav">
+      {% if user.is_authenticated %}
+      {% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
+      <!-- separator -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Operation </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'jobs' %}">Jobs</a></li>
+          <li><a class="dropdown-item" href="{% url 'dailyreport' %}">Daily Reports</a></li>
+          <li><a class="dropdown-item" href="{% url 'equipment_jobs' %}">Tracker</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#">Dashboard**</a></li>
+        </ul>
+      </li>
+      <!-- separator -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">Assets</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{%url 'equipment' %}">Equipment List</a></li>
+          <li><a class="dropdown-item" href="{%url 'battery' %}">Battery List</a></li>
+        </ul>
+      </li>
+      <!-- separator -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">Maintenance</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'maintenance' %}">Equipmenet </a></li>
+          <li><a class="dropdown-item" href="{% url 'battery_maintenance' %}">Battery </a></li>
+        </ul>
+      </li>
+      {% endif %}
 
 
-        {% if user.is_superuser or user.groups.all.0.name == 'Marketing'  %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Marketing
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{%url 'market' %}">Visit</a></li>
-            <li><a class="dropdown-item" href="{#% url 'Market1' %#}">Client</a></li>
-          </ul>
-        </li>
-        {% endif %}
+      {% if user.is_superuser or user.groups.all.0.name == 'Marketing' %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Marketing
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{%url 'market' %}">Meetings</a></li>
+          <!-- <li><a class="dropdown-item" href="{#% url 'Market1' %#}">Client</a></li> -->
+        </ul>
+      </li>
+      {% endif %}
 
 
-        {% if user.is_superuser or user.groups.all.0.name == 'HR' or user.groups.all.0.name == 'HSE' %}
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            HR
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{%url 'personnel' %}">Personnel</a></li>
-            <li><a class="dropdown-item" href="{% url 'training' %}">Training</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Letters</a></li>
-          </ul>
-        </li>
-        {% endif %}
-        {% if user.is_superuser %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'admin:index'  %}">Admin</a>
-        </li>
-        {% endif %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout'  %}">Logout</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        {% endif %}
-      </ul>
-    </div>
+      {% if user.is_superuser or user.groups.all.0.name == 'HR' or user.groups.all.0.name == 'HSE' %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          HR
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{%url 'personnel' %}">Personnel</a></li>
+          <li><a class="dropdown-item" href="{% url 'training' %}">Training</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#">Letters</a></li>
+        </ul>
+      </li>
+      {% endif %}
+      {% if user.is_superuser %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'admin:index'  %}">Admin</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout'  %}">Logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
   </div>
 </nav>
 <!--NavBar end-->

@@ -13,20 +13,18 @@
         </div>
         <hr />
         <div class="col">
-          <p class='card-text'>Part No : {{ marketing_detail.meeting_date}}</p>
-          <p class='card-text'>Serial No : {{ marketing_detail.meeting_type}}</p>
-          <p class='card-text'>Description : {{ marketing_detail.meeting_description}}</p>
+          <p class='card-text'>Date : {{ marketing_detail.meeting_date}}</p>
+          <p class='card-text'>Type : {{ marketing_detail.meeting_type}}</p>
         </div>
         <div class="col">
-          <p class='card-text'>Acquistion cost : {{ marketing_detail.client}}</p>
-          <p class='card-text'>Date : {{ marketing_detail.attendance}}</p>
-          <!-- <p class='card-text' >Pdf file : -->
-            <!-- {% if marketing_detail.pdf_file != None and marketing_detail.pdf_file != ""%} -->
-            <!-- <a href="/media/{{ market_detail.pdf_file}}" -->
-            <!--    type="application/pdf" target="_blank"> Link </a> -->
-            <!-- {% else %} -->
-            <!--   No files -->
-            <!-- {% endif %} -->
+          <p class='card-text'>Client : {{ marketing_detail.client}}</p>
+          <p class='card-text'>Attendance {{ marketing_detail.attendance}}</p>
+          </p>
+        </div>
+        <div class="row">
+          <!-- <p class='card-text'>Description : {{ marketing_detail.meeting_description}}</p> -->
+          <p class='card-text'>Description:</p>
+          <p class='card-text' style="text-align: justify;">{{ marketing_detail.meeting_description}}</p>
           </p>
         </div>
       </div>

@@ -2,6 +2,8 @@ from .models import equipmentdb
 from django import forms
 from django.conf import settings
 
+sorted_bl = sorted(settings.BL, key=lambda x : x[0])
+
 class EquipmentForm(forms.ModelForm):
     acquisition_date = forms.DateField(input_formats=['%Y-%m-%d'])
     class Meta:
@@ -19,5 +21,5 @@ class EquipmentForm(forms.ModelForm):
         }
         widgets = {
             'description': forms.Textarea(attrs={'rows': 3}),
-            'departement' : forms.Select(choices=settings.BL),
+            'departement' : forms.Select(choices=sorted_bl),
         }

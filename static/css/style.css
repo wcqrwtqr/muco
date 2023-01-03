@@ -1,0 +1,24 @@
+/* Change the color of each app separatly */
+.app-equipment {
+  background-color: ivory ;
+}
+
+.app-maintenance {
+  background-color: ivory ;
+}
+
+/* .app-maintenance-battery { */
+/*   background-color: seashell ; */
+/* } */
+
+/* .app-battery { */
+/*   background-color: ivory ; */
+/* } */
+
+.app-jobs {
+  background-color: ivory ;
+}
+
+/* .app-daily { */
+/*   background-color: olive ; */
+/* } */
