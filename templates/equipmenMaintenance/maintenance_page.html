@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block body_class %}maintenance{% endblock %}
 {% load static %}
-
 {% block body_block %}
 
-<h1 class="display-5">Maintenance Page <span class="material-icons">home_repair_service </span></h1>
+<h1 class="display-5" style="display: inline-block;"  >Maintenance Site </h1>
+<img src="{% static 'images/maintenance.png' %} " alt="image" style="display: inline-block; object-fit: cover; height: 50px;">
+
+<!-- <h1 class="display-5">Maintenance Page <span class="material-icons">home_repair_service </span></h1> -->
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 <!-- messages flash  -->

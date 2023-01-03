@@ -4,7 +4,9 @@
 
 {% block body_block %}
 
-<h1 class="display-5">Personnel Page<span class="material-icons">person </span> </h1>
+<h1 class="display-5" style="display: inline-block;"  >Personnel</h1>
+<img src="{% static 'images/personnel.png' %} " alt="image" style="display: inline-block; object-fit: cover; height: 50px;">
+<!-- <h1 class="display-5">Personnel Page<span class="material-icons">person </span> </h1> -->
 <br />
 <p class="blockquote-footer" align="left">Hello {{user.username}} from {{user.groups.all.0.name}}</p>
 

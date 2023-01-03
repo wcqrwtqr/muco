@@ -4,7 +4,9 @@
 
 {% block body_block %}
 
-<h1 class="display-5">Daily Report Page <span class="material-icons">summarize</span>   </h1>
+<h1 class="display-5" style="display: inline-block;"  >Daily Report </h1>
+<img src="{% static 'images/dailyreport.png' %} " alt="image" style="display: inline-block; object-fit: cover; height: 50px;">
+<!-- <h1 class="display-5">Daily Report Page <span class="material-icons">summarize</span>   </h1> -->
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 {% for message in messages %}

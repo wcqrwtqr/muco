@@ -4,7 +4,9 @@
 {% block body_block %}
 
 
-<h1 class="display-5">Jobs Page <span class="material-icons">oil_barrel</span> </h1>
+<h1 class="display-5" style="display: inline-block;"  >Jobs Site</h1>
+<img src="{% static 'images/job1.png' %} " alt="image" style="display: inline-block; object-fit: cover; height: 60px;">
+<!-- <h1 class="display-5">Jobs Page <span class="material-icons">oil_barrel</span> </h1> -->
 <br />
 <p class="blockquote-footer">Hello {{user.username}} {{user.groups.all.0}}</p>
 {% for message in messages %}
