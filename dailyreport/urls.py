@@ -7,4 +7,5 @@ urlpatterns = [
     path('dailyreport/<int:pk>/update/', views.DailyreportUpdateView.as_view(), name='dailyreport_update'),
     path('dailyreport/new/', views.DailyreportCreate.as_view(), name='dailyreport_new'),
     path('equipment/<int:pk>/delete/', views.DailyreportDeleteView.as_view(), name='dailyreport_delete'),
+    path('pdf/<int:pk>', views.dailyreport_render_pdf_view, name='daily_pdf'),
 ]

@@ -7,7 +7,10 @@ from .filters import DailyreportFilter
 from .forms import DailyForm
 from . import models
 from django.contrib.auth.mixins import PermissionRequiredMixin
-# Create your views here.
+from xhtml2pdf import pisa
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+from django.template.loader import get_template
 
 class DailyReportListView(PermissionRequiredMixin, ListView):
     template_name = 'dailyreport/dailyreport_page.html'
@@ -57,3 +60,20 @@ class DailyreportDeleteView(PermissionRequiredMixin,SuccessMessageMixin,  Delete
     success_url = reverse_lazy('dailyreport')
     success_message = "Daily report record was deleted"
     template_name = 'dailyreport/dailyreport_confirm_delete.html'
+
+def dailyreport_render_pdf_view(request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    dailyreport = get_object_or_404(models.dailyreportdb, pk=pk)
+    template_path = 'dailyreport/dailyreport_pdf.html'
+    context = {'dailyreport': dailyreport}
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    # if error then show some funny view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response

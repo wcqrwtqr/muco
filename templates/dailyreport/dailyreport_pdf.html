@@ -1,22 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Maintenance</title>
-    </head>
-    <body>
+{% extends 'base_pdf.html' %}
 
-        <div class=conainer align='middle'>
+{% block pdf %}
 
-            <h1>Asset  : {{ maintenance.asset}}</h1>
-            <hr>
-            <h3> Main Type: {{ maintenance.ms_type }}</h3>
-            <h3>Start Date : {{ maintenance.main_date_start	}}</h3>
-            <h3>End Date :  {{ maintenance.main_date_end}}</h3>
-            <h3>Main Cost :{{ maintenance.main_cost	}}</h3>
-            <h3>Expiry  :   {{ maintenance.expiry_date}}</h3>
 
-        </div>
+<!-- <h3 class="display-5">Jobs Full details</h3> -->
+<h3>Daily report Full details</h3>
+<hr />
+<div class="col">
+    <p class='card-text'>Client : {{ dailyreport.jobid.client}}</p>
+    <p class='card-text'>Field : {{ dailyreport.jobid.field}}</p>
+    <p class='card-text'>Well : {{ dailyreport.jobid.well}}</p>
+</div>
+<div class="col">
+    <p class='card-text'>Department : {{ dailyreport.jobid.departmenet}}</p>
+    <p class='card-text'>Service : {{ dailyreport.jobid.service}}</p>
+    <p class='card-text'>Description : {{ dailyreport.jobid.description}}</p>
+</div>
+<div class="col">
+    <p class='card-text'>Start Date : {{ dailyreport.jobid.startDate }}</p>
+    <p class='card-text'>End Date : {{ dailyreport.jobid.endDate }}</p>
+</div>
 
-    </body>
-</html>
+<hr />
+<div class="card ">
+    <div class="card-header">
+        <h3>Daily reports</h3>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr class="table-dark" style="position: sticky ; top: 0;">
+            <th scope="col" style='width:200px'>Date</th>
+            <th scope="col" style='word-break:break-word; width:450'>Last 24hr Ops</th>
+            <th scope="col" style='word-break:break-word; width:450'>Next 24hr Ops</th>
+            <th scope="col" style='width:200'>Supervisor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="{% url 'dailyreport_detail' pk=dailyreport.pk %}" target='_blank'>{{ dailyreport.operationdate }}</a></td>
+            <td style='width:400px' align="justify">{{ dailyreport.lastdayops }}</td>
+            <td style='width:400px' align="justify">{{ dailyreport.nextdayops }}</td>
+            <td>{{ dailyreport.supervisorname }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="card ">
+    <div class="card-header">
+        <h3>Parameters table</h3>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr class="table-dark" style="position: sticky ; top: 0;">
+            <th scope="col" >WHP</th>
+            <th scope="col" >WHT</th>
+            <th scope="col" >BHP</th>
+            <th scope="col" >BHT</th>
+            <th scope="col" >H2S</th>
+            <th scope="col" >CO2</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ dailyreport.whp }} psi</td>
+            <td>{{ dailyreport.wht }} C</td>
+            <td>{{ dailyreport.bhp }} psi</td>
+            <td>{{ dailyreport.bht }} C</td>
+            <td>{{ dailyreport.h2s }} psi</a></td>
+            <td>{{ dailyreport.co2 }} ppm</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="card ">
+    <div class="card-header">
+        <h3>Rates table</h3>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr class="table-dark" style="position: sticky ; top: 0;">
+            <th scope="col" >Oil rate</th>
+            <th scope="col" >Water rate</th>
+            <th scope="col" >Gas rate</th>
+            <th scope="col" >BSW</th>
+            <th scope="col" >Choke size</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ dailyreport.oilrate }} BPD</td>
+            <td>{{ dailyreport.waterrate }} BPD</td>
+            <td>{{ dailyreport.gasrate }} scfd</td>
+            <td>{{ dailyreport.bsw }} %</td>
+            <td>{{ dailyreport.chokesize }}/64"</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}
