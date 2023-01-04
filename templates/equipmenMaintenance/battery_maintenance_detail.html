@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body_class %}maintenance-battery{% endblock %}
 <!-- {#% load humanize %} -->
 {% block body_block %}
 
 <div class="card ">
   <div class="card-header">
-    <h3 class="display-5">Battery Information Details</h3>
+    <h3 class="display-5">Battery Information Details
+      <img src="{% static 'images/detail.png' %}" alt="image" style="width: 50px">
+    </h3>
     <a class="btn btn-primary" href="{% url 'battery_maintenance_detail' pk=battery_maintenance_detail.get_prev.pk  %}"><< Prev  </a>
     <a class="btn btn-primary" href="{% url 'battery_maintenance_detail' pk=battery_maintenance_detail.get_next.pk  %}">Next >></a>
   </div>

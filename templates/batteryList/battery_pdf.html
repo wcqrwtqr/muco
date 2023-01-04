@@ -1,15 +1,28 @@
 {% extends 'base_pdf.html' %}
 {% block pdf %}
-<h3>Battery Full details</h3>
-<hr />
-<p>Part No : {{ battery.part_num}}</p>
-<p>Serial No : {{ battery.serial_num}}</p>
-<p>Description : {{ battery.description}}</p>
-<p>Acquistion cost : {{ battery.purchase_date}}</p>
-<p>Service Date : {{ battery.in_service_date}}</p>
-<p>Purchase Date : {{ battery.purchase_date}}</p>
 
-<hr />
+<h3>Battery Full details</h3>
+<table class="table table-striped">
+    <thead>
+        <tr class="table-dark" style="position: sticky ; top: 0;">
+            <th>Part No</th>
+            <th>Serial No</th>
+            <th>Description</th>
+            <th>Purchase Date</th>
+            <th>In Service</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ battery.part_num }}</td>
+            <td>{{ battery.serial_num }}</td>
+            <td>{{ battery.description }}</td>
+            <td>{{ battery.purchase_date }}</td>
+            <td>{{ battery.in_service_date }}</td>
+        </tr>
+    </tbody>
+</table>
+
 <div class="card ">
     <div class="card-header">
         <h3>Maintenance</h3>

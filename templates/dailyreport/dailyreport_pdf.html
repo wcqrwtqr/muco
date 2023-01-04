@@ -2,26 +2,33 @@
 
 {% block pdf %}
 
+<h3> Daily report Full details </h3>
+<p>Job started on: {{dailyreport.jobid.startDate}} and ended on: {{dailyreport.jobid.endDate}}</p>
 
-<!-- <h3 class="display-5">Jobs Full details</h3> -->
-<h3>Daily report Full details</h3>
-<hr />
-<div class="col">
-    <p class='card-text'>Client : {{ dailyreport.jobid.client}}</p>
-    <p class='card-text'>Field : {{ dailyreport.jobid.field}}</p>
-    <p class='card-text'>Well : {{ dailyreport.jobid.well}}</p>
-</div>
-<div class="col">
-    <p class='card-text'>Department : {{ dailyreport.jobid.departmenet}}</p>
-    <p class='card-text'>Service : {{ dailyreport.jobid.service}}</p>
-    <p class='card-text'>Description : {{ dailyreport.jobid.description}}</p>
-</div>
-<div class="col">
-    <p class='card-text'>Start Date : {{ dailyreport.jobid.startDate }}</p>
-    <p class='card-text'>End Date : {{ dailyreport.jobid.endDate }}</p>
-</div>
 
-<hr />
+<table class="table table-striped">
+    <thead>
+        <tr class="table-dark" style="position: sticky ; top: 0;">
+            <th>Client</th>
+            <th>Field</th>
+            <th>Well</th>
+            <th>Department</th>
+            <th>Service</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ dailyreport.jobid.client }}</a></td>
+            <td>{{ dailyreport.jobid.field }}</td>
+            <td>{{ dailyreport.jobid.well }}</td>
+            <td>{{ dailyreport.jobid.departmenet }}</td>
+            <td>{{ dailyreport.jobid.service }}</td>
+            <td>{{ dailyreport.jobid.description }}</td>
+        </tr>
+    </tbody>
+</table>
+
 <div class="card ">
     <div class="card-header">
         <h3>Daily reports</h3>
@@ -39,7 +46,7 @@
     </thead>
     <tbody>
         <tr>
-            <td><a href="{% url 'dailyreport_detail' pk=dailyreport.pk %}" target='_blank'>{{ dailyreport.operationdate }}</a></td>
+            <td>{{ dailyreport.operationdate}}</a></td>
             <td style='width:400px' align="justify">{{ dailyreport.lastdayops }}</td>
             <td style='width:400px' align="justify">{{ dailyreport.nextdayops }}</td>
             <td>{{ dailyreport.supervisorname }}</td>
@@ -56,12 +63,12 @@
 <table class="table table-striped">
     <thead>
         <tr class="table-dark" style="position: sticky ; top: 0;">
-            <th scope="col" >WHP</th>
-            <th scope="col" >WHT</th>
-            <th scope="col" >BHP</th>
-            <th scope="col" >BHT</th>
-            <th scope="col" >H2S</th>
-            <th scope="col" >CO2</th>
+            <th scope="col">WHP</th>
+            <th scope="col">WHT</th>
+            <th scope="col">BHP</th>
+            <th scope="col">BHT</th>
+            <th scope="col">H2S</th>
+            <th scope="col">CO2</th>
         </tr>
     </thead>
     <tbody>
@@ -84,11 +91,11 @@
 <table class="table table-striped">
     <thead>
         <tr class="table-dark" style="position: sticky ; top: 0;">
-            <th scope="col" >Oil rate</th>
-            <th scope="col" >Water rate</th>
-            <th scope="col" >Gas rate</th>
-            <th scope="col" >BSW</th>
-            <th scope="col" >Choke size</th>
+            <th scope="col">Oil rate</th>
+            <th scope="col">Water rate</th>
+            <th scope="col">Gas rate</th>
+            <th scope="col">BSW</th>
+            <th scope="col">Choke size</th>
         </tr>
     </thead>
     <tbody>

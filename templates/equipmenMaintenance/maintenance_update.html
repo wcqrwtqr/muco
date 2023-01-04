@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block body_class %}maintenance{% endblock %}
 {% load crispy_forms_tags %}
 
 {% block body_block %}
-<h1 class="display-5">Update the Maintenance record</h1>
+<h1 class="display-5">Update the Maintenance record
+    <img src="{% static 'images/update.png' %}" alt="image" style="width: 50px">
+</h1>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 

@@ -1,25 +1,32 @@
 {% extends 'base_pdf.html' %}
-
 {% block pdf %}
 
-
-<!-- <h3 class="display-5">Jobs Full details</h3> -->
 <h3>Jobs Full details</h3>
-<hr />
-<div class="col">
-    <p class='card-text'>Client : {{ job.client}}</p>
-    <p class='card-text'>Field : {{ job.field}}</p>
-    <p class='card-text'>Well : {{ job.well}}</p>
-</div>
-<div class="col">
-    <p class='card-text'>Department : {{ job.departmenet}}</p>
-    <p class='card-text'>Service : {{ job.service}}</p>
-    <p class='card-text'>Description : {{ job.description}}</p>
-</div>
-<div class="col">
-    <p class='card-text'>Start Date : {{ job.startDate }}</p>
-    <p class='card-text'>End Date : {{ job.endDate }}</p>
-</div>
+<p>Job started on: {{job.startDate}}, ended on: {{job.endDate}}</p>
+<table class="table table-striped">
+    <thead>
+        <tr class="table-dark" style="position: sticky ; top: 0;">
+            <th>Client</th>
+            <th>Field</th>
+            <th>Well</th>
+            <th>Department</th>
+            <th>Service</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ job.client }}</a></td>
+            <td>{{ job.field }}</td>
+            <td>{{ job.well }}</td>
+            <td>{{ job.departmenet}} BPD</td>
+            <td>{{ job.service }}/64"</td>
+            <td>{{ job.description }} psi</td>
+        </tr>
+    </tbody>
+</table>
+
+<br />
 
 <hr />
 <div class="card ">
@@ -32,7 +39,8 @@
 <table class="table table-striped">
     <thead>
         <tr class="table-dark" style="position: sticky ; top: 0;">
-            <th scope="col" style='width:200px'>Date</th>
+            <th scope="col" style='width:50px'>#</th>
+            <th scope="col" style='width:250px'>Date</th>
             <th scope="col" style='word-break:break-word; width:450'>Last 24hr Ops</th>
             <th scope="col" style='word-break:break-word; width:450'>Next 24hr Ops</th>
             <th scope="col" style='width:200px'>Oil rate</th>
@@ -43,9 +51,10 @@
     <tbody>
         {% for fa in jobDaily %}
         <tr>
-            <td><a href="{% url 'dailyreport_detail' pk=fa.pk %}" target='_blank'>{{ fa.operationdate }}</a></td>
-            <td style='width:400px' align="justify">{{ fa.lastdayops }}</td>
-            <td style='width:400px' align="justify">{{ fa.nextdayops }}</td>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ fa.operationdate }}</a></td>
+            <td align="justify">{{ fa.lastdayops }}</td>
+            <td align="justify">{{ fa.nextdayops }}</td>
             <td>{{ fa.oilrate}} BPD</td>
             <td>{{ fa.chokesize }}/64"</td>
             <td>{{ fa.whp }} psi</td>

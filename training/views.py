@@ -73,3 +73,7 @@ class trainingDeleteView(SuccessMessageMixin,PermissionRequiredMixin,DeleteView)
     model = trainingdb
     success_url = reverse_lazy('training')
     success_message = "Training record was deleted"
+
+
+
+

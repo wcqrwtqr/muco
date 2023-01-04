@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body_class %}daily{% endblock %}
 {%load crispy_forms_tags %}
 
 {% block body_block %}
-<h1 class="display-5">Add New Daily Report</h1>
+<h1 class="display-5">Add New Daily Report
+    <img src="{% static 'images/add1.png' %}" alt="image" style="width: 50px">
+</h1>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 

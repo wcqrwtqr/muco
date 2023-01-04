@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body_class %}maintenance-battery{% endblock %}
 {% load crispy_forms_tags %}
 
 {% block body_block %}
-<h1 class="display-5">New Battery Check</h1>
+<h1 class="display-5">New Battery Check
+    <img src="{% static 'images/add1.png' %}" alt="image" style="width: 50px">
+</h1>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 

@@ -60,7 +60,7 @@
 		{% for fa in filter.qs %}
 		<tr>
 			<th scope="row">{{forloop.counter}}</th>
-			<th scope="row"> <a href="{% url 'battery_maintenance_detail' pk=fa.pk  %}"> {{ fa.battery.serial_num }}</a>
+			<th scope="row"> <a href="{% url 'battery_maintenance_detail' pk=fa.pk  %}" target="_blank"> {{ fa.battery.serial_num }}</a>
 			</th>
 			<td>{{ fa.battery.part_num }}</td>
 			<td>{{ fa.ms_type }}</td>

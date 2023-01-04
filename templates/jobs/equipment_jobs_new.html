@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {%load crispy_forms_tags %}
 
 {% block body_block %}
-<h3 class="display-5">Connect equipment to jobs</h3>
+<h3 class="display-5">Connect equipment to jobs
+    <img src="{% static 'images/add1.png' %}" alt="image" style="width: 50px">
+</h3>
 
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>

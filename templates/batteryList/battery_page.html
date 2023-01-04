@@ -64,7 +64,7 @@
 
 		<tr>
 			<th scope="row" style='width:50px'>{{forloop.counter}}</th>
-			<th scope="row"> <a href="{% url 'battery_detail' pk=battery.pk %}">{{ battery.part_num }}</a></th>
+			<th scope="row"> <a href="{% url 'battery_detail' pk=battery.pk %}" target="_blank">{{ battery.part_num }}</a></th>
 			<td>{{ battery.serial_num }}</td>
 			<td>{{ battery.description }}</td>
 			<td>{{ battery.purchase_date }}</td>

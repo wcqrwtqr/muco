@@ -62,7 +62,7 @@
 		{% for fa in filter.qs %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
-			<th scope="row"> <a href="{% url 'jobs_detail' pk=fa.pk  %}">{{ fa.jobid }}</a></th>
+			<th scope="row"> <a href="{% url 'jobs_detail' pk=fa.pk  %}" target="_blank">{{ fa.jobid }}</a></th>
 			<td>{{ fa.client }}</td>
 			<td>{{ fa.well }}</td>
 			<td>{{ fa.departmenet }}</td>

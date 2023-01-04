@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {%load crispy_forms_tags %}
 
 {% block body_block %}
-<h3 class="display-5">Update Meeting</h3>
+<h3 class="display-5">Update Meeting
+    <img src="{% static 'images/update.png' %}" alt="image" style="width: 50px">
+</h3>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 
-<form method="POST" class="post-form" enctype ="multipart/form-data">
+<form method="POST" class="post-form" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-row row">
         <div class="form-group col-md-4 mb-0 col"> {{ form.meeting_date|as_crispy_field }} </div>
@@ -41,4 +44,3 @@
 
 
 {% endblock %}
-

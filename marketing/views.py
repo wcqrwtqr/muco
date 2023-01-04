@@ -39,7 +39,6 @@ class marketingUpdateView(PermissionRequiredMixin, SuccessMessageMixin,UpdateVie
     model = marketingdb
     # TODO fix the permission below
     permission_required = ('equipmentList.view_equipmentdb')
-    # fields = '__all__'
     form_class = marketingForm
     template_name = 'marketing/marketing_update.html'
     success_message = "%(meeting_type)s was updated successfully"

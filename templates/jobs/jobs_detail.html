@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% block body_class %}jobs{% endblock %}
+{% load static %}
+
 {% block body_block %}
 
 <div class="row ">
   <div class="col">
     <div class="card card-body">
       <div class="row">
-        <h3 class="display-5">Jobs Full details</h3>
+        <h3 class="display-5">Jobs Full details
+          <img src="{% static 'images/detail.png' %}" alt="image" style="width: 50px">
+        </h3>
         <div class="col">
           <a class="btn btn-primary" href="{% url 'jobs_detail' pk=jobs_detail.get_prev.pk  %}"><< Prev </a>
           <a class="btn btn-primary" href="{% url 'jobs_detail' pk=jobs_detail.get_next.pk  %}">Next >></a>

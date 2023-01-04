@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block body_class %}jobs{% endblock %}
 {%load crispy_forms_tags %}
 
 {% block body_block %}
-<h3 class="display-5">Update Job ID</h3>
+<h3 class="display-5">Update Job Info
+    <img src="{% static 'images/update.png' %}" alt="image" style="width: 50px">
+</h3>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 
-<form method="POST" class="job-form" enctype ="multipart/form-data">
+<form method="POST" class="job-form" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-row row">
         <div class="form-group col-md-3 mb-0 col"> {{ form.jobid | as_crispy_field }} </div>

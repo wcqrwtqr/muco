@@ -1,7 +1,11 @@
+{% load static %}
+
 <!--NavBar start-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #052e70;" >
   <div class=" container-fluid">
-  <a class="navbar-brand" href="{% url 'home' %} ">MUCO</a>
+  <a class="navbar-brand" href="{% url 'home' %} ">
+    <img src="{% static 'images/muco1.png' %}" alt="image" style="display: inline-block; object-fit: cover; width: 50px; height: 50px;">
+  </a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -44,7 +48,6 @@
       </li>
       {% endif %}
 
-
       {% if user.is_superuser or user.groups.all.0.name == 'Marketing' %}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -52,11 +55,9 @@
         </a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="{%url 'market' %}">Meetings</a></li>
-          <!-- <li><a class="dropdown-item" href="{#% url 'Market1' %#}">Client</a></li> -->
         </ul>
       </li>
       {% endif %}
-
 
       {% if user.is_superuser or user.groups.all.0.name == 'HR' or user.groups.all.0.name == 'HSE' %}
       <li class="nav-item dropdown">

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block body_class %}equipment-jobs{% endblock %}
 {% load static %}
 {% block body_block %}
 
@@ -56,7 +57,7 @@
 		{% for fa in object_list %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
-			<th scope="row"> <a href="{% url 'equipment_jobs_detail' pk=fa.pk %}">{{ fa.jobidnew.jobid }}</a></th>
+			<th scope="row"> <a href="{% url 'equipment_jobs_detail' pk=fa.pk %}" target="_blank">{{ fa.jobidnew.jobid }}</a></th>
 			<td>{{ fa.jobidnew.client }}</td>
 			<td>{{ fa.jobidnew.well }}</td>
 			<td>{{ fa.jobidnew.service }}</td>

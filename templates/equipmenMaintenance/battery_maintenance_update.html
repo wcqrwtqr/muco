@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block body_class %}maintenance-battery{% endblock %}
 {% load crispy_forms_tags %}
 
 {% block body_block %}
-<h1 class="display-5">Update Battery Check record</h1>
+<h1 class="display-5">Update Battery Check record
+    <img src="{% static 'images/update.png' %}" alt="image" style="width: 50px">
+</h1>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 
-<form method="POST" class="job-form" enctype ="multipart/form-data" >
+<form method="POST" class="job-form" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-row row">
         <div class="form-group col-md-4 mb-0 col"> {{ form.check_date |as_crispy_field }} </div>
@@ -36,5 +40,3 @@
 
 
 {% endblock %}
-
-

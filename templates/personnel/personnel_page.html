@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 <!-- #% load bootstrap  %} -->
 {% load static %}
-
+{% block body_class %}personnel{% endblock %}
 {% block body_block %}
 
 <h1 class="display-5" style="display: inline-block;"  >Personnel</h1>
@@ -64,7 +64,7 @@
 		{% for person in filter.qs %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
-			<th scope="row"> <a href="{% url 'personnel_detail' pk=person.pk %}">{{ person.first_name }}</a></th>
+			<th scope="row"> <a href="{% url 'personnel_detail' pk=person.pk %}" target="_blank">{{ person.first_name }}</a></th>
 			<td >{{ person.last_name }}</td>
 			<td >{{ person.senionrty_date}}</td>
 			<td style='width:80px'>{{ person.department }}</td>

@@ -5,7 +5,7 @@
 
 <!-- <h1 class="display-5">Equipment Page  <span class="material-icons">precision_manufacturing </span> </h1> -->
 <h1 class="display-5" style="display: inline-block;"  >Equipment Site</h1>
-<img src="{% static 'images/equipment.png' %}" alt="image" style="display: inline-block; object-fit: cover; width: 50px; height: 50px;">
+<img src="{% static 'images/equipment1.png' %}" alt="image" style="display: inline-block; object-fit: cover; width: 50px; height: 50px;">
 <br />
 <p class="blockquote-footer" align="left">Hello {{user.username}}</p>
 
@@ -18,7 +18,7 @@
 {% endfor %}
 
 <button class="btn btn-outline-secondary mb-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMe"
-	aria-expanded="false" aria-controls="collapseExample" id="filterbutton">Show/Hide form</button>
+		aria-expanded="false" aria-controls="collapseExample" id="filterbutton">Show/Hide form</button>
 <div class="row collapse" id="collapseMe">
 	<div class="col">
 		<div class="card card-body">
@@ -61,7 +61,7 @@
 		{% for equip in filter.qs %}
 		<tr>
 			<th scope="row" >{{forloop.counter}}</th>
-			<th scope="row" > <a href="{% url 'equipment_detail' pk=equip.pk %}">{{ equip.part_num }}</a></th>
+			<th scope="row" > <a href="{% url 'equipment_detail' pk=equip.pk %}" target="_blank">{{ equip.part_num }}</a></th>
 			<td>{{ equip.serial_num }}</td>
 			<td>{{ equip.description }}</td>
 			<td>{{ equip.departement }}</td>
@@ -76,20 +76,20 @@
 				{% endif %}
 			</td>
 			<td>
-			<div class="btn-group" role="group">
-				<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-					Action
-				</button>
-				<ul class="dropdown-menu">
-					{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
-					<li><a class="dropdown-item" href="{%url 'equipment_update' pk=equip.pk%}">Update</a></li>
-					{% endif %}
-					{% if user.is_superuser %}
-					<li><a class="dropdown-item" href="{%url 'equipment_delete' pk=equip.pk %}">Delete</a></li>
-					{% endif %}
-					<li><a class="dropdown-item" href="{%url 'equipment_pdf' pk=equip.pk%}" target="_blank">Pdf</a></li>
-				</ul>
-			</div>
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						Action
+					</button>
+					<ul class="dropdown-menu">
+						{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
+						<li><a class="dropdown-item" href="{%url 'equipment_update' pk=equip.pk%}">Update</a></li>
+						{% endif %}
+						{% if user.is_superuser %}
+						<li><a class="dropdown-item" href="{%url 'equipment_delete' pk=equip.pk %}">Delete</a></li>
+						{% endif %}
+						<li><a class="dropdown-item" href="{%url 'equipment_pdf' pk=equip.pk%}" target="_blank">Pdf</a></li>
+					</ul>
+				</div>
 			</td>
 		</tr>
 		{% endfor %}
@@ -107,9 +107,9 @@
 
 <!-- Select2 script for searching dropdown list -->
 <script>
-$(document).ready(function() {
-    $('.js-select2-basic').select2();
-});
+	$(document).ready(function() {
+		$('.js-select2-basic').select2();
+	});
 </script>
 
 {% endblock %}
