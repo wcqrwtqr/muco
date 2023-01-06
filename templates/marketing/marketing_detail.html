@@ -10,8 +10,8 @@
           <img src="{% static 'images/detail.png' %}" alt="image" style="width: 50px">
         </h3>
         <div class="col">
-          <a class="btn btn-primary" href="{% url 'market_detail' pk=marketing_detail.get_prev.pk  %}"><< Prev </a>
-          <a class="btn btn-primary" href="{% url 'market_detail' pk=marketing_detail.get_next.pk  %}">Next >></a>
+          <a class="btn btn-outline-primary" href="{% url 'market_detail' pk=marketing_detail.get_prev.pk  %}"><< Prev </a>
+          <a class="btn btn-outline-primary" href="{% url 'market_detail' pk=marketing_detail.get_next.pk  %}">Next >></a>
         </div>
         <hr />
         <div class="col">

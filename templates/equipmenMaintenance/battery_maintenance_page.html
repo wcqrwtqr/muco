@@ -6,7 +6,6 @@
 
 <h1 class="display-5" style="display: inline-block;"  >Battery Maintenance Site </h1>
 <img src="{% static 'images/battery-main.png' %} " alt="image" style="display: inline-block; object-fit: cover; height: 50px;">
-<!-- <h1 class="display-5">Battery Maintenance Page <span class="material-icons">battery_3_bar</span></h1> -->
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 <!-- messages flash  -->
@@ -23,7 +22,6 @@
 <div class="row collapse" id="collapseMe">
 	<div class="col">
 		<div class="card card-body">
-			<!-- I liked this method below as it shows the table in a better way -->
 			<form method="GET">
 				<table>
 					{{ filter.form.as_table}}
@@ -41,6 +39,7 @@
 
 <br>
 <table class="table table-striped">
+	<caption>Table of batteries maintenance</caption>
 	<thead>
 		<!-- This style makes the top header sticking to the top of the page as a sticky table header  -->
 		<tr class="table-dark" style=" position: sticky; top: 0;">
@@ -82,11 +81,12 @@
 
 			<td>
 				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
+					<button type="button" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown"
 						aria-expanded="false">
 						Action
 					</button>
-					<ul class="dropdown-menu">
+					<!-- to make the dropdown go dark use the "dropdown-menu-dark" -->
+					<ul class="dropdown-menu {{class_drop.light}}">
 						{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 						<li><a class="dropdown-item" href="{%url 'battery_maintenance_update' pk=fa.pk%}">Update</a>
 						</li>
@@ -112,5 +112,7 @@
 {{block.super}}
 <script src="{% static 'js/mainScript.js' %}"></script>
 <script src="{% static 'js/messageScript.js' %}"></script>
+<!-- Js file for darkmode -->
+<script src="{% static 'js/darkmode.js' %}"></script>
 
 {% endblock %}

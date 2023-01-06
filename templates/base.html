@@ -13,6 +13,8 @@
 
 		<!-- Google material -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!-- Dark-mode theme js file -->
+		<link rel="stylesheet" href="{% static 'css/dark-theme.css' %}" id="dark-theme-css">
 
 		<!-- Below for datepicker xxxxxxxxx -->
 		<!-- jQuery -->
@@ -32,7 +34,7 @@
 
 	</head>
 
-	<body  class="app-{% block body_class %}{% endblock %}" >
+	<body  class="app-{% block body_class %}{% endblock %} " >
 
 		{% include 'partials/nav.html' %}
 		<div class="container" >

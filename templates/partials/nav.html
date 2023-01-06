@@ -16,7 +16,7 @@
       {% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
       <!-- separator -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Operation </a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="{% url 'jobs' %}">Jobs</a></li>
@@ -30,7 +30,7 @@
       </li>
       <!-- separator -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">Assets</a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="{%url 'equipment' %}">Equipment List</a></li>
@@ -39,7 +39,7 @@
       </li>
       <!-- separator -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">Maintenance</a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="{% url 'maintenance' %}">Equipmenet </a></li>
@@ -50,7 +50,7 @@
 
       {% if user.is_superuser or user.groups.all.0.name == 'Marketing' %}
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Marketing
         </a>
         <ul class="dropdown-menu">
@@ -61,7 +61,7 @@
 
       {% if user.is_superuser or user.groups.all.0.name == 'HR' or user.groups.all.0.name == 'HSE' %}
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           HR
         </a>
         <ul class="dropdown-menu">
@@ -87,6 +87,9 @@
         <a class="nav-link" href="#">About</a>
       </li>
       {% endif %}
+      <li class="nav-item">
+        <button id="dark-mode-button" class="btn btn-outline-secondary btn-sm ml-auto">Dark Mode</button>
+      </li>
     </ul>
   </div>
   </div>

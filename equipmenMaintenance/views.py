@@ -64,6 +64,8 @@ class BatteryMaintenanceHomePage(PermissionRequiredMixin,ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = BatteryMaintenancefilter(self.request.GET, queryset=self.queryset)
+        # This is an option to select the light or dark drop down list for the action button
+        context['class_drop'] = { "dark":"dropdown-menu-dark", "light":"dropdown-menu-light" }
         return context
 
 class BatteryMaintenanceDetailView(PermissionRequiredMixin,DetailView):

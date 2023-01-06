@@ -1,6 +1,8 @@
 from django import forms
 from .models import Maintenancedb, Batterymaintenancedb
+from batteryList.models import batterydb
 from django.conf import settings
+from django.db.models import Q
 
 
 class MaintenanceForm (forms.ModelForm):
@@ -20,8 +22,9 @@ class MaintenanceForm (forms.ModelForm):
       }
 
 
-class BatteryMaintenanceForm (forms.ModelForm):
+class BatteryMaintenanceForm (forms.ModelForm, forms.Form):
    check_date = forms.DateField(label="Check Date", input_formats=['%Y-%m-%d'], )
+
    class Meta:
       model = Batterymaintenancedb
       fields = '__all__'

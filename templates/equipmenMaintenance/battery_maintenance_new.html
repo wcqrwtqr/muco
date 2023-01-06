@@ -31,13 +31,18 @@
 </form>
 
 {% endblock %}
-{% block scripts %}
 
+
+{% block scripts %}
 <script>
     $(function () {
         $("#id_check_date").datepicker({
             format: 'dd-mm-yyyy',
         });
     });
+
+
 </script>
+<!-- Js file for darkmode -->
+<script src="{% static 'js/darkmode.js' %}"></script>
 {% endblock %}

@@ -1,5 +1,8 @@
+from django.core.checks import register
 import django_filters
 from .models import Maintenancedb , Batterymaintenancedb
+
+
 
 class Maintenancefilter(django_filters.FilterSet):
     CHOICES = [

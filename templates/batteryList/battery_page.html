@@ -20,7 +20,7 @@
 {% endfor %}
 
 <button class="btn btn-outline-secondary mb-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMe"
-	aria-expanded="false" aria-controls="collapseExample" id="filterbutton">Show/Hide form</button>
+		aria-expanded="false" aria-controls="collapseExample" id="filterbutton">Show/Hide form</button>
 <div class="row collapse" id="collapseMe">
 	<div class="col">
 		<div class="card card-body">
@@ -36,6 +36,8 @@
 		</div>
 	</div>
 </div>
+
+<!-- <button id="dark-mode-button" class="btn btn-outline-dark btn-sm">Toggle Dark Mode</button> -->
 
 <div>
 	<!-- <p class="fw-lighter" style="float:right"> Total records... {{filter.qs.count}}</p> -->
@@ -83,20 +85,20 @@
 			</td>
 
 			<td>
-			<div class="btn-group" role="group">
-				<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-					Action
-				</button>
-				<ul class="dropdown-menu">
-					{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
-					<li><a class="dropdown-item" href="{%url 'battery_update' pk=battery.pk%}">Update</a></li>
-					{% endif %}
-					{% if user.is_superuser %}
-					<li><a class="dropdown-item" href="{%url 'battery_delete' pk=battery.pk %}">Delete</a></li>
-					{% endif %}
-					<li><a class="dropdown-item" href="{%url 'battery_pdf' pk=battery.pk%}" target="_blank">Pdf</a></li>
-				</ul>
-			</div>
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						Action
+					</button>
+					<ul class="dropdown-menu">
+						{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
+						<li><a class="dropdown-item" href="{%url 'battery_update' pk=battery.pk%}">Update</a></li>
+						{% endif %}
+						{% if user.is_superuser %}
+						<li><a class="dropdown-item" href="{%url 'battery_delete' pk=battery.pk %}">Delete</a></li>
+						{% endif %}
+						<li><a class="dropdown-item" href="{%url 'battery_pdf' pk=battery.pk%}" target="_blank">Pdf</a></li>
+					</ul>
+				</div>
 			</td>
 		</tr>
 
@@ -112,13 +114,9 @@
 {% block scripts %}
 {{block.super}}
 <!-- <script type="text/javascript" src="{#% static 'js/equipmentScript.js'  %#}"></script> -->
-<script src="{% static 'js/messageScript.js' %}"></script>
 
-<!-- Select2 script for searching dropdown list -->
-<script>
-$(document).ready(function() {
-    $('.js-select2-basic').select2();
-});
-</script>
+<script src="{% static 'js/messageScript.js' %}"></script>
+<!-- Js file for darkmode -->
+<script src="{% static 'js/darkmode.js' %}"></script>
 
 {% endblock %}
