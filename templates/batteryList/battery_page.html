@@ -3,11 +3,11 @@
 <!-- #% load bootstrap  %} -->
 {% load static %}
 
+
 {% block body_block %}
 
 <h1 class="display-5" style="display: inline-block;"  >Battery Site</h1>
 <img src="{% static 'images/battery.png' %}" alt="image" style="display: inline-block; object-fit: cover;  height: 50px;">
-<!-- <h1 class="display-5">Battery Page  <span class="material-icons">battery_full</span> </h1> -->
 <br />
 <p class="blockquote-footer" align="left">Hello {{user.username}}</p>
 
@@ -89,8 +89,8 @@
 					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 						Action
 					</button>
-					<ul class="dropdown-menu">
-						{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
+					{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
+					<ul class="dropdown-menu dropdown-menu-dark">
 						<li><a class="dropdown-item" href="{%url 'battery_update' pk=battery.pk%}">Update</a></li>
 						{% endif %}
 						{% if user.is_superuser %}
@@ -118,5 +118,7 @@
 <script src="{% static 'js/messageScript.js' %}"></script>
 <!-- Js file for darkmode -->
 <script src="{% static 'js/darkmode.js' %}"></script>
+<!-- TODO fix this Js file for dropdown -->
+<script src="{% static 'js/dropdownlist.js' %}"></script>
 
 {% endblock %}

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block body_block %}
 
@@ -15,4 +16,11 @@
   <p>Please login or or the admin for password</p>
   {% endif %}
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{block.super}}
+<script src="{% static 'js/darkmode.js' %}"></script>
+<!-- TODO fix this Js file for dropdown -->
+<script src="{% static 'js/dropdownlist.js' %}"></script>
 {% endblock %}

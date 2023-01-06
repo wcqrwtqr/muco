@@ -25,10 +25,7 @@ body.dark-theme td {
   color: var(--text-color);
 }
 
-body.dark-theme th {
-  color: var(--text-color);
+.black-background{
+  background-color: var(--bg-color);
 }
 
-body.dark-theme tr {
-  color: var(--text-color);
-}
