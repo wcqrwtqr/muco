@@ -3,10 +3,10 @@
 {% block body_class %}daily{% endblock %}
 {% block body_block %}
 
-<div class="card ">
+<div class="card">
   <div class="card-header">
     <h1 class="display-5">Daily Report Details
-      <img src="{% static 'images/detail.png' %}" alt="image" style="width: 50px">
+      <img id="daily-img" src="{% static 'images/detail.png' %}" alt="image" style="width: 50px">
     </h1>
       <a class="btn btn-outline-primary" href="{% url 'dailyreport_detail' pk=dailyreport_detail.get_prev.pk  %}"><< Prev </a>
       <a class="btn btn-outline-primary" href="{% url 'dailyreport_detail' pk=dailyreport_detail.get_next.pk  %}">Next >></a>
@@ -104,5 +104,12 @@
     dailyreport is Important
   </div>
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+{{block.super}}
+<!-- Js file for darkmode -->
+<script src="{% static 'js/darkmode.js' %}"></script>
 
 {% endblock %}

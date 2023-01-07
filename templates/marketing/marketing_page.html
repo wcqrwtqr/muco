@@ -71,10 +71,10 @@
 			<td>{{ market.client }}</td>
 			<td>
 				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					<button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 						Action
 					</button>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu dropdown-menu-dark">
 						{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
 						<li><a class="dropdown-item" href="{%url 'market_update' pk=market.pk%}">Update</a></li>
 						{% endif %}

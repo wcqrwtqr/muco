@@ -86,7 +86,7 @@
 
 			<td>
 				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					<button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 						Action
 					</button>
 					{% if user.is_superuser or user.groups.all.0.name == 'Operation' %}
@@ -111,14 +111,14 @@
 <br>
 {% endblock %}
 
+
 {% block scripts %}
 {{block.super}}
-<!-- <script type="text/javascript" src="{#% static 'js/equipmentScript.js'  %#}"></script> -->
 
 <script src="{% static 'js/messageScript.js' %}"></script>
 <!-- Js file for darkmode -->
 <script src="{% static 'js/darkmode.js' %}"></script>
 <!-- TODO fix this Js file for dropdown -->
-<script src="{% static 'js/dropdownlist.js' %}"></script>
+<!-- <script src="{% static 'js/dropdownlist.js' %}"></script> -->
 
 {% endblock %}

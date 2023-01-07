@@ -83,3 +83,10 @@
 {% endif %}
 <!-- TODO make a button to take the user to a new maintenance record for this equipment based on the pk number -->
 {% endblock %}
+
+{% block scripts %}
+{{block.super}}
+<!-- Js file for darkmode -->
+<script src="{% static 'js/darkmode.js' %}"></script>
+
+{% endblock %}
