@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'dailyreport',
     'batteryList',
     'marketing',
+    'supermarket',
 ]
 
 MIDDLEWARE = [
@@ -158,7 +159,7 @@ CLINET = [('HKN','HKN'),('DNO','DNO'), ('BBPosun','BBPosun'), ('Genel','Genel'),
           ('OILSERV','OILSERV'), ('SLB','SLB'), ('Haliburton','Haliburton'),
           ('GKPI','GKPI'), ('TTOPCO','TTOPCO'), ('KAR','KAR'), ('HuntOil','HuntOil'),
           ('NESR','NESR'), ('RN','RN'), ('Gazprom','Gazprom'), ('TAQA','TAQA'), ('BossPac','BossPac'),
-          ('Roboze','Roboze'), ('IOT','IOT')]
+          ('Roboze','Roboze'), ('IOT','IOT'), ('Cyclone','Cyclone')]
 
 
 # Static files (CSS, JavaScript, Images)

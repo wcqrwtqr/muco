@@ -1,76 +1,113 @@
 {% extends 'base.html' %}
+<!-- separator -->
 {% load static %}
+<!-- separator -->
 {% block body_class %}daily{% endblock %}
+<!-- separator -->
 {%load crispy_forms_tags %}
-
+<!-- separator -->
 {% block body_block %}
-<h1 class="display-5">Add New Daily Report
-    <img src="{% static 'images/add1.png' %}" alt="image" style="width: 50px">
+<!-- separator -->
+<h1 class="display-5">
+  Add New Daily Report
+  <img src="{% static 'images/add1.png' %}" alt="image" style="width: 50px" />
 </h1>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 
 <form method="POST" class="job-form">
+  {% csrf_token %}
 
-    {% csrf_token %}
-
-    <!-- Well info -->
-    <div class="form-row row">
-        <div class="form-group col-md-4 mb-0 col">{{form.jobid |as_crispy_field}}</div>
-        <div class="form-group col-md-4 mb-0 col">{{form.operationdate |as_crispy_field}}</div>
-        <div class="form-group col-md-4 mb-0 col">{{form.supervisorname |as_crispy_field}}</div>
+  <!-- Well info -->
+  <div class="form-row row">
+    <div class="form-group col-md-4 mb-0 col">
+      {{form.jobid |as_crispy_field}}
     </div>
-
-    <hr />
-    <!-- Details info -->
-    <div class="form-row row">
-        <div class="form-group col-md-6 mb-0 col">{{form.lastdayops |as_crispy_field}}</div>
-        <div class="form-group col-md-6 mb-0 col">{{form.nextdayops |as_crispy_field}}</div>
+    <div class="form-group col-md-4 mb-0 col">
+      {{form.operationdate |as_crispy_field}}
     </div>
-
-    <hr />
-    <!-- Rate info -->
-    <div class="form-row row">
-        <div class="form-group col-md-3 mb-0 col">{{form.whp |as_crispy_field}}</div>
-        <div class="form-group col-md-3 mb-0 col">{{form.wht |as_crispy_field}}</div>
-        <div class="form-group col-md-3 mb-0 col">{{form.bht |as_crispy_field}}</div>
-        <div class="form-group col-md-3 mb-0 col">{{form.bhp |as_crispy_field}}</div>
+    <div class="form-group col-md-4 mb-0 col">
+      {{form.supervisorname |as_crispy_field}}
     </div>
+  </div>
 
-    <hr />
-    <div class="form-row row">
-        <div class="form-group col-md-2 mb-0 col">{{form.chokesize |as_crispy_field}}</div>
-        <div class="form-group col-md-2 mb-0 col">{{form.h2s |as_crispy_field}}</div>
-        <div class="form-group col-md-2 mb-0 col">{{form.co2 |as_crispy_field}}</div>
-        <div class="form-group col-md-2 mb-0 col">{{form.hz |as_crispy_field}}</div>
-        <div class="form-group col-md-4 mb-0 col">{{form.pdf_file |as_crispy_field}}</div>
+  <hr />
+  <!-- Details info -->
+  <div class="form-row row">
+    <div class="form-group col-md-6 mb-0 col">
+      {{form.lastdayops |as_crispy_field}}
     </div>
-
-    <hr />
-    <div class="form-row row">
-        <div class="form-group col-md-3 mb-0 col">{{form.oilrate |as_crispy_field}}</div>
-        <div class="form-group col-md-3 mb-0 col">{{form.waterrate |as_crispy_field}}</div>
-        <div class="form-group col-md-3 mb-0 col">{{form.gasrate |as_crispy_field}}</div>
-        <div class="form-group col-md-3 mb-0 col">{{form.bsw |as_crispy_field}}</div>
+    <div class="form-group col-md-6 mb-0 col">
+      {{form.nextdayops |as_crispy_field}}
     </div>
+  </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a class="btn btn-outline-dark" href="{% url 'dailyreport' %}">Cancel</a>
+  <hr />
+  <!-- Rate info -->
+  <div class="form-row row">
+    <div class="form-group col-md-3 mb-0 col">
+      {{form.whp |as_crispy_field}}
+    </div>
+    <div class="form-group col-md-3 mb-0 col">
+      {{form.wht |as_crispy_field}}
+    </div>
+    <div class="form-group col-md-3 mb-0 col">
+      {{form.bht |as_crispy_field}}
+    </div>
+    <div class="form-group col-md-3 mb-0 col">
+      {{form.bhp |as_crispy_field}}
+    </div>
+  </div>
+
+  <hr />
+  <div class="form-row row">
+    <div class="form-group col-md-2 mb-0 col">
+      {{form.chokesize |as_crispy_field}}
+    </div>
+    <div class="form-group col-md-2 mb-0 col">
+      {{form.h2s |as_crispy_field}}
+    </div>
+    <div class="form-group col-md-2 mb-0 col">
+      {{form.co2 |as_crispy_field}}
+    </div>
+    <div class="form-group col-md-2 mb-0 col">{{form.hz |as_crispy_field}}</div>
+    <div class="form-group col-md-4 mb-0 col">
+      {{form.pdf_file |as_crispy_field}}
+    </div>
+  </div>
+
+  <hr />
+  <div class="form-row row">
+    <div class="form-group col-md-3 mb-0 col">
+      {{form.oilrate |as_crispy_field}}
+    </div>
+    <div class="form-group col-md-3 mb-0 col">
+      {{form.waterrate |as_crispy_field}}
+    </div>
+    <div class="form-group col-md-3 mb-0 col">
+      {{form.gasrate |as_crispy_field}}
+    </div>
+    <div class="form-group col-md-3 mb-0 col">
+      {{form.bsw |as_crispy_field}}
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save</button>
+  <a class="btn btn-outline-dark" href="{% url 'dailyreport' %}">Cancel</a>
 </form>
 <br />
 <br />
 
-
+<!-- Here we select the format of the date -->
 <script>
-    $(function () {
-        $("#id_operationdate").datepicker({
-            format: 'dd-mm-yyyy',
-        });
+  $(function () {
+    $("#id_operationdate").datepicker({
+      format: "yyyy-mm-dd",
     });
+  });
 </script>
 
 <!-- Js file for darkmode -->
 <script src="{% static 'js/darkmode.js' %}"></script>
 
 {% endblock %}
-

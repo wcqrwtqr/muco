@@ -1,40 +1,62 @@
 {% extends 'base.html' %}
+<!-- separator -->
 {% block body_class %}training{% endblock %}
+<!-- separator -->
 {% load static %}
-
+<!-- separator -->
 {%load crispy_forms_tags %}
-
+<!-- separator -->
 {% block body_block %}
-<h1 class="display-5">Update Training
-    <img src="{% static 'images/update.png' %}" alt="image" style="width: 50px">
+<h1 class="display-5">
+  Update Training
+  <img src="{% static 'images/update.png' %}" alt="image" style="width: 50px" />
 </h1>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 
-
-<form method="POST" class="post-form" enctype ="multipart/form-data" >
-    {% csrf_token %}
-    <div class="form-row row">
-        <div class="form-group col-md-6 mb-0 col"> {{ form.training_date_start |as_crispy_field }} </div>
-        <div class="form-group col-md-6 mb-0 col"> {{ form.training_type |as_crispy_field }} </div>
+<form method="POST" class="post-form" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-row row">
+    <div class="form-group col-md-6 mb-0 col">
+      {{ form.training_date_start |as_crispy_field }}
     </div>
-    <div class="form-row row">
-        <div class="form-group col-md-6 mb-0 col"> {{ form.training_name |as_crispy_field }} </div>
-        <div class="form-group col-md-6 mb-0 col"> {{ form.training_cost|as_crispy_field}} </div>
+    <div class="form-group col-md-6 mb-0 col">
+      {{ form.training_type |as_crispy_field }}
     </div>
-    <div class="form-row row">
-        <div class="form-group col-md-12 mb-0 col"> {{ form.description|as_crispy_field }} </div>
+  </div>
+  <div class="form-row row">
+    <div class="form-group col-md-6 mb-0 col">
+      {{ form.training_name |as_crispy_field }}
     </div>
-    <div class="form-row row">
-        <div class="form-group col-md-6 mb-0 col"> {{ form.attendees|as_crispy_field }} </div>
-        <div class="form-group col-md-6 mb-0 col">{{form.pdf_file |as_crispy_field}}</div>
-
+    <div class="form-group col-md-6 mb-0 col">
+      {{ form.training_cost|as_crispy_field}}
     </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a class="btn btn-outline-dark " href="{% url 'training' %}">Cancel</a>
+  </div>
+  <div class="form-row row">
+    <div class="form-group col-md-12 mb-0 col">
+      {{ form.description|as_crispy_field }}
+    </div>
+  </div>
+  <div class="form-row row">
+    <div class="form-group col-md-6 mb-0 col">
+      {{ form.attendees|as_crispy_field }}
+    </div>
+    <div class="form-group col-md-6 mb-0 col">
+      {{form.pdf_file |as_crispy_field}}
+    </div>
+  </div>
+  <br />
+  <button type="submit" class="btn btn-primary">Save</button>
+  <a class="btn btn-outline-dark" href="{% url 'training' %}">Cancel</a>
 </form>
 <!-- Js file for darkmode -->
+<script>
+  $(function () {
+    $("#id_training_date_start").datepicker({
+      format: "yyyy-mm-dd",
+    });
+  });
+</script>
 <script src="{% static 'js/darkmode.js' %}"></script>
 
 {% endblock %}

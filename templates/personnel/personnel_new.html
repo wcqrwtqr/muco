@@ -1,66 +1,66 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block body_class %}personnel{% endblock %}
+<!-- separator -->
+{% load static %} {% block body_class %}personnel{% endblock %}
+<!-- separator -->
 {%load crispy_forms_tags %}
-
+<!-- separator -->
 {% block body_block %}
-<h1 class="display-3">New Person
-    <img src="{% static 'images/add1.png' %}" alt="image" style="width: 50px">
+<h1 class="display-3">
+  New Person
+  <img src="{% static 'images/add1.png' %}" alt="image" style="width: 50px" />
 </h1>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 
 <form method="POST" class="post-form">
-    {% csrf_token %}
-    <div class="form-row row">
-        <div class="form-group col-md-6 mb-0 col"> {{ form.first_name|as_crispy_field }} </div>
-        <div class="form-group col-md-6 mb-0 col"> {{ form.last_name|as_crispy_field }} </div>
+  {% csrf_token %}
+  <div class="form-row row">
+    <div class="form-group col-md-6 mb-0 col">
+      {{ form.first_name|as_crispy_field }}
     </div>
-    <div class="form-row row">
-        <div class="form-group col-md-4 mb-0 col"> {{ form.senionrty_date|as_crispy_field }} </div>
-        <div class="form-group col-md-4 mb-0 col"> {{ form.birth_date|as_crispy_field}} </div>
-        <div class="form-group col-md-4 mb-0 col"> {{ form.grade|as_crispy_field }} </div>
+    <div class="form-group col-md-6 mb-0 col">
+      {{ form.last_name|as_crispy_field }}
     </div>
-    <div class="form-row row">
-        <div class="form-group col-md-4 mb-0 col"> {{ form.department|as_crispy_field}} </div>
-        <div class="form-group col-md-4 mb-0 col"> {{ form.position|as_crispy_field }} </div>
-        <div class="form-group col-md-4 mb-0 col"> {{ form.pdf_file|as_crispy_field }} </div>
+  </div>
+  <div class="form-row row">
+    <div class="form-group col-md-4 mb-0 col">
+      {{ form.senionrty_date|as_crispy_field }}
     </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a class="btn btn-outline-dark " href="{% url 'personnel' %}">Cancel</a>
+    <div class="form-group col-md-4 mb-0 col">
+      {{ form.birth_date|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-4 mb-0 col">
+      {{ form.grade|as_crispy_field }}
+    </div>
+  </div>
+  <div class="form-row row">
+    <div class="form-group col-md-4 mb-0 col">
+      {{ form.department|as_crispy_field}}
+    </div>
+    <div class="form-group col-md-4 mb-0 col">
+      {{ form.position|as_crispy_field }}
+    </div>
+    <div class="form-group col-md-4 mb-0 col">
+      {{ form.pdf_file|as_crispy_field }}
+    </div>
+  </div>
+  <br />
+  <button type="submit" class="btn btn-primary">Save</button>
+  <a class="btn btn-outline-dark" href="{% url 'personnel' %}">Cancel</a>
 </form>
-
-{% endblock %}
-
-
-<!-- Old style -->
-<!-- {#{% csrf_token %}#} -->
-<!-- {{form | crispy}} -->
-<!-- <button type="submit" class="btn btn-success">Save</button> -->
-<!-- <a class="btn btn-outline-dark" href="{% url 'equipment' %}">Cancel</a> -->
-<!-- <br> -->
-<!-- <hr> -->
-<!-- Old style -->
-
-<!-- second good one -->
-<!-- <div class='row'> -->
-<!--     <\!-- {#{% for field in form %}#} -\-> -->
-<!--     <div class='col-md-6'> -->
-<!--         {{ field|as_crispy_field }} -->
-<!--     </div> -->
-<!--     <\!-- {#{% endfor %}#} -\-> -->
-<!--     <\!-- {#{% csrf_token %}#} -\-> -->
-<!-- </div> -->
-
 
 <script>
   $(function () {
-    $("#datetimepicker1").datetimepicker({
-      format: 'DD/MM/YYYY HH:mm',
+    $("#id_senionrty_date").datepicker({
+      format: "yyyy-mm-dd",
+    });
+    $("#id_birth_date").datepicker({
+      format: "yyyy-mm-dd",
     });
   });
 </script>
+
+{% endblock %}
 
 <!-- Js file for darkmode -->
 <script src="{% static 'js/darkmode.js' %}"></script>

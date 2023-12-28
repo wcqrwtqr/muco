@@ -1,46 +1,61 @@
 {% extends 'base.html' %}
+<!-- separator -->
 {% load static %}
-
+<!-- separator -->
 {% block body_class %}battery{% endblock %}
+<!-- separator -->
 {%load crispy_forms_tags %}
-
+<!-- separator -->
 {% block body_block %}
-<h3 class="display-5">New Battery
-    <img src="{% static 'images/add1.png' %}" alt="image" style="width: 50px">
+<h3 class="display-5">
+  New Battery
+  <img src="{% static 'images/add1.png' %}" alt="image" style="width: 50px" />
 </h3>
 <br />
 <p class="blockquote-footer">Hello {{user.username}}</p>
 
-<form method="POST" class="post-form" enctype ="multipart/form-data">
-    {% csrf_token %}
-    <div class="form-row row">
-        <div class="form-group col-md-6 mb-0 col"> {{ form.part_num|as_crispy_field }} </div>
-        <div class="form-group col-md-6 mb-0 col"> {{ form.serial_num|as_crispy_field }} </div>
+<form method="POST" class="post-form" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-row row">
+    <div class="form-group col-md-6 mb-0 col">
+      {{ form.part_num|as_crispy_field }}
     </div>
-    <div class="form-row row">
-        <div class="form-group col-md-12 mb-0 col"> {{ form.description|as_crispy_field}} </div>
+    <div class="form-group col-md-6 mb-0 col">
+      {{ form.serial_num|as_crispy_field }}
     </div>
-    <div class="form-row row">
-        <div class="form-group col-md-4 mb-0 col"> {{ form.purchase_date|as_crispy_field }} </div>
-        <div class="form-group col-md-4 mb-0 col"> {{ form.in_service_date|as_crispy_field }} </div>
-        <div class="form-group col-md-4 mb-0 col"> {{ form.pdf_file|as_crispy_field }} </div>
+  </div>
+  <div class="form-row row">
+    <div class="form-group col-md-12 mb-0 col">
+      {{ form.description|as_crispy_field}}
     </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a class="btn btn-outline-dark " href="{% url 'battery' %}">Cancel</a>
+  </div>
+  <div class="form-row row">
+    <div class="form-group col-md-4 mb-0 col">
+      {{ form.purchase_date|as_crispy_field }}
+    </div>
+    <div class="form-group col-md-4 mb-0 col">
+      {{ form.in_service_date|as_crispy_field }}
+    </div>
+    <div class="form-group col-md-4 mb-0 col">
+      {{ form.pdf_file|as_crispy_field }}
+    </div>
+  </div>
+  <br />
+  <button type="submit" class="btn btn-primary">Save</button>
+  <a class="btn btn-outline-dark" href="{% url 'battery' %}">Cancel</a>
 </form>
 
 <script>
-    $(function () {
-        $("#id_in_service_date").datepicker({
-            // format: 'dd-mm-yyyy',
-            format: 'yyyy-mm-dd',
-        });
-        $("#id_purchase_date").datepicker({
-            // format: 'dd-mm-yyyy',
-            format: 'yyyy-mm-dd',
-        });
+  $(function () {
+    $("#id_in_service_date").datepicker({
+      // format: 'dd-mm-yyyy',
+      format: "yyyy-mm-dd",
     });
+    $("#id_purchase_date").datepicker({
+      // format: 'dd-mm-yyyy',
+      format: "yyyy-mm-dd",
+    });
+  });
 </script>
 <!-- Js file for darkmode -->
 <script src="{% static 'js/darkmode.js' %}"></script>
