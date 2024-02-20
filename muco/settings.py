@@ -16,7 +16,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,67 +24,67 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'changeme'
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
     "crispy_forms",
-    'crispy_bootstrap5',
-    'django_filters',
-    'equipmentList',
-    'personnel',
-    'training',
-    'equipmenMaintenance',
-    'jobs',
-    'dailyreport',
-    'batteryList',
-    'marketing',
-    'supermarket',
+    "crispy_bootstrap5",
+    "django_filters",
+    "equipmentList",
+    "personnel",
+    "training",
+    "equipmenMaintenance",
+    "jobs",
+    "dailyreport",
+    "batteryList",
+    "marketing",
+    "supermarket",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'muco.urls'
+ROOT_URLCONF = "muco.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [TEMPLATE_DIR],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'muco.wsgi.application'
+WSGI_APPLICATION = "muco.wsgi.application"
 
 
 # Database
@@ -98,11 +98,11 @@ WSGI_APPLICATION = 'muco.wsgi.application'
 # }
 
 DATABASES = {
-    'default': {
+    "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "postgres",
-        'USER': os.environ.get('SECRET_USER'),
-        'PASSWORD': os.environ.get('SECRET_DB'),
+        "USER": os.environ.get("SECRET_USER"),
+        "PASSWORD": os.environ.get("SECRET_DB"),
         "HOST": "db",  # set in docker-compose.yml
         # "HOST": "loclhost",  # set in docker-compose.yml
         "PORT": 5432,  # default postgres port
@@ -114,16 +114,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -131,9 +131,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -142,24 +142,59 @@ USE_TZ = True
 
 # My own variables
 # Departement
-BL = [('WSS','WSS'),('H2S','H2S'), ('AQM','AQM'),('Supply','Supply')]
+BL = [("WSS", "WSS"), ("H2S", "H2S"), ("AQM", "AQM"), ("Supply", "Supply")]
 # Maintenance list
-MS = [('MS-1','MS-1'),('MS-2','MS-2'), ('MS-3','MS-3'), ('O-rings','O-rings'),
-      ('Repair','Repair'),('Down','Down'), ('Waiting on Spares','Waiting on Spares'),
-      ('Junked','Junked'), ('Voltage Check','Voltage Check'),('Visutal Check','Visutal Check'),
-      ('Junked','Junked'),]
+MS = [
+    ("MS-1", "MS-1"),
+    ("MS-2", "MS-2"),
+    ("MS-3", "MS-3"),
+    ("O-rings", "O-rings"),
+    ("Repair", "Repair"),
+    ("Down", "Down"),
+    ("Waiting on Spares", "Waiting on Spares"),
+    ("Junked", "Junked"),
+    ("Voltage Check", "Voltage Check"),
+    ("Visutal Check", "Visutal Check"),
+    ("Junked", "Junked"),
+]
 # Services list
-SERVICE = [('DH Camera','DH Camera'),('Eco meter','Eco meter'), ('BossPac','BossPac'),
-           ('xmile','xmile'),('H2S','H2S'),('AQM','AQM'),('Supply','Supply'),]
+SERVICE = [
+    ("DH Camera", "DH Camera"),
+    ("Eco meter", "Eco meter"),
+    ("BossPac", "BossPac"),
+    ("xmile", "xmile"),
+    ("H2S", "H2S"),
+    ("AQM", "AQM"),
+    ("Supply", "Supply"),
+]
 
-TYPE = [('Visit','Visit'),('Call','Call'), ('Confernce Call','Confernce Call')]
+TYPE = [("Visit", "Visit"), ("Call", "Call"), ("Confernce Call", "Confernce Call")]
 
-CLINET = [('HKN','HKN'),('DNO','DNO'), ('BBPosun','BBPosun'), ('Genel','Genel'),
-          ('Viking','Viking'), ('OPHKL','OPHKL'), ('Mansoori','Mansoori'), ('Weahterford','Weahterford'),
-          ('OILSERV','OILSERV'), ('SLB','SLB'), ('Haliburton','Haliburton'),
-          ('GKPI','GKPI'), ('TTOPCO','TTOPCO'), ('KAR','KAR'), ('HuntOil','HuntOil'),
-          ('NESR','NESR'), ('RN','RN'), ('Gazprom','Gazprom'), ('TAQA','TAQA'), ('BossPac','BossPac'),
-          ('Roboze','Roboze'), ('IOT','IOT'), ('Cyclone','Cyclone')]
+CLINET = [
+    ("HKN", "HKN"),
+    ("DNO", "DNO"),
+    ("BBPosun", "BBPosun"),
+    ("Genel", "Genel"),
+    ("Viking", "Viking"),
+    ("OPHKL", "OPHKL"),
+    ("Mansoori", "Mansoori"),
+    ("Weahterford", "Weahterford"),
+    ("OILSERV", "OILSERV"),
+    ("SLB", "SLB"),
+    ("Haliburton", "Haliburton"),
+    ("GKPI", "GKPI"),
+    ("TTOPCO", "TTOPCO"),
+    ("KAR", "KAR"),
+    ("HuntOil", "HuntOil"),
+    ("NESR", "NESR"),
+    ("RN", "RN"),
+    ("Gazprom", "Gazprom"),
+    ("TAQA", "TAQA"),
+    ("BossPac", "BossPac"),
+    ("Roboze", "Roboze"),
+    ("IOT", "IOT"),
+    ("Cyclone", "Cyclone"),
+]
 
 
 # Static files (CSS, JavaScript, Images)
@@ -169,17 +204,19 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL='home'
-LOGOUT_REDIRECT_URL='home'
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"

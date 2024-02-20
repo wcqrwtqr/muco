@@ -84,7 +84,7 @@
         >
       </th>
       <td>{{ market.meeting_date }}</td>
-      <td style="text-align: justify">{{ market.meeting_description }}</td>
+      <td style="text-align: justify">{{ market.meeting_description|truncatechars:50 }}</td>
       <td>{{ market.attendance }}</td>
       <td>{{ market.client }}</td>
       <td>

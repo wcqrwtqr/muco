@@ -27,5 +27,7 @@ class personnelForm(forms.ModelForm):
             "pdf_file": "upload file",
         }
         widgets = {
-            "pdf_file": ClearableFileInput(attrs={"multiple": True}),
+            # "pdf_file": ClearableFileInput(attrs={"multiple": True}),
         }
+        # class MyForm(forms.Form):
+        #     files = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))

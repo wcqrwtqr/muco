@@ -10,8 +10,6 @@ from django.views.generic import (
 )
 from .models import jobsdb, equipment_job_activitiesdb
 from dailyreport.models import dailyreportdb
-
-# from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from .forms import *
 from . import models

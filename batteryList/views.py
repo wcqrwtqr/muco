@@ -4,7 +4,8 @@ from django.views.generic import (
     CreateView,
     DeleteView,
     UpdateView,
-)
+    )
+ 
 from batteryList.models import batterydb
 from jobs.models import equipment_job_activitiesdb  # test TODO lets check
 from equipmenMaintenance.models import Batterymaintenancedb
